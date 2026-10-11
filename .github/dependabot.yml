@@ -20,11 +20,12 @@ updates:
       - dependency-name: "@angular/*"
         update-types: ["version-update:semver-major"]
       - dependency-name: "zone.js"
-        update-types: ["version-update:semver-major"]
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
       - dependency-name: "tailwindcss"
         update-types: ["version-update:semver-major"]
       - dependency-name: "@types/jasmine"
         update-types: ["version-update:semver-major"]
+      - dependency-name: "postcss-selector-parser"
     groups:
       angular:
         patterns:
