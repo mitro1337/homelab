@@ -12,13 +12,13 @@
 #   8. Internal Homelab Forensics (Media Galaxy, Revolut, Task Scam, Steam OpenID)
 # ------------------------------------------------------------------------------
 # Classification: TLP:CLEAR | Synchronized Daily at 00:00 Europe/Bucharest (24h)
-# Last Updated: 2026-10-13 13:28:44 UTC
-# Total Forbidden Domains: 16810
+# Last Updated: 2026-10-13 13:54:21 UTC
+# Total Forbidden Domains: 16815
 # Breakdown:
 #   - Local Forensics:               435
 #   - Romania (DNSC Blacklist):       10
 #   - European Union (CERT-EU/URLh): 784
-#   - Five Eyes Coalition (US/UK/CA/AU/NZ): 15629
+#   - Five Eyes Coalition (US/UK/CA/AU/NZ): 15634
 # ==============================================================================
 007tg.vip
 00rr59n2.en-pegasus.com
@@ -2198,6 +2198,7 @@ blackoods.com
 blackscreamfest.com
 blackstageconcerts.com
 blacktailor.cz
+blackthornkeep.top
 bladehostpi.life
 blanc.kz
 blancharl.icu
@@ -10607,6 +10608,7 @@ pal-uk.com
 palace.mdlrh.workers.dev
 paladarlight.com.br
 palalto.live
+paleanchor.com
 palefox.cc
 palerospropertymanagement.com
 palharesinformatica.com.br
@@ -13332,6 +13334,8 @@ storamoregoods.com
 store.purestack.lol
 store.relexa.us
 storea.ir
+stormfangridge.top
+stormwraith.com
 storyjam.live
 storylingoo.com
 stpaulrawan.org
@@ -15304,6 +15308,7 @@ williambittner.com
 williamcleans.de
 willow-62.com
 willowbrooktownhouse.com
+willowtransit.com
 wiltonstamebudgies.com
 wiltshire.energy
 wimanamo.workers.dev
