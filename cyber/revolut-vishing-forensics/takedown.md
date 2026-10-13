@@ -24,14 +24,12 @@ This document records the operational lifecycle, registrar escalations, and tech
 Prompt identification of the hosting upstream provider, DNS registrar, and URL shortener APIs enabled a swift response, successfully severing the credential exfiltration pipeline within 4.5 hours of initial detection.
 
 ```mermaid
-timeline
-    title Takedown Chronology & Escalation Milestones
-    10:25 UTC : Initial Threat Ingress : Phishing URL extracted from SMS smishing lure
-    10:40 UTC : Domain Enumeration : WHOIS lookup, DNS A records, and ASN identification
-    11:05 UTC : Abuse Report Filed : High-priority abuse reports submitted to Registrar & Host
-    11:30 UTC : DNS Sinkhole Deployed : Host domain null-routed (0.0.0.0) in local Unbound DNS
-    12:15 UTC : Upstream Null-Routing : Registrar suspends malicious domain name delegation
-    14:45 UTC : Post-Remediation Verification : Worldwide DNS resolution returns NXDOMAIN / Refused
+flowchart TD
+    T1["10:25 UTC — Initial Threat Ingress<br/>Phishing URL extracted from SMS smishing lure"] --> T2["10:40 UTC — Domain Enumeration<br/>WHOIS lookup, DNS A records, and ASN identification"]
+    T2 --> T3["11:05 UTC — Abuse Report Filed<br/>High-priority abuse reports submitted to Registrar & Host"]
+    T3 --> T4["11:30 UTC — DNS Sinkhole Deployed<br/>Host domain null-routed (0.0.0.0) in local Unbound DNS"]
+    T4 --> T5["12:15 UTC — Upstream Null-Routing<br/>Registrar suspends malicious domain name delegation"]
+    T5 --> T6["14:45 UTC — Post-Remediation Verification<br/>Worldwide DNS resolution returns NXDOMAIN / Refused"]
 ```
 
 ---

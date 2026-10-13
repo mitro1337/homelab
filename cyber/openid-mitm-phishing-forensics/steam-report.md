@@ -27,8 +27,8 @@ Testing was strictly confined to an isolated, air-gapped laboratory environment 
 
 ```mermaid
 flowchart LR
-    VALVE_SEC["Valve Security & Abuse"] <--|"Formal Incident Telemetry Package"| DISCLOSURE["Security Disclosure Filing"]
-    DISCLOSURE --> IOCS["Malicious Domain: cs2-tournament-bracket[.]top<br/>C2 IP: 194.38.20.182"]
+    DISCLOSURE["Security Disclosure Filing"] -->|"Formal Incident Telemetry Package"| VALVE_SEC["Valve Security & Abuse"]
+    DISCLOSURE --> IOCS["Malicious Domain: cs2-tournament-bracket(.)top<br/>C2 IP: 194.38.20.182"]
     DISCLOSURE --> EXPLOIT["Exploitation Mechanism:<br/>BitM In-DOM Window + OpenID Relay"]
     DISCLOSURE --> REC["Remediation Proposals:<br/>Family View Grace Period & In-App Web API Alerts"]
 ```

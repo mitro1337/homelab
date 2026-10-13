@@ -61,12 +61,12 @@ sequenceDiagram
 
     TikTok->>Victim: Serves automated video showing fake $50k/mo Stripe dashboard
     Victim->>Landing: Clicks link-in-bio (enters in-app browser)
-    Landing->>Victim: Displays artificial countdown timer & "100% Resell Rights" pitch
+    Landing->>Victim: Displays artificial countdown timer and 100% Resell Rights pitch
     Victim->>Gateway: Submits $497 card payment via Stripe Connect
-    Gateway-->>Victim: Confirms settlement; waives refund rights in fine print
+    Gateway-->>Victim: Confirms settlement, waives refund rights in fine print
     Fulfillment->>Victim: Dispatches download link to synthetic generic PDF guides
-    Victim->>Victim: Reviews course; discovers zero actionable skills taught
-    Victim->>Landing: Module 1 instructs: "Build your own store & resell this course"
+    Victim->>Victim: Reviews course, discovers zero actionable skills taught
+    Victim->>Landing: Module 1 instructs to build store and resell this course
     Victim->>TikTok: Victim creates new promotional account to recover lost funds
     TikTok->>Downstream: Re-broadcasts scheme, propagating the recursive pyramid
 ```

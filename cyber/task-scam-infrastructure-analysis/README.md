@@ -59,21 +59,21 @@ sequenceDiagram
     participant DB as Campaign Database & Ledger
     actor Bot as Blockchain Drain Engine (TRON TRC-20)
 
-    Recruiter->>Victim: Unsolicited remote job offer + Invite Code "888888"
+    Recruiter->>Victim: Unsolicited remote job offer and Invite Code 888888
     Victim->>UI: Registers account using mobile number (+40 Romanian campaign)
-    UI->>API: POST /api/v1/user/auth/register (invite_code: "888888")
-    API->>DB: Stores victim profile; assigns initial simulated balance (e.g. 50 USDT)
+    UI->>API: POST /api/v1/user/auth/register (invite_code 888888)
+    API->>DB: Stores victim profile and assigns initial simulated balance of 50 USDT
     Victim->>UI: Completes simulated product evaluation tasks
     UI->>API: POST /api/v1/task/submit
-    API->>UI: Returns fabricated commission gains (e.g. +$180 phantom balance)
+    API->>UI: Returns fabricated commission gains (+180 phantom balance)
     Victim->>UI: Attempts fiat cashout to Bank Account / Revolut
     UI->>API: GET /api/v1/site/config
-    API-->>UI: Hardcoded kill-switch: withdrawMethodBank=false, withdrawMethodRevolut=false
-    UI->>Victim: Error: "Fiat channel unavailable. VIP Task unlock requires 200 USDT deposit."
+    API-->>UI: Hardcoded kill-switch withdrawMethodBank=false and withdrawMethodRevolut=false
+    UI->>Victim: Error indicating fiat unavailable and VIP task requires 200 USDT deposit
     Victim->>Bot: Transfers 200 USDT via TRC-20 to attacker address
-    Bot->>API: Credit applied; immediately locks account with "Tax / Compliance Fee"
+    Bot->>API: Credit applied and immediately locks account with Tax and Compliance Fee
     Victim->>Recruiter: Inquires about withdrawal status
-    Recruiter->>Victim: Demands secondary 500 USDT deposit; funds permanently lost
+    Recruiter->>Victim: Demands secondary 500 USDT deposit with funds permanently lost
 ```
 
 ---

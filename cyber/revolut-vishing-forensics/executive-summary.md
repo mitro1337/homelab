@@ -53,15 +53,13 @@ Impersonating official Revolut Anti-Fraud personnel, the attackers manufactured 
 </div>
 
 ```mermaid
-timeline
-    title Incident Lifecycle: SEC-2026-VISH-002 (10 August 2026)
-    10:15 UTC : Threat Ingress : Outbound spoofed call received from +40749-XXX-XXX
-    10:18 UTC : Social Engineering : Attacker pretexts as Revolut Fraud Staff claiming urgent unauthorized charges
-    10:22 UTC : Delivery Vector : SMS received containing shortened link to cloned payment landing portal
-    10:25 UTC : Technical Triage : Sandboxed browser inspection of landing page; DOM cloning & SSL cert verified
-    10:35 UTC : Defensive Severance : Call terminated; native Revolut in-app support contacted; cards frozen
-    11:00 UTC : Takedown & Telemetry : IoCs compiled; abuse reports filed with registrar and DNSC
-    14:30 UTC : Remediation Complete : Registrar null-routes phishing domain; Revolut security validates account safety
+flowchart TD
+    T1["10:15 UTC — Threat Ingress<br/>Outbound spoofed call received from +40749-XXX-XXX"] --> T2["10:18 UTC — Social Engineering<br/>Attacker pretexts as Revolut Fraud Staff claiming urgent unauthorized charges"]
+    T2 --> T3["10:22 UTC — Delivery Vector<br/>SMS received containing shortened link to cloned payment landing portal"]
+    T3 --> T4["10:25 UTC — Technical Triage<br/>Sandboxed browser inspection of landing page; DOM cloning & SSL cert verified"]
+    T4 --> T5["10:35 UTC — Defensive Severance<br/>Call terminated; native Revolut in-app support contacted; cards frozen"]
+    T5 --> T6["11:00 UTC — Takedown & Telemetry<br/>IoCs compiled; abuse reports filed with registrar and DNSC"]
+    T6 --> T7["14:30 UTC — Remediation Complete<br/>Registrar null-routes phishing domain; Revolut security validates account safety"]
 ```
 
 ---

@@ -18,12 +18,12 @@
 
 ```mermaid
 flowchart TD
-    A[Alert / Victim Identification] --> B[Immediate Containment: Card Freeze]
-    B --> C[Evidence Preservation & Header Extraction]
-    C --> D[Bank Dispute & Chargeback Filing]
-    D --> E[Perimeter Immunization OPNsense/DNS]
-    E --> F[Abuse Reporting & Registrar Takedown]
-    F --> G[Post-Incident Review & Threat Intel Sharing]
+    A["Alert / Victim Identification"] --> B["Immediate Containment: Card Freeze"]
+    B --> C["Evidence Preservation & Header Extraction"]
+    C --> D["Bank Dispute & Chargeback Filing"]
+    D --> E["Perimeter Immunization OPNsense/DNS"]
+    E --> F["Abuse Reporting & Registrar Takedown"]
+    F --> G["Post-Incident Review & Threat Intel Sharing"]
 ```
 
 ---
