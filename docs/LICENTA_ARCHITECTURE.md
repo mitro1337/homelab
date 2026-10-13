@@ -25,19 +25,48 @@
 
 This document specifies the architecture, network segmentation, virtualization parameters, and security policies governing the dedicated **Bachelor's Thesis (Lucrare de Licență)** research infrastructure deployed on the primary Proxmox VE 9.2 hypervisor host (`192.168.1.132`, Node 1).
 
+- **Titlu Licență (FINAL)**: **Impactul tehnologiilor inteligente asupra securitatii digitale**
+- **Coordonator Științific**: **prof. univ. dr. Georgeta Soava**
 - **Academic Candidate**: **Moană Ștefănuț-Cornel** ([`@stefanutc1`](https://github.com/stefanutc1))
 - **Institution**: **Universitatea din Craiova** · **Facultatea de Economie și Administrarea Afacerilor (FEAA)**
 - **Degree Program**: **Informatică Economică (2024 – 2027)**
 - **Curriculum Repository**: [`https://github.com/stefanutc1/university`](https://github.com/stefanutc1/university)
 - **Thesis Courses**: `LL3 - LucrareLicenta` & `PELL3 - PracticaElaborareLucrareLicenta`
+- **Inventariere stack**: **Lucrare de licență — Inventar inițial**
 
-The laboratory environment delivers an isolated, reproducible proving ground for:
-1. **Core-Banking Architecture & Resiliency**: Practical implementation of Apache Fineract (Java 17, Spring Boot), PostgreSQL 16 ACID financial ledgers with `pgAudit`, and an isolated SWIFT customer-bastion jumpbox simulating real-world financial transaction pipelines.
-2. **Offensive Security & Red Team Automation**: Automated scanning, enumeration, exploitation, and post-exploitation workflows executed from a dedicated Kali Linux workstation.
-3. **Enterprise Active Directory Security**: Auditing domain controller hygiene, Group Policy Objects (GPOs), Kerberoasting, AS-REP roasting, and pass-the-hash attacks on Windows Server.
-4. **Multi-Vector Vulnerability Assessment**: Targeting known CVEs, legacy services, and unpatched daemons on Linux Metasploitable targets.
-5. **Modern Web Application Security (OWASP Top 10)**: Assessing contemporary web flaws (SQL injection, broken access control, XSS, insecure deserialization) in a containerized OWASP Juice Shop target running on Alpine Linux LXC.
-6. **Blue Team Telemetry & Detection Engineering**: Calibrating Wazuh SIEM 4.14 agent detection rules, Suricata IDS/IPS signatures, and Windows Sysmon Event IDs (EID 1, 3, 7, 8, 10, 13).
+<div align="center">
+
+### Operational Tech Stack & Tooling Inventory
+
+</div>
+
+* **Operating Systems & Virtualization**: Windows Server, Linux, virtual machines (Proxmox VE, KVM, QEMU, LXC).
+* **Networking & Packet Inspection**: Networking TCP/IP, Wireshark, tcpdump.
+* **SIEM, EDR & IDS/IPS Platforms**: SIEM systems including Splunk, Elastic, Wazuh, Microsoft Sentinel; EDR; IDS/IPS (Suricata, Snort).
+* **Offensive & Vulnerability Assessment**: Nmap, Nessus, OpenVAS, Burp Suite, PowerShell, Python, Git.
+* **Threat Detection & Intelligence**: Sysmon, Sigma rules, YARA rules, Snort, MISP.
+* **Digital Forensics & Reverse Engineering**: Malware Autopsy, Volatility memory forensics, Ghidra, IDA Pro, x64dbg.
+* **Governance, Frameworks & Compliance**: NIS2 Directive compliance, MITRE ATT&CK enterprise attack mapping.
+* **Infrastructure as Code & Automated Response**: Ansible, Python, and Terraform for IaC, automating compromised VM isolation triggered by SIEM alerts.
+* **Cloud & Orchestration**: Kubernetes, AWS.
+
+<div align="center">
+
+### Practici, Simulări și Exemple
+
+</div>
+
+1. **Red-teaming ușor**: Bruteforce, ethical hacking pe mașina virtuală personală dedicată.
+2. **Honeypot pe OS vechi**: Honeypot pe sisteme legacy (Windows Server 2003/2008 sau Windows 7).
+3. **Simularea unui mediu bancar**: Sisteme Windows 10/11 + Active Directory, core-banking ledger și gateway.
+4. **Analiza malware**: Mediu controlat pe Windows 10 dedicat analizei dinamice și statice.
+5. **Vulnerabilitatea rețelelor Wi-Fi (POSIBIL)**: Social engineering sau handshaking WPA2/WPA3 cu microcontrollere ESP32 (Bruce/Marauder).
+6. **Detecția și monitorizarea wireless în SOC**: Analiza fluxurilor wireless și corelarea evenimentelor în SIEM.
+7. **Analiza riscului împotriva Wi-Fi sniffing**: Evaluare contramăsuri criptografice și de perimetru.
+8. **Simulare de atacuri bazate pe comportamentele reale ale grupurilor APT**: Cartografiere MITRE ATT&CK a scenariilor de atac.
+9. **Reverse engineering pe software**: Decompilare și analiză binară prin IDA, Ghidra și x64dbg.
+
+> **Mențiune obligatorie de conformitate legală**: Între VM-urile mele, niciun atac nu va părăsi mașinile mele virtuale; lucrarea de licență va fi efectuată într-un cadru legal.
 
 ---
 

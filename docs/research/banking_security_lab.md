@@ -22,9 +22,11 @@
 
 </div>
 
-This research laboratory hosts the practical implementation and empirical attack-defense testbed for the **Bachelor's Thesis (Lucrare de Licență)** focused on **Enterprise Banking Infrastructure Security, Resilient Core-Banking Architectures, and Automated Threat Detection**.
+This research laboratory hosts the practical implementation and empirical attack-defense testbed for the **Bachelor's Thesis (Lucrare de Licență)**: **Impactul tehnologiilor inteligente asupra securitatii digitale** (Coordonator: **prof. univ. dr. Georgeta Soava**), specifically fulfilling practical simulation component #3: *Simularea unui mediu bancar (sisteme Windows 10/11 + Active Directory)* and resilient financial core infrastructure.
 
-The research simulates a realistic, multi-tier banking architecture adhering to financial industry standards (**PCI-DSS 4.0**, **ISO 27001**, and **SWIFT Customer Security Programme - CSP**).
+The research simulates a realistic, multi-tier banking architecture adhering to financial industry standards (**PCI-DSS 4.0**, **ISO 27001**, and **SWIFT Customer Security Programme - CSP**), integrated with Wazuh SIEM threat monitoring and automated isolation.
+
+> **Mențiune:** Între VM-urile mele, niciun atac nu va părăsi mașinile mele virtuale; lucrarea de licență va fi efectuată într-un cadru legal.
 
 ---
 

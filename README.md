@@ -99,7 +99,7 @@ The platform operates across physical bare-metal nodes, a virtualized perimeter 
 | [**`BACKUP.md`**](BACKUP.md) | 3-2-1 backup strategy, Proxmox vzdump, PBS client deduplication, ZFS snapshots, RPO (<4h) and RTO (<15m) | Backup & Storage Admins |
 | [**`DISASTER-RECOVERY.md`**](DISASTER-RECOVERY.md) | DR plan, bare-metal recovery runbooks, failure scenarios A–D, and drill restore verification | Incident Response Commanders |
 | [**`CONTRIBUTING.md`**](CONTRIBUTING.md) | Contribution standards, IaC formatting, pre-commit validation gates, conventional commit standards | Contributors & Developers |
-| [**`docs/LICENTA_ARCHITECTURE.md`**](docs/LICENTA_ARCHITECTURE.md) | Bachelor's Thesis Banking Security Lab (Apache Fineract, PostgreSQL ledger, SWIFT MT103, ISO 20022) | Academic Advisors & Researchers |
+| [**`docs/LICENTA_ARCHITECTURE.md`**](docs/LICENTA_ARCHITECTURE.md) | Bachelor's Thesis: Impactul tehnologiilor inteligente asupra securitatii digitale (Prof. univ. dr. Georgeta Soavă) | Academic Advisors & Researchers |
 | [**`docs/ACTIVE_DIRECTORY_LAB.md`**](docs/ACTIVE_DIRECTORY_LAB.md) | Multi-generational Active Directory forest (2008–2025), Kerberos, BloodHound, and Sysmon telemetry | Identity & Red Team Engineers |
 | [**`esp32/README.md`**](esp32/README.md) | Physical edge IoT fleet (Gate Biometrics, Smart Irrigation, Thermal Monitor, Mains/UPS Appliance) | Embedded & IoT Engineers |
 | [**`cyber/ctf/19-09-2026/`**](cyber/ctf/19-09-2026/) | Complete 19.09.2026 InvataCyber.ro CTF writeups (3/3 flags · 100% solved with code solvers) | Reverse Engineers & CTF Players |

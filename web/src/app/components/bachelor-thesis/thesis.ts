@@ -27,15 +27,12 @@ import {
           </span>
         </div>
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-normal text-slate-50 tracking-tight">
-          {{ ts.currentLang() === 'ro' ? 'Arhitectura și Securitatea Sistemelor Informatice Bancare' : 'Architecture and Security of Banking Information Systems' }}
+          {{ ts.currentLang() === 'ro' ? 'Impactul tehnologiilor inteligente asupra securității digitale' : 'Impact of Intelligent Technologies on Digital Security' }}
         </h2>
         <p class="text-sm sm:text-base text-slate-300 max-w-4xl font-sans font-normal leading-relaxed">
-          High-assurance banking simulation environment reproducing multi-tier financial computing:
-          <span class="text-slate-100 font-medium">Apache Fineract Core-Banking</span>,
-          <span class="text-slate-100 font-medium">PostgreSQL 16 with pgAudit</span>,
-          <span class="text-slate-100 font-medium">FastAPI Card Authorization & SWIFT MT103 API</span>, and
-          <span class="text-slate-100 font-medium">an ed25519/MFA Bastion Jump-Box</span>.
-          Strict distinction between implemented components and protocol simulation stubs.
+          {{ ts.currentLang() === 'ro' 
+            ? 'Cercetare academică de licență (FEAA Craiova · Coordonator: prof. univ. dr. Georgeta Soava) integrând tehnologii inteligente de detecție și apărare: simulare mediu bancar (Active Directory, Windows 10/11), honeypots pe sisteme legacy, analiză malware, securitate Wi-Fi în SOC și orchestrare IaC NIS2 cu izolare automată a VM-urilor compromise.' 
+            : 'Bachelor thesis research laboratory (FEAA Craiova · Academic Advisor: prof. univ. dr. Georgeta Soava) integrating intelligent detection and defensive engineering: banking environment simulation (Active Directory, Windows 10/11), legacy honeypots, malware analysis, SOC Wi-Fi security, and NIS2 IaC orchestration with automated VM isolation.' }}
         </p>
       </div>
 

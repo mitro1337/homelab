@@ -50,7 +50,7 @@ flowchart TB
         end
 
         subgraph RESEARCH["Layer 5: Academic & Cybersecurity Research Testbeds"]
-            LICENTA["Bachelor's Thesis Core-Banking Lab<br/>Apache Fineract · PostgreSQL 16 · SWIFT Bastion"]
+            LICENTA["Bachelor's Thesis Cyber Defense Lab<br/>Impactul tehnologiilor inteligente asupra securitatii digitale"]
             AD["Active Directory Enterprise Forest<br/>Windows Server 2008 R2–2025 Multi-Tier"]
             CYBER["Offensive Security & Malware Range<br/>Kali Linux · Metasploitable 2 · OWASP Juice Shop"]
         end
