@@ -9,7 +9,7 @@
 [![Operations](https://img.shields.io/badge/SRE-Day--2%20Operations%20Manual-0f172a.svg?style=flat&logo=ansible)](#)
 [![Health Doctor](https://img.shields.io/badge/Diagnostics-Automated%20Doctor%20(12%20Domains)-10b981.svg?style=flat&logo=python)](#31-automated-infrastructure-health-doctor)
 [![Runbooks](https://img.shields.io/badge/Runbooks-Cold%20Boot%20%26%20Emergency%20Shutdown-0284c7.svg?style=flat&logo=gnubash)](#2-core-operational-runbooks)
-[![Edge Resiliency](https://img.shields.io/badge/Hardware%20Triggers-ESP32%20Power%20Failover-e7352c.svg?style=flat&logo=espressif)](esp32/power_monitor/README.md)
+[![Edge Resiliency](https://img.shields.io/badge/Hardware%20Triggers-ESP32%20Power%20Failover-e7352c.svg?style=flat&logo=espressif)](iot/power_monitor/README.md)
 [![Zero-Cost](https://img.shields.io/badge/Cloud%20Audit-Zero--Cost%20Static%20Verification-8b5cf6.svg?style=flat&logo=terraform)](scripts/verify_zero_cloud_cost.py)
 [![Author](https://img.shields.io/badge/Operations%20Lead-Moan%C4%83%20%C8%98tef%C4%83nu%C8%9B--Cornel-blue.svg?style=flat&logo=github)](https://github.com/stefanutc1)
 [![University](https://img.shields.io/badge/University-Universitatea%20din%20Craiova%20%C2%B7%20FEAA-0284c7.svg?style=flat&logo=academia)](https://feaa.ucv.ro)
@@ -39,7 +39,7 @@ It equips Systems Administrators, Site Reliability Engineers (SREs), and Platfor
 | Frequency | Task / Procedure | Automation Script / Tool | Expected Duration |
 | :--- | :--- | :--- | :--- |
 | **Continuous (Real-Time)** | Endpoint Availability & Latency Monitoring | Uptime Kuma (CT 103) & Prometheus (CT 104) | Automated (<15s scrape) |
-| **Continuous (Real-Time)** | Edge Telemetry, Rack Thermals & Grid Watch | ESP32 Nodes 01–04 (`esp32/`) & Home Assistant | Sub-second edge interrupts |
+| **Continuous (Real-Time)** | Edge Telemetry, Rack Thermals & Grid Watch | ESP32 Nodes 01–06 (`iot/`) & Home Assistant | Sub-second edge interrupts |
 | **Daily (02:00 UTC)** | vzdump Container & VM Snapshots to OMV NAS | Proxmox vzdump Engine & PBS Client | ~25 minutes |
 | **Daily (00:00 Europe/Bucharest)** | Threat Intelligence & Currency Sync | GitHub Actions CD & Python Sync Scripts | ~3 minutes |
 | **Weekly (Sundays 03:00 UTC)** | Operating System Package Updates (Debian/PVE) | `ansible/playbooks/maintenance.yml` | ~15 minutes |
@@ -80,7 +80,7 @@ Gracefully terminates active databases, containers, and hypervisors during power
 ### 2.3 Hardware-Triggered Emergency Shutdown (ESP32 Power Monitor)
 
 </div>
-- **Node**: `ESP32-EDGE-04` (`esp32/power_monitor/`)
+- **Node**: `ESP32-EDGE-04` (`iot/power_monitor/`)
 - **Mechanism**: The 230V AC optocoupler detects grid drop instantly. If power remains lost and the 12V SLA battery bank discharges below **11.4V (critical cut-off threshold)**:
   1. ESP32 sounds the onboard emergency buzzer.
   2. Issues an authenticated emergency webhook to Proxmox VE host API (`POST /api2/json/nodes/pve/status -d command=shutdown`).
@@ -91,7 +91,7 @@ Gracefully terminates active databases, containers, and hypervisors during power
 ### 2.4 Datacenter Thermal Regulation (ESP32 Environment Node)
 
 </div>
-- **Node**: `ESP32-EDGE-03` (`esp32/datacenter_environment/`)
+- **Node**: `ESP32-EDGE-03` (`iot/datacenter_environment/`)
 - **Mechanism**: Continuously samples BME280 ambient temperature and dual DS18B20 1-Wire intake/exhaust probes:
   - If delta-T ($\Delta T = T_{\text{exhaust}} - T_{\text{intake}}$) exceeds $8.0^\circ\text{C}$ or exhaust exceeds $38.0^\circ\text{C}$, the 25kHz PWM driver spins Noctua cooling fans to 100% duty cycle.
   - If ambient temperature exceeds $45.0^\circ\text{C}$ despite fan cooling, an alert is dispatched to Prometheus Alertmanager and Uptime Kuma.

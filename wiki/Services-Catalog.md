@@ -31,3 +31,5 @@ Complete breakdown of foundational and production services hosted across the inf
 | **Edge IoT: Irrigation**| ESP32 Irrigation Controller | `1883` (MQTT) | `esp32-irrigation.lan` | ESP32-EDGE-02 | `DEPLOYED` |
 | **Edge IoT: Environment**| ESP32 Datacenter Telemetry | `80` (`/metrics`) | `esp32-env.lan` | ESP32-EDGE-03 | `DEPLOYED` |
 | **Edge IoT: Power** | ESP32 Grid & Battery Watch | `80` (`/metrics`) | `esp32-power.lan` | ESP32-EDGE-04 | `DEPLOYED` |
+| **Edge IoT: Climate** | ESP32 Smart Thermostat | `1883` (MQTT) | `esp32-thermostat.lan` | ESP32-EDGE-05 | `DEPLOYED` |
+| **Edge IoT: Motion** | ESP32 Smart Motion Sensor | `1883` (MQTT) | `esp32-motion.lan` | ESP32-EDGE-06 | `DEPLOYED` |

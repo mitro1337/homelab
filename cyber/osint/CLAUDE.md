@@ -1,12 +1,12 @@
 <div align="center">
 
-# Claude Operational Guidelines: Enterprise OSINT Framework
+# Claude Guidelines: OSINT Module
 
 </div>
 
 <div align="center">
 
-## Autonomous Intelligence Gathering, STANAG 2022 Validation, and Investigative Standards
+## Rules, Guardrails, and Verification Steps
 
 </div>
 
@@ -14,50 +14,51 @@
 
 <div align="center">
 
-### Operational Directives
+### Directives
 
 </div>
 
-When conducting OSINT investigations or operating within the `cyber/osint` module, Claude must adhere strictly to the following parameters:
+When working inside `cyber/osint`, follow these rules:
 
-1. **Zero-Emoji Policy**: Under no circumstances should emojis, pictographs, or non-technical symbols appear in markdown documentation, comments, or generated dossiers.
-2. **Centered Markdown Headings**: Every header element (`#`, `##`, `###`, etc.) must be wrapped inside `<div align="center">\n\n... \n\n</div>`.
-3. **Passive Reconnaissance Exclusivity**: Never suggest or execute active network scanning, port probing, credential brute-forcing, or disruptive exploitation against external targets. Restrict tradecraft to passive DNS, Certificate Transparency, RDAP, and search dorks.
-4. **Admiralty Grading Mandate**: All external intelligence assertions must be tagged with a NATO STANAG 2022 Admiralty Code (e.g., A1, B2, C3).
-5. **Git Attribution Constraint**: All version control activity must designate `stefanutc1 <321888485+stefanutc1@users.noreply.github.com>`.
+1. **No Emojis**: Keep all markdown files, commit messages, and comments completely free of emojis or pictographs.
+2. **Centered Markdown Headings**: Wrap every heading (`#`, `##`, `###`) in `<div align="center">\n\n... \n\n</div>`.
+3. **Passive Reconnaissance Only**: Never suggest or execute active network scans, port probes (e.g. Nmap SYN scans), or intrusive brute-force attacks against third-party systems. Keep lookups passive (DNS records, Certificate Transparency, RDAP, public registries).
+4. **Admiralty Grading**: When evaluating external intelligence or IOC claims, assign a NATO STANAG 2022 Admiralty rating (e.g. B2, C3).
+5. **Git Author Identity**: Every commit must be authored by `stefanutc1 <321888485+stefanutc1@users.noreply.github.com>`.
 
 ---
 
 <div align="center">
 
-### Architecture and Component Specifications
+### Codebase Organization
 
 </div>
 
-- **Language Runtime**: Python 3.10+ (Standard Library preferred for security and cross-environment predictability).
-- **Core Engine Libraries**:
-  - `lib/entity_extractor.py`: High-precision extraction of IPv4/IPv6, domains, emails, CVEs, SHA256/MD5 hashes, ASNs, and cryptocurrency addresses.
-  - `lib/admiralty.py`: Evaluation of NATO STANAG 2022 matrices and composite confidence indexes.
-  - `lib/passive_intel.py`: Safe passive DNS resolution, Certificate Transparency query generators, and non-intrusive domain profiling.
-  - `lib/synthesis.py`: Automated threat intelligence dossier compilation conforming to TLP standards.
-- **Operational CLI**: `scripts/osint_cli.py` providing subcommands (`extract`, `score`, `recon`, `synthesize`).
-- **Audit Engine**: `scripts/audit_osint.py`.
+This module runs on Python 3.10+ using the standard library:
+
+- `lib/entity_extractor.py`: Regex extraction of IPs, domains, hashes, CVEs, emails, and wallet addresses.
+- `lib/admiralty.py`: Scoring matrices and confidence calculations for source reliability (A-F) and credibility (1-6).
+- `lib/passive_intel.py`: URL and domain parsing, crt.sh query generation, and passive DNS profile helpers.
+- `lib/synthesis.py`: Formats parsed data and confidence scores into structured markdown reports.
+- `scripts/osint_cli.py`: Terminal interface for `extract`, `score`, `recon`, and `synthesize`.
 
 ---
 
 <div align="center">
 
-### Standard Operational Commands
+### Verification Commands
 
 </div>
+
+Run these commands before pushing any changes:
 
 ```bash
-# Execute unit test suite
+# Run unit tests
 python3 -m unittest tests/test_osint.py
 
-# Execute module compliance and zero-emoji verification
+# Run module compliance check
 python3 scripts/audit_osint.py
 
-# Extract indicators from notes
-python3 scripts/osint_cli.py extract --text "Observed C2 at 198.51.100.12 via malicious-pivot.org"
+# Quick extraction test
+python3 scripts/osint_cli.py extract --text "Sample C2 at 198.51.100.12 with domain threat-sample.org"
 ```

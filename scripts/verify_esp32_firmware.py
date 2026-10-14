@@ -20,7 +20,9 @@ REQUIRED_PROJECTS = [
     "footprint",
     "irrigation",
     "datacenter_environment",
-    "power_monitor"
+    "power_monitor",
+    "smart_thermostat",
+    "smart_motion_sensor"
 ]
 
 def audit_esp32_suite(esp32_dir: Path):
@@ -84,13 +86,15 @@ def main():
     print("=" * 80)
 
     repo_root = Path(__file__).resolve().parent.parent
-    esp32_dir = repo_root / "esp32"
+    iot_dir = repo_root / "iot"
+    if not iot_dir.exists():
+        iot_dir = repo_root / "esp32"
 
-    count, violations = audit_esp32_suite(esp32_dir)
-    print(f"[AUDIT] Verified {count} ESP32 edge firmware projects...")
+    count, violations = audit_esp32_suite(iot_dir)
+    print(f"[AUDIT] Verified {count} IoT/ESP32 edge firmware projects...")
 
     if not violations:
-        print("[SUCCESS] All 4 ESP32 projects have valid .ino sketches, pin mappings, WDT routines, and READMEs.")
+        print(f"[SUCCESS] All {count} IoT/ESP32 projects have valid .ino sketches, pin mappings, WDT routines, and READMEs.")
         sys.exit(0)
     else:
         print(f"\n[FAILURE] Found {len(violations)} issues in ESP32 suite:\n")

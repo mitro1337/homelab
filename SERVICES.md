@@ -11,7 +11,7 @@
 [![Media Automation](https://img.shields.io/badge/Media%20Suite-10%20Services%20(*arr%20%2B%20Immich)-8b5cf6.svg?style=flat&logo=jellyfin)](#12-media--personal-cloud-automation-arr-suite--immich)
 [![SOC DFIR](https://img.shields.io/badge/SOC%2FDFIR-9%20Security%20Workloads-e11d48.svg?style=flat&logo=wazuh)](#14-security-operations-center-soc-dfir--malware-lab)
 [![AI Platform](https://img.shields.io/badge/AI%20Subsystem-GTX%201050%20Ti%20Ollama%20%2B%20LiteLLM-f59e0b.svg?style=flat&logo=nvidia)](#15-artificial-intelligence--elo-research-platform)
-[![Edge IoT](https://img.shields.io/badge/Edge%20Fleet-4%20ESP32%20Bare--Metal%20Nodes-e7352c.svg?style=flat&logo=espressif)](esp32/README.md)
+[![Edge IoT](https://img.shields.io/badge/Edge%20Fleet-6%20ESP32%20Bare--Metal%20Nodes-e7352c.svg?style=flat&logo=espressif)](iot/README.md)
 [![Author](https://img.shields.io/badge/Architect-Moan%C4%83%20%C8%98tef%C4%83nu%C8%9B--Cornel-blue.svg?style=flat&logo=github)](https://github.com/stefanutc1)
 [![University](https://img.shields.io/badge/University-Universitatea%20din%20Craiova%20%C2%B7%20FEAA-0284c7.svg?style=flat&logo=academia)](https://feaa.ucv.ro)
 
@@ -177,7 +177,7 @@ Each service entry documents its operational role, deployment model, network loc
 
 <div align="center">
 
-### 1.6 Embedded Edge IoT Microcontroller Services (`esp32/`)
+### 1.6 Embedded Edge IoT Microcontroller Services (`iot/`)
 
 </div>
 | # | Node / Service | Operational Role | Firmware Type | Network / VLAN | Protocol & Port | Integration Target | Factual State |
@@ -186,6 +186,8 @@ Each service entry documents its operational role, deployment model, network loc
 | **45**| **`esp32-irrigation`** | 4-zone garden irrigation, capacitive soil probes, pulse flow | C++ (Arduino Core) | VLAN 50 (`192.168.50.22`) | MQTT (`1883/TCP`) | Home Assistant (`CT 100`) | `DEPLOYED` |
 | **46**| **`esp32-datacenter_env`**| Rack thermals (BME280, dual DS18B20 Delta-T), Noctua PWM | C++ (Arduino Core) | VLAN 50 (`192.168.50.23`) | HTTP `/metrics` (`80/TCP`) & MQTT | Prometheus (`CT 104`) | `DEPLOYED` |
 | **47**| **`esp32-power_monitor`** | 230V mains optocoupler, 12V battery ADC, emergency shutdown | C++ (Arduino Core) | VLAN 50 (`192.168.50.24`) | HTTP `/metrics` (`80/TCP`) & Webhook| Proxmox Host API (`Node 1`) | `DEPLOYED` |
+| **48**| **`esp32-smart_thermostat`** | Smart HVAC thermostat (DHT22, 3x optocoupled relays, anti-cycling) | C++ (Arduino Core) | VLAN 50 (`192.168.50.25`) | MQTT (`1883/TCP`) | Home Assistant (`CT 100`) | `DEPLOYED` |
+| **49**| **`esp32-smart_motion`** | Smart motion retrofit (PIR, radar fusion, LDR lux, battery gauge) | C++ (Arduino Core) | VLAN 50 (`192.168.50.26`) | MQTT (`1883/TCP`) | Home Assistant (`CT 100`) | `DEPLOYED` |
 
 ---
 

@@ -1,12 +1,12 @@
 <div align="center">
 
-# Autonomous Agent System Protocol: Enterprise OSINT
+# Multi-Agent OSINT Guidelines
 
 </div>
 
 <div align="center">
 
-## Multi-Agent Reconnaissance Orchestration, Admiralty Calibration, and Tradecraft Verification
+## Operational Boundaries and Subagent Rules
 
 </div>
 
@@ -14,71 +14,70 @@
 
 <div align="center">
 
-### Abstract and Scope
+### Scope
 
 </div>
 
-This specification governs autonomous artificial intelligence agent interactions within open-source threat intelligence (OSINT) operations. It establishes execution guardrails, verification steps, and reporting standards to ensure that autonomous investigations produce verified, non-intrusive, and mathematically scored intelligence outputs.
+Rules for automated subagents gathering and processing threat intelligence in this repository. These safeguards ensure all reconnaissance remains strictly passive and well-documented.
 
 ---
 
 <div align="center">
 
-### Mandatory Agent Operating Procedures
+### Subagent Rules
 
 </div>
 
-1. **Zero-Emoji Rule**: All outputs, logs, pull requests, and commit descriptions must contain zero emojis.
-2. **Centered Heading Formatting**: Markdown headers must be placed inside `<div align="center">...</div>`.
-3. **Passive Reconnaissance Boundary**:
-   - Agents must never execute active port scanners (e.g. Nmap SYN scans), web application fuzzers, or unauthorized penetration testing tools.
-   - All collection must be conducted passively using public databases, search dorks, certificate transparency logs, and historical archives.
-4. **Admiralty Grading Protocol**:
-   - Every identified threat indicator or campaign attribution must be accompanied by an Admiralty code (NATO STANAG 2022).
-   - Uncorroborated single-source claims must be graded F6 or E5 until validated by secondary channels.
-5. **Output Synthesis and TLP Enforcement**:
-   - Threat intelligence briefings must specify appropriate Traffic Light Protocol classification (TLP:CLEAR, TLP:GREEN, TLP:AMBER, TLP:RED).
-   - Dossiers must be generated via `IntelligenceSynthesizer`.
+1. **Zero Emojis**: Keep all markdown outputs, generated logs, and comments clean of Unicode emojis.
+2. **Centered Headings**: Wrap headings in `<div align="center">\n\n... \n\n</div>`.
+3. **Passive Reconnaissance Only**:
+   - Never run active port scanners (like Nmap), brute-force tools, or web application fuzzers against targets.
+   - Limit data collection to public records, Certificate Transparency logs, and passive DNS caches.
+4. **Admiralty Grading**:
+   - Tag every threat indicator or external claim with a NATO STANAG 2022 Admiralty rating.
+   - Treat single-source claims as unverified (E5 or F6) until corroborated by another source.
+5. **Report Generation**:
+   - Format final dossiers through `IntelligenceSynthesizer` and mark appropriate TLP headers (e.g. TLP:CLEAR or TLP:AMBER).
 
 ---
 
 <div align="center">
 
-### Autonomous Agent OSINT Pipeline
+### Inspection Flow
 
 </div>
 
 ```mermaid
 sequenceDiagram
     autonumber
-    participant A as "Investigating Agent"
-    participant E as "EntityExtractor"
-    participant P as "PassiveIntelEngine"
-    participant M as "AdmiraltyEvaluator"
-    participant S as "IntelligenceSynthesizer"
-    participant C as "Enterprise SOC Queue"
+    participant A as Investigating Agent
+    participant E as EntityExtractor
+    participant P as PassiveIntelEngine
+    participant M as AdmiraltyEvaluator
+    participant S as IntelligenceSynthesizer
+    participant C as Incident Queue
 
-    A->>E: "Ingest Unstructured Threat Feeds"
-    E-->>A: "Extracted Indicators (IPs, Domains, Hashes)"
-    A->>P: "Query Passive Reconnaissance Vectors"
-    P-->>A: "Certificate Transparency and Historical Mappings"
-    A->>M: "Score Source and Credibility (STANAG 2022)"
-    M-->>A: "Composite Confidence Index"
-    A->>S: "Generate Structured Threat Dossier"
-    S-->>A: "Validated TLP-Compliant Briefing"
-    A->>C: "Publish to SOC Incident Response Queue"
+    A->>E: Ingest Raw Threat Text
+    E-->>A: Parsed Indicators (IPs, Domains, Hashes)
+    A->>P: Request Passive Lookups (crt.sh, DNS)
+    P-->>A: Domain Mappings and Subdomains
+    A->>M: Grade Source & Credibility (STANAG 2022)
+    M-->>A: Confidence Score
+    A->>S: Compile Dossier
+    S-->>A: Markdown Report
+    A->>C: Deliver to Queue
 ```
 
 ---
 
 <div align="center">
 
-### Compliance Audit Checklist
+### Pre-Push Checklist
 
 </div>
 
-- [ ] All markdown headings centered using `<div align="center">...</div>`.
-- [ ] Absolutely zero Unicode emoji characters across all files.
-- [ ] All unit tests pass in `tests/test_osint.py`.
-- [ ] Compliance script `scripts/audit_osint.py` exits with status code 0.
-- [ ] Git commit attributed to `stefanutc1 <321888485+stefanutc1@users.noreply.github.com>`.
+- [ ] All markdown headings are centered using `<div align="center">...</div>`.
+- [ ] No emojis in any markdown, code comments, or commit messages.
+- [ ] Unit tests pass: `python3 -m unittest tests/test_osint.py`.
+- [ ] Audit passes: `python3 scripts/audit_osint.py`.
+- [ ] Commit author is `stefanutc1 <321888485+stefanutc1@users.noreply.github.com>`.

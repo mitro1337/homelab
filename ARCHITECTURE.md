@@ -11,7 +11,7 @@
 [![Network](https://img.shields.io/badge/Firewall-OPNsense%20Dual--Perimeter-f26522.svg?style=flat&logo=opnsense)](https://opnsense.org)
 [![Zero-Trust](https://img.shields.io/badge/Network-802.1Q%20Zero--Trust%20VLANs-0052cc.svg?style=flat&logo=cisco)](#network-architecture)
 [![SIEM](https://img.shields.io/badge/SIEM%2FXDR-Wazuh%204.14-00a4e4.svg?style=flat&logo=wazuh)](https://wazuh.com)
-[![Edge IoT](https://img.shields.io/badge/Edge%20Fleet-ESP32%20Bare--Metal%20C%2B%2B-e7352c.svg?style=flat&logo=espressif)](esp32/README.md)
+[![Edge IoT](https://img.shields.io/badge/Edge%20Fleet-ESP32%20Bare--Metal%20C%2B%2B-e7352c.svg?style=flat&logo=espressif)](iot/README.md)
 [![Cloud Cost](https://img.shields.io/badge/Cloud%20Policy-%240.00%20Strict%20Free--Tier-10b981.svg?style=flat&logo=terraform)](policy/cloud/zero_cost_policy.rego)
 [![Author](https://img.shields.io/badge/Author-Moan%C4%83%20%C8%98tef%C4%83nu%C8%9B--Cornel-blue.svg?style=flat&logo=github)](https://github.com/stefanutc1)
 [![University](https://img.shields.io/badge/University-Universitatea%20din%20Craiova%20%C2%B7%20FEAA-0284c7.svg?style=flat&logo=academia)](https://feaa.ucv.ro)
@@ -203,14 +203,16 @@ All hybrid cloud assets (AWS, GCP, Azure) are codified under a strict **$0.00 / 
 
 <div align="center">
 
-### 3.6 Edge Microcontroller Fleet (`esp32/`)
+### 3.6 Edge Microcontroller Fleet (`iot/`)
 
 </div>
 - **Bare-Metal C++ Firmware**: Production-grade ESP32 firmware equipped with Hardware Watchdog Timers (WDT), automated Wi-Fi reconnect backoff, and MQTT telemetry integration.
-- **Physical Security & Access (`esp32/footprint/`)**: R307/R504 optical fingerprint sensor, dual HC-SR501 PIR sensors, HC-SR04 ultrasonic distance measurement, 12V solenoid gate relay, and SSD1306 OLED display.
-- **Precision Irrigation (`esp32/irrigation/`)**: 4-zone optically isolated active-LOW relay driver, capacitive analog soil moisture probes, rain sensor inhibit logic, and YF-S201 pulse flow meter interrupt counter.
-- **Datacenter Rack Telemetry (`esp32/datacenter_environment/`)**: BME280 I2C sensor (temp/humidity/pressure), dual DS18B20 1-Wire sensors calculating rack intake/exhaust delta-T, Noctua 25kHz PWM fan control with tachometer RPM feedback, and an embedded Prometheus HTTP `/metrics` exporter.
-- **Power Telemetry & Grid Resiliency (`esp32/power_monitor/`)**: 230V AC optocoupler zero-latency mains interrupt, 12V SLA battery divider ADC, INA219 digital power sensor, and automated emergency Proxmox shutdown triggers when battery drops below 11.4V.
+- **Physical Security & Access (`iot/footprint/`)**: R307/R504 optical fingerprint sensor, dual HC-SR501 PIR sensors, HC-SR04 ultrasonic distance measurement, 12V solenoid gate relay, and SSD1306 OLED display.
+- **Precision Irrigation (`iot/irrigation/`)**: 4-zone optically isolated active-LOW relay driver, capacitive analog soil moisture probes, rain sensor inhibit logic, and YF-S201 pulse flow meter interrupt counter.
+- **Datacenter Rack Telemetry (`iot/datacenter_environment/`)**: BME280 I2C sensor (temp/humidity/pressure), dual DS18B20 1-Wire sensors calculating rack intake/exhaust delta-T, Noctua 25kHz PWM fan control with tachometer RPM feedback, and an embedded Prometheus HTTP `/metrics` exporter.
+- **Power Telemetry & Grid Resiliency (`iot/power_monitor/`)**: 230V AC optocoupler zero-latency mains interrupt, 12V SLA battery divider ADC, INA219 digital power sensor, and automated emergency Proxmox shutdown triggers when battery drops below 11.4V.
+- **Smart HVAC Climate Control (`iot/smart_thermostat/`)**: Multi-stage heating/cooling/fan optocoupled relay actuation with 3-minute anti-cycle compressor guard, DHT22/BME280 precision sensing, and Home Assistant MQTT climate integration.
+- **Smart Motion Retrofit (`iot/smart_motion_sensor/`)**: Conventional PIR sensor enhancement with software occupancy hold timing, microwave radar sensor fusion, ambient lux thresholding, and battery fuel gauge.
 
 ---
 
@@ -249,7 +251,7 @@ Key architectural trade-offs and design decisions are formally cataloged in [`do
 | [`BACKUP.md`](BACKUP.md) | 3-2-1 backup strategy, PBS client, ZFS snapshots, RPO/RTO matrix, restore drills | Backup & Storage Administrators |
 | [`DISASTER-RECOVERY.md`](DISASTER-RECOVERY.md) | Business continuity plan, disaster classification, bare-metal rebuild runbooks | Incident Commanders & SREs |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | Contribution standards, IaC formatting, Git workflow, testing, CI validation gates | Software & DevOps Engineers |
-| [`esp32/README.md`](esp32/README.md) | ESP32 edge firmware suite, pinouts, MQTT schemas, Prometheus endpoints, safety specs | Embedded Systems Engineers |
+| [`iot/README.md`](iot/README.md) | IoT edge firmware suite, pinouts, MQTT schemas, Prometheus endpoints, safety specs | Embedded & IoT Engineers |
 
 ---
 

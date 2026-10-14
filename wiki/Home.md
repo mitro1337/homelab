@@ -61,6 +61,8 @@ flowchart TB
         EDGE2["ESP32-02: irrigation<br/>4-Zone Relays · Soil Moisture Probes · Pulse Flow Meter"]
         EDGE3["ESP32-03: datacenter_env<br/>BME280 · Dual DS18B20 Delta-T · Noctua PWM Driver · /metrics"]
         EDGE4["ESP32-04: power_monitor<br/>230V Mains Interrupt · 12V Battery ADC · Emergency PVE Shutdown"]
+        EDGE5["ESP32-05: smart_thermostat<br/>DHT22 · 3x Opto Relays · Anti-Cycle · HA Climate"]
+        EDGE6["ESP32-06: smart_motion_sensor<br/>PIR + Radar Fusion · LDR Lux · 18650 Battery"]
     end
 
     Internet --> OPN

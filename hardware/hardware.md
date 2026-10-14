@@ -10,7 +10,7 @@
 [![Primary Node](https://img.shields.io/badge/Hypervisor-Intel%20i3--10100F%20(12GB%20DDR4)-blue.svg?style=flat&logo=intel)](#host-proxmox-node-1--primary-hypervisor)
 [![Storage Node](https://img.shields.io/badge/Storage-ASUS%20X451MA%20(ZFS%20NAS)-059669.svg?style=flat&logo=asus)](#host-openmediavault-node-2--storage-nas)
 [![Edge Worker](https://img.shields.io/badge/Worker-AMD%20Athlon%20II%20X2%20(4GB%20DDR3)-8b5cf6.svg?style=flat&logo=amd)](#host-k8s-node-04-node-4--kubernetes-worker-node)
-[![Edge IoT](https://img.shields.io/badge/Edge%20Fleet-4%20ESP32%20Bare--Metal%20Nodes-e7352c.svg?style=flat&logo=espressif)](../esp32/README.md)
+[![Edge IoT](https://img.shields.io/badge/Edge%20Fleet-6%20ESP32%20Bare--Metal%20Nodes-e7352c.svg?style=flat&logo=espressif)](../iot/README.md)
 [![Author](https://img.shields.io/badge/Hardware%20Architect-Moan%C4%83%20%C8%98tef%C4%83nu%C8%9B--Cornel-blue.svg?style=flat&logo=github)](https://github.com/stefanutc1)
 [![University](https://img.shields.io/badge/University-Universitatea%20din%20Craiova%20%C2%B7%20FEAA-0284c7.svg?style=flat&logo=academia)](https://feaa.ucv.ro)
 
@@ -145,7 +145,7 @@ This document describes the physical host hardware, compute chassis, power deliv
 
 <div align="center">
 
-## 2. Embedded Microcontroller Fleet (`esp32/`)
+## 2. Embedded Microcontroller Fleet (`iot/`)
 
 </div>
 
@@ -153,7 +153,7 @@ All microcontrollers are powered by dual-core 32-bit Xtensa LX6 processors clock
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                              ESP32 EDGE TELEMETRY FLEET                                │
+│                               IoT EDGE TELEMETRY FLEET                                 │
 ├──────────────────────────┬──────────────────────────┬──────────────────────────────────┤
 │ NODE 01: footprint       │ NODE 02: irrigation      │ NODE 03: datacenter_env          │
 │ R307/R504 Fingerprint    │ 4-Zone Relay Driver      │ Bosch BME280 I2C                 │
@@ -161,15 +161,21 @@ All microcontrollers are powered by dual-core 32-bit Xtensa LX6 processors clock
 │ Ultrasonic HC-SR04       │ Pulse Flow Meter         │ Noctua 25kHz PWM Fan Driver      │
 │ 12V Solenoid Gate Relay  │ Safety Hardware Timer    │ Native Prometheus /metrics (:80) │
 │ IP: 192.168.50.21        │ IP: 192.168.50.22        │ IP: 192.168.50.23                │
-├──────────────────────────┴──────────────────────────┴──────────────────────────────────┤
-│ NODE 04: power_monitor                                                                 │
-│ 230V AC Optocoupler Zero-Latency Interrupt · 12V SLA Battery Divider ADC               │
-│ INA219 DC Power Monitor · Emergency Proxmox VE API Shutdown Trigger (<11.4V)           │
-│ IP: 192.168.50.24                                                                      │
+├──────────────────────────┼──────────────────────────┴──────────────────────────────────┤
+│ NODE 04: power_monitor   │ NODE 05: smart_thermostat                                   │
+│ 230V AC Opto Mains Cut   │ DHT22 Temperature & Humidity · 3x Optocoupled Relays (W1/Y1)│
+│ INA219 DC Power Monitor  │ 3-Minute Compressor Protection · Dual Tactile Pushbuttons   │
+│ Battery ADC Shutdown     │ Home Assistant MQTT Climate Entity                          │
+│ IP: 192.168.50.24        │ IP: 192.168.50.25                                           │
+├──────────────────────────┴─────────────────────────────────────────────────────────────┤
+│ NODE 06: smart_motion_sensor                                                           │
+│ Retrofitted Analog PIR (HC-SR501/AM312) · RCWL-0516 Microwave Radar Fusion             │
+│ LDR Ambient Lux Sensor · 18650 Li-ion Battery ADC · 30s Software Occupancy Hold Timer   │
+│ IP: 192.168.50.26                                                                      │
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-Detailed schematic documentation, GPIO pinouts, and source code reside in [`esp32/README.md`](../esp32/README.md).
+Detailed schematic documentation, GPIO pinouts, and source code reside in [`iot/README.md`](../iot/README.md).
 
 ---
 

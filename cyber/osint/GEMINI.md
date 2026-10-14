@@ -1,12 +1,12 @@
 <div align="center">
 
-# Gemini Operational Guidelines: Enterprise OSINT Framework
+# Gemini Guidelines: OSINT Module
 
 </div>
 
 <div align="center">
 
-## Multimodal Reconnaissance, Intelligence Normalization, and Evaluation Protocols
+## Rules, Guardrails, and Verification Steps
 
 </div>
 
@@ -14,36 +14,30 @@
 
 <div align="center">
 
-### Operational Directives
+### Directives
 
 </div>
 
-When operating within the `cyber/osint` module or evaluating multimodal intelligence artifacts, Gemini must comply with the following policies:
+When working inside `cyber/osint`, follow these rules:
 
-1. **Zero-Emoji Enforcement**: Absolute prohibition against emojis or decorative symbols across all markdown documents and outputs.
-2. **Centered Markdown Formatting**: All heading levels must be wrapped within `<div align="center">\n\n... \n\n</div>`.
-3. **Multimodal Evidence Normalization**: When analyzing screenshots of phishing portals, DNS graphs, or certificate chains, extract and catalog all visible domain names, serial numbers, issuer CAs, and timestamps into structured indicator tables.
-4. **Admiralty Confidence Tagging**: Apply NATO STANAG 2022 ratings to any intelligence assertion derived from unstructured evidence.
-5. **Git Author Integrity**: Commits must exclusively specify `stefanutc1 <321888485+stefanutc1@users.noreply.github.com>`.
+1. **No Emojis**: Do not add emojis or icons to any markdown documents, code comments, or git commits.
+2. **Centered Markdown Headings**: Every heading must be wrapped in `<div align="center">\n\n... \n\n</div>`.
+3. **Passive Reconnaissance**: Do not run or generate commands for active port scanning or web vulnerability testing against external targets. Use passive DNS and public Certificate Transparency queries.
+4. **Admiralty Grading**: When analyzing unstructured threat feeds, apply NATO STANAG 2022 ratings (A-F for source reliability, 1-6 for data credibility).
+5. **Git Author Identity**: Every commit must be authored by `stefanutc1 <321888485+stefanutc1@users.noreply.github.com>`.
 
 ---
 
 <div align="center">
 
-### Core Capabilities and Libraries
+### Core Tools
 
 </div>
 
-- **Entity Extraction (`lib/entity_extractor.py`)**:
-  - Automatically identifies indicators of compromise across raw logs and threat actor communications.
-  - Excludes file extensions and document references to minimize false positives.
-- **Admiralty Evaluation (`lib/admiralty.py`)**:
-  - Validates source reliability (A-F) against information credibility (1-6).
-  - Calculates composite confidence indexes using weighted scoring models.
-- **Passive Intelligence (`lib/passive_intel.py`)**:
-  - Formulates Certificate Transparency search vectors via crt.sh without sending unsolicited packets to target assets.
-- **Intelligence Synthesis (`lib/synthesis.py`)**:
-  - Formats multi-source indicators into structured, actionable incident response packages.
+- **Entity Extractor (`lib/entity_extractor.py`)**: Locates and validates IPs, domains, hashes, CVEs, emails, and crypto addresses in raw text.
+- **Admiralty Evaluator (`lib/admiralty.py`)**: Computes confidence scores using the STANAG 2022 matrix.
+- **Passive Intel (`lib/passive_intel.py`)**: Formats queries for crt.sh and parses apex domains from complex URLs.
+- **Synthesizer (`lib/synthesis.py`)**: Compiles indicators and evaluation scores into clean reports.
 
 ---
 
@@ -53,10 +47,12 @@ When operating within the `cyber/osint` module or evaluating multimodal intellig
 
 </div>
 
+Run these commands to verify the code and documentation:
+
 ```bash
-# Execute unit tests
+# Run unit tests
 python3 -m unittest tests/test_osint.py
 
-# Execute module compliance check
+# Run module compliance check
 python3 scripts/audit_osint.py
 ```

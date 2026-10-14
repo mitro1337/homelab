@@ -1,6 +1,6 @@
 <div align="center">
 
-# ESP32 Edge Systems & Physical Telemetry Suite
+# IoT Edge Systems & Physical Telemetry Suite
 
 </div>
 
@@ -18,19 +18,21 @@
 
 </div>
 
-The `esp32/` directory houses the complete bare-metal firmware suite powering edge sensing, environmental control, biometric physical security, and datacenter hardware safety. Each project is engineered as an autonomous, fail-safe edge node:
+The `iot/` directory houses the complete bare-metal firmware suite powering edge sensing, environmental climate regulation, biometric physical security, occupancy tracking, and datacenter hardware safety. Each project is engineered as an autonomous, fail-safe edge node:
 
 ```mermaid
 flowchart TB
-    subgraph VLAN50["Isolated Physical Edge & IoT Network (VLAN 50: 192.168.50.0/24)"]
-        direction LR
+    subgraph VLAN50 ["Isolated Physical Edge & IoT Network (VLAN 50: 192.168.50.0/24)"]
+        direction TB
         NODE_GATE["<b>1. Footprint & Gate Node</b><br/>ESP32 · R307 Biometrics<br/>PIR + Ultrasonic · 12V Solenoid<br/>IP: 192.168.50.14"]
         NODE_IRR["<b>2. Smart Irrigation Node</b><br/>ESP32 · 4-Zone Solenoids<br/>Soil Moisture · Flow Meter<br/>IP: 192.168.50.12"]
         NODE_ENV["<b>3. Rack Thermal Monitor</b><br/>ESP32 · BME280 + Dual DS18B20<br/>Noctua 25kHz PWM Fan Control<br/>IP: 192.168.50.15 (:80/metrics)"]
         NODE_PWR["<b>4. Power & UPS Safety Node</b><br/>ESP32 · 230V Opto Mains<br/>12V Battery ADC · INA219 Meter<br/>IP: 192.168.50.16 (:80/metrics)"]
+        NODE_THERM["<b>5. Smart Thermostat Node</b><br/>ESP32 · DHT22 + Optocoupler Relays<br/>HVAC W1/Y1/G Interlock · 3m Anti-Cycle<br/>IP: 192.168.50.17"]
+        NODE_MOTION["<b>6. Smart Motion Sensor Node</b><br/>ESP32 · PIR + Radar Sensor Fusion<br/>LDR Lux Sensor · 18650 Battery Gauge<br/>IP: 192.168.50.18"]
     end
 
-    subgraph CORE_SERVICES["Core Infrastructure (VLAN 20: 192.168.20.0/24)"]
+    subgraph CORE_SERVICES ["Core Infrastructure (VLAN 20: 192.168.20.0/24)"]
         HASS["Home Assistant Core (CT 100)<br/>MQTT Auto-Discovery & Automation"]
         PROM["Prometheus TSDB (CT 104)<br/>Direct HTTP /metrics Scrapes"]
         PVE["Proxmox VE 9.2 (Node 1)<br/>Graceful UPS Powerdown Agent"]
@@ -42,6 +44,8 @@ flowchart TB
     NODE_ENV ==>|"HTTP GET /metrics (15s)"| PROM
     NODE_PWR ==>|"HTTP GET /metrics (15s)"| PROM
     NODE_PWR ==>|"Zero-Latency MQTT Alert"| PVE
+    NODE_THERM ==>|"MQTT: homelab/climate/thermostat"| HASS
+    NODE_MOTION ==>|"MQTT: homelab/sensors/motion"| HASS
 ```
 
 ---
@@ -53,7 +57,7 @@ flowchart TB
 </div>
 
 ```text
-esp32/
+iot/
 ├── README.md                           # Master suite documentation
 ├── hardware_telemetry_daemon.py        # Python host-side serial/MQTT ingestion bridge
 ├── firmware/
@@ -75,10 +79,22 @@ esp32/
 │   ├── datacenter_environment.ino      # Production Arduino C++ sketch
 │   ├── config.h                        # BME280, DS18B20 1-Wire & 25kHz PWM fan pinouts
 │   └── README.md                       # Prometheus scrape config & Noctua fan curve
-└── power_monitor/                      # Datacenter mains AC & UPS battery safety monitor
-    ├── power_monitor.ino               # Production Arduino C++ sketch
-    ├── config.h                        # Optocoupler interrupt, INA219 I2C & battery divider
-    └── README.md                       # High-voltage safety guidelines & emergency shutdown
+├── power_monitor/                      # Datacenter mains AC & UPS battery safety monitor
+│   ├── power_monitor.ino               # Production Arduino C++ sketch
+│   ├── config.h                        # Optocoupler interrupt, INA219 I2C & battery divider
+│   └── README.md                       # High-voltage safety guidelines & emergency shutdown
+├── smart_thermostat/                   # Smart HVAC climate controller with relay interlocks
+│   ├── smart_thermostat.ino            # Production Arduino C++ sketch
+│   ├── config.h                        # Relay pins, DHT22 sensor, push buttons & setpoints
+│   ├── thermostat_controller.h         # C++ state-machine header (hysteresis, anti-cycling)
+│   ├── thermostat_controller.cpp       # C++ state-machine implementation
+│   └── README.md                       # Wiring schematic, HVAC safety & Home Assistant discovery
+└── smart_motion_sensor/                # Smart retrofit appliance for conventional PIR sensors
+    ├── smart_motion_sensor.ino         # Production Arduino C++ sketch
+    ├── config.h                        # PIR input, radar fusion, LDR ADC & battery divider pins
+    ├── motion_detector.h               # C++ motion debouncer & analog sampling header
+    ├── motion_detector.cpp             # C++ occupancy timer, lux & battery percentage engine
+    └── README.md                       # Retrofit modification guide, jumper settings & HA config
 ```
 
 ---
@@ -90,9 +106,10 @@ esp32/
 </div>
 
 1. **Hardware Watchdog Timers (`esp_task_wdt`)**: Every sketch initializes the hardware watchdog timer (`12–15 seconds`). If an event loop freezes or an I2C transaction stalls, the microcontroller automatically reboots into a known safe state.
-2. **Fail-Safe Solenoid Relay States**:
+2. **Fail-Safe Relay and Solenoid States**:
    - Gate solenoid relay defaults to **LOCKED** (`LOW`).
    - Irrigation valves default to **CLOSED** (`HIGH` on Active-LOW optocoupled relay boards).
+   - Thermostat heating and cooling calls default to **OFF** (`HIGH` on Active-LOW optocoupled relays) with a strict 3-minute anti-cycle compressor guard.
    - Maximum watering duration is hard-coded to **15 minutes** in software, preventing flooding even if network connection drops while a valve is open.
 3. **Network Isolation**: All ESP32 devices reside strictly in **VLAN 50 (IoT & Physical Edge)**. Inter-VLAN routing is governed by OPNsense stateful packet filtering (`pf`), blocking direct access to Management (VLAN 10) or WAN.
 4. **Native Prometheus Support**: Environment and Power nodes serve standard OpenMetrics format directly on HTTP port 80, eliminating the need for third-party serial polling bridges.

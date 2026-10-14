@@ -1,12 +1,12 @@
 <div align="center">
 
-# Autonomous Agent System Protocol: Enterprise OPSEC
+# Multi-Agent OPSEC Guidelines
 
 </div>
 
 <div align="center">
 
-## Multi-Agent Operational Security, Persona Boundaries, and Isolation Protocols
+## Operational Boundaries and Subagent Rules
 
 </div>
 
@@ -14,72 +14,72 @@
 
 <div align="center">
 
-### Abstract and Scope
+### Scope
 
 </div>
 
-This specification establishes the mandatory operating standards for autonomous artificial intelligence agents executing tasks across the enterprise cyber domain. It establishes constraints on agent execution, memory retention, tool usage, and communication boundaries to prevent adversarial hijacking, indirect injection, and credential compromise.
+Rules for automated subagents executing tasks in this repository. These safeguards prevent prompt injection, data leaks, and credential exposure across multi-agent workflows.
 
 ---
 
 <div align="center">
 
-### Agent Operational Requirements
+### Subagent Rules
 
 </div>
 
-1. **Zero-Emoji Rule**: All outputs, markdown artifacts, logs, and agent communications must contain zero emojis.
-2. **Centered Heading Formatting**: Markdown headers must be formatted inside `<div align="center">...</div>` containers.
-3. **Execution Sandbox and Least Privilege**:
-   - Subagents must operate only within their assigned directories.
-   - External command execution must avoid network egress unless explicitly authorized by policy.
-4. **Memory Scrubbing and Sanitization**:
-   - Prior to committing any artifact or writing logs, agents must execute the `OpsecSanitizer` to sanitize sensitive data.
-   - Any sensitive input detected must be quarantined immediately.
-5. **Canary Trap Compliance**:
-   - Agents must never disclose canary tokens registered via `CanaryManager`.
-   - If an agent detects a canary token in an external payload, it must halt execution and emit a security incident event.
+1. **Zero Emojis**: Keep all markdown outputs, generated logs, and comments clean of Unicode emojis.
+2. **Centered Headings**: Wrap headings in `<div align="center">\n\n... \n\n</div>`.
+3. **Execution Isolation**:
+   - Subagents must work strictly within their assigned project folder.
+   - Do not make outbound network calls unless explicitly required by the task.
+4. **Data Sanitization**:
+   - Run `OpsecSanitizer` before writing logs or committing files containing raw telemetry.
+   - Quarantine unexpected sensitive data immediately.
+5. **Canary Trap Handling**:
+   - Never print or leak canary tokens created by `CanaryManager`.
+   - If a known canary token appears in an untrusted payload, stop the run and alert the user.
 
 ---
 
 <div align="center">
 
-### Multi-Agent Workflow Sequence
+### Inspection Flow
 
 </div>
 
 ```mermaid
 sequenceDiagram
     autonumber
-    participant U as "Authorized Operator"
-    participant O as "OPSEC Orchestrator"
-    participant S as "Sanitization Worker"
-    participant C as "Canary Tripwire Guard"
-    participant T as "Target Subsystem"
+    participant U as Operator
+    participant O as OPSEC Orchestrator
+    participant S as Sanitizer Worker
+    participant C as Canary Guard
+    participant T as Target System
 
-    U->>O: "Submit Task Instruction"
-    O->>O: "Evaluate Prompt via PromptGuard"
-    O->>C: "Register Dynamic Context Canary"
-    O->>S: "Pre-Scrub Input Parameters"
-    S-->>O: "Sanitized Parameters"
-    O->>T: "Dispatch Task Execution"
-    T-->>O: "Task Results / Telemetry"
-    O->>C: "Verify Tripwires (No Canary Leaked)"
-    O->>S: "Sanitize Output Artifacts"
-    S-->>O: "Verified Safe Artifact"
-    O-->>U: "Deliver Operator Output"
+    U->>O: Dispatch Task
+    O->>O: Evaluate Prompt via PromptGuard
+    O->>C: Register Canary Token
+    O->>S: Scrub Input Arguments
+    S-->>O: Clean Arguments
+    O->>T: Execute Command
+    T-->>O: Raw Telemetry Output
+    O->>C: Check Canary Tripwires
+    O->>S: Scrub Output Artifacts
+    S-->>O: Clean Artifacts
+    O-->>U: Deliver Results
 ```
 
 ---
 
 <div align="center">
 
-### Compliance Audit Checklist
+### Pre-Push Checklist
 
 </div>
 
-- [ ] All markdown headings centered using `<div align="center">...</div>`.
-- [ ] Absolutely zero Unicode emoji characters present across all files.
-- [ ] All unit tests pass in `tests/test_opsec.py`.
-- [ ] Compliance script `scripts/audit_opsec.py` exits with status code 0.
-- [ ] Git commit attributed to `stefanutc1 <321888485+stefanutc1@users.noreply.github.com>`.
+- [ ] All markdown headings are centered using `<div align="center">...</div>`.
+- [ ] No emojis in any markdown, code comments, or commit messages.
+- [ ] Unit tests pass: `python3 -m unittest tests/test_opsec.py`.
+- [ ] Audit passes: `python3 scripts/audit_opsec.py`.
+- [ ] Commit author is `stefanutc1 <321888485+stefanutc1@users.noreply.github.com>`.
