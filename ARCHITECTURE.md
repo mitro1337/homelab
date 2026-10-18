@@ -74,26 +74,28 @@ flowchart TB
         EDGE2["ESP32-EDGE-02: irrigation<br/>4-Zone Opto-Isolated Active-LOW Relays<br/>Analog Capacitive Moisture Probes<br/>Pulse Flow Meter (YF-S201) · Rain Inhibit"]
         EDGE3["ESP32-EDGE-03: datacenter_env<br/>BME280 I2C (Temp/Humidity/Pressure)<br/>Dual DS18B20 1-Wire Intake/Exhaust Delta-T<br/>Noctua 25kHz PWM Fan Driver · Prometheus /metrics"]
         EDGE4["ESP32-EDGE-04: power_monitor<br/>230V AC Optocoupler Zero-Latency Interrupt<br/>12V SLA Battery Divider ADC · INA219 DC Monitor<br/>Emergency Proxmox Shutdown Trigger (<11.4V)"]
+        EDGE5["ESP32-EDGE-05: thermostat<br/>DHT22 / DS18B20 Temp & Humidity<br/>Relay Heat/Cool Control · MQTT Telemetry"]
+        EDGE6["ESP32-EDGE-06: smart_motion<br/>PIR Motion + Doppler Microwave Radar<br/>Ambient Light Photocell · MQTT Telemetry"]
     end
 
     subgraph WORKLOAD_TIERS["Workload Execution Tiers (Node 1)"]
-        subgraph ALWAYS_ON["Always-On Production Microservices (~9.2 GB RAM)"]
-            CT100["CT 100: Home Assistant Core (384 MB)"]
-            CT101["CT 101: Scrutiny S.M.A.R.T. Daemon (128 MB)"]
+        subgraph ALWAYS_ON["Always-On Production Microservices (~9.8 GB RAM)"]
+            CT100["CT 100: Home Assistant Core (1,024 MB)"]
+            CT101["CT 101: Scrutiny S.M.A.R.T. Daemon (96 MB)"]
             CT102["CT 102: Ollama GPU AI Runtime (2,048 MB)"]
-            CT103["CT 103: Uptime Kuma Prober (128 MB)"]
+            CT103["CT 103: Uptime Kuma Prober (256 MB)"]
             CT104["CT 104: Prometheus & Grafana (1,024 MB)"]
-            CT105["CT 105: Media Suite & Jellyfin (896 MB)"]
+            CT105["CT 105: OWASP Pentest Target (512 MB)"]
             CT106["CT 106: Wazuh SIEM / HIDS Server (1,536 MB)"]
-            CT100B["CT 100b: Immich Photo Server (896 MB)"]
-            CT101B["CT 101b: Nextcloud Collaboration Hub (512 MB)"]
-            CT161["CT 161: MinIO S3 Object Storage (256 MB)"]
+            CT107["CT 107: Nextcloud Collaboration Hub (512 MB)"]
+            CT108["CT 108: Jellyfin Media Suite (1,536 MB)"]
+            CT109["CT 109: Immich Photo Server (1,536 MB)"]
         end
 
         subgraph ON_DEMAND["On-Demand Academic & Research Labs (Spin-Up Lifecycle)"]
-            LAB_AD["Active Directory Enterprise Forest (VMs 400–410)<br/>Win Server 2008 R2, 2012 R2, 2016, 2019, 2022, 2025<br/>Win 10/11 & RHEL 9.8 Domain Workloads"]
+            LAB_AD["Active Directory Enterprise Forest (VMs 400–405)<br/>Win Server 2012 R2, 2016, 2022<br/>Win 7/10 & RHEL 9.8 Domain Workloads"]
             LAB_BANK["Bachelor's Thesis Banking Security Lab (VMs 310–313)<br/>Apache Fineract Core-Banking · PostgreSQL Ledger<br/>SWIFT Privileged Bastion · Payment Gateway API"]
-            LAB_CYBER["Offensive Security & Malware Range<br/>Kali Linux (VM 302) · Metasploitable 2 (VM 301)<br/>OWASP Juice Shop (CT 303) · REMnux DFIR (VM 205)<br/>T-Pot 24 Multi-Decoy Honeypot (VM 203)"]
+            LAB_CYBER["Offensive Security & Malware Range<br/>Parrot Security (VM 300) · Windows Malware Sandbox (VM 301)<br/>Kali Linux (VM 302) · Metasploitable 2 (VM 305)<br/>REMnux DFIR (VM 304)"]
         end
     end
 

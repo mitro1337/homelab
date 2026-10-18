@@ -17,17 +17,17 @@ Complete breakdown of foundational and production services hosted across the inf
 | **Observability** | Uptime Kuma | `3001` | `status.lan` | CT 103 (Node 1) | `DEPLOYED` |
 | **Observability** | Scrutiny S.M.A.R.T. | `8080` | `disks.lan` | CT 101 (Node 1) | `DEPLOYED` |
 | **Security & SIEM** | Wazuh Manager 4.14 | `1514`, `55000` | `wazuh.lan` | CT 106 (Node 1) | `DEPLOYED` |
-| **Security & DFIR** | Windows Malware Sandbox | `3389` | `malware.lan` | VM 303 (Node 1) | `DEPLOYED` |
+| **Security & DFIR** | Windows Malware Sandbox | `3389` | `malware.lan` | VM 301 (Node 1) | `DEPLOYED` |
 | **Offensive Security**| Parrot Pentest Node | `22` | `parrot.lan` | VM 300 (Node 1) | `DEPLOYED` |
 | **Security & Lab** | OWASP Pentest Target | `80`, `3000` | `owasp.lan` | CT 105 (Node 1) | `DEPLOYED` |
 | **Productivity & Cloud**| Nextcloud Hub | `8080` | `cloud.lan` | CT 107 (Node 1) | `DEPLOYED` |
 | **Storage & Object** | MinIO S3 API | `9000`, `9001` | `s3.lan` | CT 161 (Node 1) | `DECLARED` |
 | **Storage & NAS** | OpenMediaVault ZFS | `80`, `445` | `nas.lan` | Node 2 (Bare-Metal) | `DEPLOYED` |
 | **Storage & Backup** | Proxmox Backup Server | `8007` | `pbs.lan` | Node 1 / 2 | `DEPLOYED` |
-| **Media & Streaming** | Jellyfin Media Server | `8096` | `media.lan` | CT 180 (Node 1) | `DEPLOYED` |
+| **Media & Streaming** | Jellyfin Media Server | `8096` | `media.lan` | CT 108 (Node 1) | `DEPLOYED` |
 | **Media Automation** | Gluetun VPN Killswitch | `8085` | `vpn.lan` | Node 1 (Docker) | `DECLARED` |
 | **Media Automation** | Sonarr / Radarr / Prowlarr | `8989`, `7878`, `9696` | `arr.lan` | Node 1 (Docker) | `DECLARED` |
-| **Media Automation** | Immich Photo & Video | `2283` | `photos.lan` | CT 181 (Node 1) | `DEPLOYED` |
+| **Media Automation** | Immich Photo & Video | `2283` | `photos.lan` | CT 109 (Node 1) | `DEPLOYED` |
 | **Home Automation** | Home Assistant Core | `8123` | `home.lan` | CT 100 (Node 1) | `DEPLOYED` |
 | **AI Platform** | Ollama GPU Inference | `11434` | `ai.lan` | CT 102 (Node 1) | `DEPLOYED` |
 | **Operations & SSoT** | NetBox DCIM / IPAM | `8000` | `netbox.lan` | Node 1 (Docker) | `DECLARED` |

@@ -170,8 +170,7 @@ flowchart TB
 
         subgraph SEC_VMS["Cyber Defense & Forensic Sandboxes"]
             VM300["VM 300: Parrot Security OS (192.168.1.30)"]
-            VM301["VM 301: Metasploitable 2 Target (Isolated)"]
-            VM303["VM 303: Windows Malware Sandbox (Flare-VM)"]
+            VM301["VM 301: Windows Malware Sandbox (Flare-VM)"]
             VM304["VM 304: REMnux Reverse Engineering Toolkit"]
         end
     end
@@ -286,10 +285,10 @@ The platform runs 26 core production workloads categorized into five availabilit
 | **Tier 1** | **Prometheus & Grafana (CT 104)**| LXC | `192.168.1.121` | `9090`, `3000` | 1,024 MB | Telemetry TSDB, hardware dashboards & alerts |
 | **Tier 1** | **Uptime Kuma (CT 103)** | LXC | `192.168.1.119` | `3001` | 256 MB | Synthetic HTTP/TCP availability health monitoring |
 | **Tier 2** | **OpenMediaVault NAS (Node 2)** | Bare | `192.168.1.135` | `80`, `445`, `2049` | 2,048 MB | Central ZFS storage, NFS/SMB shares, vzdump |
-| **Tier 2** | **Scrutiny SMART (CT 101)** | LXC | `192.168.1.108` | `8080` | 256 MB | Hard drive health & NVMe telemetry tracking |
+| **Tier 2** | **Scrutiny SMART (CT 101)** | LXC | `192.168.1.18` | `8080` | 256 MB | Hard drive health & NVMe telemetry tracking |
 | **Tier 3** | **Ollama AI Inference (CT 102)** | LXC | `192.168.1.110` | `11434` | 2,048 MB | Local LLM inference (NVIDIA GTX 1050 Ti GPU) |
-| **Tier 3** | **Immich Photo Library (CT 181)**| LXC | `192.168.1.181` | `2283`, `3003` | 1,536 MB | Self-hosted machine-learning photo storage |
-| **Tier 3** | **Media Suite / Jellyfin (CT 180)**| LXC | `192.168.1.180` | `8096`, `8989` | 1,536 MB | Media pipeline, indexing and transcoding |
+| **Tier 3** | **Immich Photo Library (CT 109)**| LXC | `192.168.1.109` | `2283`, `3003` | 1,536 MB | Self-hosted machine-learning photo storage |
+| **Tier 3** | **Media Suite / Jellyfin (CT 108)**| LXC | `192.168.1.108` | `8096`, `8989` | 1,536 MB | Media pipeline, indexing and transcoding |
 | **Tier 3** | **Nextcloud Hub (CT 107)** | LXC | `192.168.1.8` | `8080` | 512 MB | File synchronization, WebDAV and collaboration |
 | **Tier 3** | **OWASP Pentest Target (CT 105)**| LXC | `192.168.1.175` | `80`, `3000` | 512 MB | Vulnerable web applications for security testing |
 | **Tier 4** | **Banking Core (VM 310–313)** | KVM | `192.168.20.50` | `8080`, `5432`, `8000`| 3,072 MB | Bachelor's thesis banking security cyberlab |

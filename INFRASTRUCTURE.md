@@ -98,7 +98,7 @@ All virtual machines execute under QEMU/KVM on Node 1 (`pve_primary_x64`). Total
 | :---: | :--- | :--- | :---: | :---: | :---: | :---: | :--- | :--- | :---: | :--- |
 | **200** | `opnsense-firewall` | FreeBSD 14 / OPNsense 24.x | 2 | 2,048 MB | 1,024 MB | 16 GB | `local-lvm` | VLAN 10 (`192.168.1.134`) | `DEPLOYED` | Core perimeter gateway, NAT, Suricata DPI, DoT Unbound DNS |
 | **300** | `parrot` | Parrot Security 7.3 | 1 | 1,536 MB | 1,024 MB | 65 GB | `local-lvm` | VLAN 30 (`192.168.1.210`) | `DEPLOYED` | Dedicated offensive testing and red team operator workstation |
-| **303** | `windows-malware` | Windows 10 Enterprise | 2 | 2,560 MB | 2,048 MB | 50 GB | `local-lvm` | VLAN 30 (`192.168.1.215`) | `DEPLOYED` | Dynamic malware execution, memory acquisition & DFIR sandbox |
+| **301** | `windows-malware` | Windows 10 Enterprise | 2 | 2,560 MB | 2,048 MB | 50 GB | `local-lvm` | VLAN 30 (`192.168.1.215`) | `DEPLOYED` | Dynamic malware execution, memory acquisition & DFIR sandbox |
 | **400** | `ad2022` | Windows Server 2022 Datacenter | 2 | 4,096 MB | 2,048 MB | 60 GB | `local-lvm` | VLAN 10 (`192.168.1.222`) | `DEPLOYED` | Primary Active Directory forest root & Kerberos DC |
 | **401** | `ad2016` | Windows Server 2016 Standard | 2 | 2,048 MB | 2,048 MB | 50 GB | `local-lvm` | VLAN 10 (`192.168.1.216`) | `DEPLOYED` | Replica Domain Controller and cross-forest trust partner |
 | **402** | `ad2012` | Windows Server 2012 R2 Standard | 2 | 1,024 MB | 1,024 MB | 50 GB | `local-lvm` | VLAN 10 (`192.168.1.212`) | `DEPLOYED` | Deprecated protocol testing (NTLMv1, SMBv1 teardown) |
@@ -106,7 +106,7 @@ All virtual machines execute under QEMU/KVM on Node 1 (`pve_primary_x64`). Total
 | **404** | `adwin7` | Windows 7 Ultimate SP1 Client | 2 | 1,024 MB | 1,024 MB | 50 GB | `local-lvm` | VLAN 10 (`192.168.1.207`) | `DEPLOYED` | Legacy client testing for pass-the-hash and NetBIOS attacks |
 | **405** | `adrhel` | RHEL 9.8 Enterprise Domain Node | 2 | 1,536 MB | 1,024 MB | 50 GB | `local-lvm` | VLAN 10 (`192.168.1.228`) | `DEPLOYED` | SSSD / Realmd cross-platform Kerberos domain join |
 | **201** | `openstack` | Ubuntu 24.04 / Kolla OpenStack | 2 | 4,096 MB | 2,048 MB | 32 GB | `local-lvm` | VLAN 20 (`192.168.1.201`) | `DECLARED` | Private cloud orchestration and API testing |
-| **301** | `metasploitable2` | Metasploitable 2 Linux Target | 1 | 512 MB | 512 MB | 8 GB | `local-lvm` | VLAN 20 (`192.168.1.202`) | `DECLARED` | Network penetration testing and vulnerability verification |
+| **302** | `kali-licenta` | Kali Linux Rolling Pentest Node | 2 | 4,096 MB | 2,048 MB | 30 GB | `local-lvm` | VLAN 30 (`192.168.30.102`) | `DECLARED` | Dedicated offensive testing and red team operator workstation |
 | **304** | `remnux` | REMnux v7 / Ubuntu Malware DFIR | 2 | 4,096 MB | 2,048 MB | 40 GB | `local-lvm` | VLAN 30 (`192.168.1.205`) | `DECLARED` | Reverse engineering and malware behavioral analysis |
 | **310** | `core-banking` | Debian 12 / Apache Fineract | 2 | 4,096 MB | 2,048 MB | 40 GB | `local-lvm` | VLAN 20 (`192.168.20.50`) | `DECLARED` | Bachelor's Thesis enterprise core-banking platform |
 | **311** | `banking-db` | Debian 12 / PostgreSQL 16 Ledger | 2 | 4,096 MB | 2,048 MB | 50 GB | `local-lvm` | VLAN 20 (`192.168.20.51`) | `DECLARED` | Financial transaction ledger, pgAudit, SCRAM-SHA-256 |
@@ -133,8 +133,8 @@ All containers execute on Node 1 (`pve_primary_x64`), sharing the host Linux 6.8
 | **105** | `owasp` | Vulnerable Web Application Target | Alpine 3.24 | 512 MB | 8 GB | Yes | VLAN 30 (`192.168.1.175`) | `DEPLOYED` |
 | **106** | `wazuh` | Wazuh SIEM / HIDS Server 4.14 | Ubuntu 24.04 | 4,096 MB | 35 GB | No | VLAN 10 (`192.168.1.240`) | `DEPLOYED` |
 | **107** | `nextcloud` | File Synchronization & WebDAV Hub | Alpine 3.24 | 512 MB | 8 GB | Yes | VLAN 20 (`192.168.1.8`) | `DEPLOYED` |
-| **180** | `jellyfin` | Media Streaming Suite (*arr Stack) | Ubuntu 24.04 | 1,536 MB | 30 GB | No | VLAN 20 (`192.168.1.180`) | `DEPLOYED` |
-| **181** | `immich` | Machine-Learning Photo Backup | Ubuntu 24.04 | 1,536 MB | 30 GB | No | VLAN 20 (`192.168.1.181`) | `DEPLOYED` |
+| **108** | `jellyfin` | Media Streaming Suite (*arr Stack) | Ubuntu 24.04 | 1,536 MB | 30 GB | No | VLAN 20 (`192.168.1.108`) | `DEPLOYED` |
+| **109** | `immich` | Machine-Learning Photo Backup | Ubuntu 24.04 | 1,536 MB | 30 GB | No | VLAN 20 (`192.168.1.109`) | `DEPLOYED` |
 
 ---
 
@@ -161,8 +161,8 @@ Total Physical RAM: 12,288 MB (100.0%)
   ├─ VM 200 (OPNsense Firewall & Suricata DPI): 1,536 MB (Balloon 1024-2048 MB)
   ├─ CT 102 (Ollama AI Inference Runtime): 2,048 MB (GPU handles model weights)
   ├─ CT 106 (Wazuh SIEM / HIDS Server): 1,536 MB
-  ├─ CT 180 (Jellyfin Media Suite): 1,536 MB
-  ├─ CT 181 (Immich Photos): 1,536 MB
+  ├─ CT 108 (Jellyfin Media Suite): 1,536 MB
+  ├─ CT 109 (Immich Photos): 1,536 MB
   ├─ CT 100 (Home Assistant Core): 1,024 MB
   ├─ CT 107 (Nextcloud Collaboration Hub): 512 MB
   ├─ CT 105 (OWASP Pentest Target): 512 MB
