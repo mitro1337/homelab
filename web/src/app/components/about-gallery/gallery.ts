@@ -371,20 +371,20 @@ export class AboutGalleryComponent {
   },
   {
     src: 'photos/services/metasploitable2.png',
-    title: 'Metasploitable 2 · Vulnerable Exploit Target (VM 301)',
-    titleRo: 'Metasploitable 2 · Țintă Vulnerabilă pentru Exploatare (VM 301)',
+    title: 'Metasploitable 2 · Vulnerable Exploit Target (VM 305)',
+    titleRo: 'Metasploitable 2 · Țintă Vulnerabilă pentru Exploatare (VM 305)',
     category: 'CYBERSECURITY & PROVING GROUND',
     categoryRo: 'SECURITATE CIBERNETICĂ & POLIGON DE TEST',
     description: 'Intentionally vulnerable Linux test environment in isolated VLAN 30 for offensive exploit validation, payload crafting, and IDS signature tuning.',
     descriptionRo: 'Mediu Linux deliberat vulnerabil în VLAN 30 izolat pentru validarea exploatărilor ofensive și calibrarea semnăturilor IDS.',
     endpoint: '192.168.30.10 (VLAN 30 Isolated Target)',
-    badge: 'METASPLOITABLE (VM 301)',
-    badgeRo: 'METASPLOITABLE (VM 301)'
+    badge: 'METASPLOITABLE (VM 305)',
+    badgeRo: 'METASPLOITABLE (VM 305)'
   },
   {
     src: 'photos/services/dfir-sandbox.png',
-    title: 'Windows Malware Sandbox · Flare-VM Detonation (VM 303)',
-    titleRo: 'Windows Malware Sandbox · Detonare Malware Flare-VM (VM 303)',
+    title: 'Windows Malware Sandbox · Flare-VM Detonation (VM 301)',
+    titleRo: 'Windows Malware Sandbox · Detonare Malware Flare-VM (VM 301)',
     category: 'CYBERSECURITY & MALWARE LAB',
     categoryRo: 'SECURITATE CIBERNETICĂ & LAB MALWARE',
     description: 'Isolated Windows 10 dynamic analysis sandbox equipped with Mandiant Flare-VM, Procmon, x64dbg, and Wireshark for behavioral malware detonation in VLAN 30.',

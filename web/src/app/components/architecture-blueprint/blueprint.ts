@@ -2113,7 +2113,7 @@ export class ArchitectureBlueprintComponent implements OnInit {
       name: 'Core Microservices & Applications',
       subnet: '192.168.1.0/24',
       gateway: '192.168.1.134 (OPNsense)',
-      nodes: 'Home Assistant (CT 100), Scrutiny (CT 101), Ollama GPU (CT 102), Uptime Kuma (CT 103), Monitoring (CT 104)',
+      nodes: 'Home Assistant (CT 100), Scrutiny (CT 101), Ollama GPU (CT 102), Uptime Kuma (CT 103), Monitoring (CT 104), Nextcloud Hub (CT 107), Jellyfin (CT 108), Immich Photos (CT 109)',
       firewallPolicy: 'Restricted inter-VLAN access; stateful egress inspection'
     },
     {
@@ -2121,7 +2121,7 @@ export class ArchitectureBlueprintComponent implements OnInit {
       name: 'Cyber Security & Sandboxes (CyberLab)',
       subnet: '192.168.30.0/24',
       gateway: '192.168.1.134:8443',
-      nodes: 'Wazuh SIEM/XDR (CT 106), Suricata IDS, OWASP Lab (CT 105), Parrot Security OS (VM 300)',
+      nodes: 'Wazuh SIEM/XDR (CT 106), Suricata IDS, OWASP Lab (CT 105), Parrot Security OS (VM 300), Windows Malware Sandbox (VM 301), REMnux (VM 304)',
       firewallPolicy: 'Promiscuous SPAN mirror port, no outbound WAN access for sandboxes'
     },
     {
@@ -2137,7 +2137,7 @@ export class ArchitectureBlueprintComponent implements OnInit {
       name: 'IoT & Physical Edge Devices',
       subnet: '192.168.50.0/24',
       gateway: '192.168.1.134',
-      nodes: 'Smart Home Sensors, IoT Relays, Zigbee Gateway',
+      nodes: 'Smart Home Sensors, IoT Relays, Zigbee Gateway, ESP32 Fleet (6 Nodes)',
       firewallPolicy: 'MQTT communication strictly restricted to Home Assistant (CT 100)'
     }
   ];
@@ -2156,7 +2156,7 @@ export class ArchitectureBlueprintComponent implements OnInit {
       name: 'Microservicii Core & Aplicații',
       subnet: '192.168.1.0/24',
       gateway: '192.168.1.134 (OPNsense)',
-      nodes: 'Home Assistant (CT 100), Scrutiny (CT 101), Ollama GPU (CT 102), Uptime Kuma (CT 103), Monitoring (CT 104)',
+      nodes: 'Home Assistant (CT 100), Scrutiny (CT 101), Ollama GPU (CT 102), Uptime Kuma (CT 103), Monitoring (CT 104), Nextcloud Hub (CT 107), Jellyfin (CT 108), Immich Photos (CT 109)',
       firewallPolicy: 'Acces inter-VLAN restricționat; inspecție de securitate de ieșire'
     },
     {
@@ -2164,7 +2164,7 @@ export class ArchitectureBlueprintComponent implements OnInit {
       name: 'Securitate Cibernetică & Sandboxes (CyberLab)',
       subnet: '192.168.30.0/24',
       gateway: '192.168.1.134:8443',
-      nodes: 'Wazuh SIEM/XDR (CT 106), Suricata IDS, Laborator OWASP (CT 105), Parrot Security OS (VM 300)',
+      nodes: 'Wazuh SIEM/XDR (CT 106), Suricata IDS, Laborator OWASP (CT 105), Parrot Security OS (VM 300), Windows Malware Sandbox (VM 301), REMnux (VM 304)',
       firewallPolicy: 'Port mirror SPAN promiscuu, fără acces WAN outbound pentru sandbox-uri'
     },
     {

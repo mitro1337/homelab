@@ -34,8 +34,8 @@ export const HARDWARE_NODES: HardwareNode[] = [
     name: 'Proxmox Primary (pve)',
     machine: 'Custom Desktop Compute Chassis',
     machineRo: 'Șasiu Desktop Compute Custom',
-    role: 'Primary x86_64 virtualization hypervisor running the perimeter OPNsense firewall, production LXCs (100–106), security VMs (300, 301, 303, 304), and the multi-tier Active Directory lab (VMs 400–405).',
-    roleRo: 'Hypervisor primar de virtualizare x86_64 ce rulează firewall-ul perimetral OPNsense, containerele LXC de producție (100–106), VM-urile de securitate (300, 301, 303, 304) și laboratorul Active Directory (VM-uri 400–405).',
+    role: 'Primary x86_64 virtualization hypervisor running the perimeter OPNsense firewall, production LXCs (100–109), security VMs (300, 301, 304, 305), and the multi-tier Active Directory lab (VMs 400–405).',
+    roleRo: 'Hypervisor primar de virtualizare x86_64 ce rulează firewall-ul perimetral OPNsense, containerele LXC de producție (100–109), VM-urile de securitate (300, 301, 304, 305) și laboratorul Active Directory (VM-uri 400–405).',
     cpu: 'Intel Core i3-10100F (4 Cores / 8 Threads @ 4.30 GHz Turbo)',
     gpu: 'NVIDIA GeForce GTX 1050 Ti (4GB VRAM · PCIe Passthrough to Ollama CT 102)',
     ram: '12,288 MB DDR4 (12 GB DDR4-2133)',
@@ -77,21 +77,21 @@ export const HARDWARE_NODES: HardwareNode[] = [
       },
       { 
         vmid: 301, 
-        name: 'metasploitable2', 
-        os: 'Linux 2.6 (Vulnerable Target)', 
-        allocatedMb: 512, 
-        balloonMinMb: 256, 
-        purpose: 'Intentionally Vulnerable Target for Offensive Security Drills',
-        purposeRo: 'Țintă vulnerabilă deliberat pentru simulări de securitate ofensivă'
-      },
-      { 
-        vmid: 303, 
         name: 'malware', 
         os: 'Windows 10 (Flare-VM)', 
         allocatedMb: 2560, 
         balloonMinMb: 1536, 
         purpose: 'Dynamic Malware Analysis & Detonation Sandbox',
         purposeRo: 'Sandbox izolat pentru analiză dinamică de malware și detonare'
+      },
+      { 
+        vmid: 305, 
+        name: 'metasploitable2', 
+        os: 'Linux 2.6 (Vulnerable Target)', 
+        allocatedMb: 512, 
+        balloonMinMb: 256, 
+        purpose: 'Intentionally Vulnerable Target for Offensive Security Drills',
+        purposeRo: 'Țintă vulnerabilă deliberat pentru simulări de securitate ofensivă'
       },
       { 
         vmid: 304, 
@@ -188,9 +188,9 @@ export const HARDWARE_NODES: HardwareNode[] = [
       'VM 200: OPNsense Core Firewall (1024 MB · Suricata IDS/IPS, WireGuard, Unbound DNS)',
       'VM 201: OpenStack Dev Sandbox (4096 MB · Kolla-Ansible Cloud Controller)',
       'VM 300: Parrot Security OS (1536 MB · Dedicated Offensive Security & Threat Analysis Workstation)',
-      'VM 301: Metasploitable 2 Target (512 MB · Vulnerable Exploit Target)',
-      'VM 303: Windows Malware Sandbox (2560 MB · Flare-VM Dynamic Analysis Sandbox)',
+      'VM 301: Windows Malware Sandbox (2560 MB · Flare-VM Dynamic Analysis Sandbox)',
       'VM 304: REMnux Forensic Toolkit (4096 MB · Reverse Engineering & Static Analysis)',
+      'VM 305: Metasploitable 2 Target (512 MB · Vulnerable Exploit Target)',
       'VM 310: Core-Banking Engine (4096 MB · Apache Fineract, Double-Entry Ledger, VLAN 20)',
       'VM 311: Financial Database Server (4096 MB · PostgreSQL 16 ACID, pgAudit, Wazuh HIDS)',
       'CT 312: Payment Gateway & SWIFT API (1024 MB · FastAPI Simulator, ISO 20022 pacs.008)',
@@ -201,13 +201,16 @@ export const HARDWARE_NODES: HardwareNode[] = [
       'VM 403: Domain Workstation adwin10 (2560 MB · Windows 10 Enterprise GPO & Sysmon)',
       'VM 404: Legacy Client adwin7 (2048 MB · Windows 7 SP1 SMBv1/NTLM Drill Target)',
       'VM 405: Linux Realm Member adrhel (1536 MB · RHEL 9 SSSD & Kerberos Auth)',
-      'CT 100: Home Assistant Hub (128 MB · Smart Home, Zigbee & IoT Telemetry Gateway)',
+      'CT 100: Home Assistant Hub (1024 MB · Smart Home, Zigbee & IoT Telemetry Gateway)',
       'CT 101: Scrutiny S.M.A.R.T. Monitor (96 MB · Storage Health & Drive Telemetry)',
       'CT 102: Ollama GPU LLM Runtime (2048 MB · PCIe Passthrough NVIDIA GTX 1050 Ti)',
       'CT 103: Uptime Kuma Health Monitor (128 MB · High-Frequency Endpoint Status)',
       'CT 104: Monitoring Stack (256 MB · Prometheus TSDB & Grafana Dashboards)',
       'CT 105: OWASP Pentest Target Lab (512 MB · Juice Shop Web Security Environment)',
-      'CT 106: Wazuh SIEM / XDR Manager (6144 MB · OpenSearch 4GB Heap, Manager, Dashboard)'
+      'CT 106: Wazuh SIEM / XDR Manager (6144 MB · OpenSearch 4GB Heap, Manager, Dashboard)',
+      'CT 107: Nextcloud Collaboration Hub (512 MB · Enterprise WebDAV & File Sync)',
+      'CT 108: Jellyfin Media Suite (1536 MB · Media Streaming & *arr Stack)',
+      'CT 109: Immich Photo Server (1536 MB · ML Photo & Video Library)'
     ]
   },
   {

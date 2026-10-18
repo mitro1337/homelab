@@ -135,11 +135,11 @@ detection:
     status: 'Evaluat & Documentat',
     summary: 'Vulnerabilități critice în stiva de virtualizare Microsoft Hyper-V ce permit unui atacator autentificat într-o mașină virtuală guest să spargă complet izolarea hypervisorului (Ring -1 / Ring 0) și să execute cod arbitrar ca NT AUTHORITY\\SYSTEM pe mașina fizică gazdă.',
     rootCause: 'Out-of-Bounds Write în emulatorul SCSI storvsp.sys prin liste de dispersie/colectare (SGL) malformate trimise prin VMBus (CVE-2026-69603) și Use-After-Free în vmswitch.sys la renegocierea concurentă a MTU și eliberarea cozilor de pachete (CVE-2026-80083).',
-    homelabImpact: 'Direct și sever pe mașina gazdă fizică Hyper-V configurată în hypervisors/hyperv/main.tf (hlextswitch). Dacă un atacator compromite o mașină de test sau honeypot (metasploitable_vm VMID 202, metasploitable_licenta_vm VMID 301, tpot_vm VMID 203), poate evada pe host-ul Windows fizic. Odată pe host, obține acces la toate discurile VHDX și poate extrage memoria RAM a Domain Controller-ului (ad2025_vm) și a firewall-ului OPNsense.',
+    homelabImpact: 'Direct și sever pe mașina gazdă fizică Hyper-V configurată în hypervisors/hyperv/main.tf (hlextswitch). Dacă un atacator compromite o mașină de test sau honeypot (metasploitable_vm VMID 202, metasploitable_licenta_vm VMID 305, tpot_vm VMID 203), poate evada pe host-ul Windows fizic. Odată pe host, obține acces la toate discurile VHDX și poate extrage memoria RAM a Domain Controller-ului (ad2025_vm) și a firewall-ului OPNsense.',
     affectedNodes: [
       'Physical Hyper-V Host (hypervisors/hyperv/main.tf)',
       'metasploitable_vm (192.168.1.202 - VMID 202)',
-      'metasploitable_licenta_vm (192.168.1.211 - VMID 301)',
+      'metasploitable_licenta_vm (192.168.1.211 - VMID 305)',
       'tpot_vm (192.168.1.203 - VMID 203)',
       'ad2025_vm & ad2022_vm (Co-located VM exposure)'
     ],
@@ -389,7 +389,7 @@ detection:
     affectedNodes: [
       'Physical Hyper-V Host (hypervisors/hyperv/main.tf)',
       'metasploitable_vm (192.168.1.202 - VMID 202)',
-      'metasploitable_licenta_vm (192.168.1.211 - VMID 301)',
+      'metasploitable_licenta_vm (192.168.1.211 - VMID 305)',
       'tpot_vm (192.168.1.203 - VMID 203)',
       'ad2025_vm & ad2022_vm (Co-located VM exposure)'
     ],
