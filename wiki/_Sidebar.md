@@ -10,5 +10,5 @@
 - [[Infrastructure as Code|Infrastructure-as-Code]]
 - [[Kubernetes & GitOps|Kubernetes-and-GitOps]]
 - [[Monitoring & Alerting|Monitoring-and-Alerting]]
-- [[ESP32 Edge Systems|ESP32-Edge-Systems]]
+- [SmartHome Edge Suite](https://github.com/stefanutc1/smarthome)
 - [[Runbooks & Disaster Recovery|Runbooks-and-Disaster-Recovery]]

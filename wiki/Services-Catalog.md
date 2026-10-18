@@ -33,3 +33,6 @@ Complete breakdown of foundational and production services hosted across the inf
 | **Edge IoT: Power** | ESP32 Grid & Battery Watch | `80` (`/metrics`) | `esp32-power.lan` | ESP32-EDGE-04 | `DEPLOYED` |
 | **Edge IoT: Climate** | ESP32 Smart Thermostat | `1883` (MQTT) | `esp32-thermostat.lan` | ESP32-EDGE-05 | `DEPLOYED` |
 | **Edge IoT: Motion** | ESP32 Smart Motion Sensor | `1883` (MQTT) | `esp32-motion.lan` | ESP32-EDGE-06 | `DEPLOYED` |
+
+*Firmware source code, GPIO pinouts, and hardware schematics for Edge IoT nodes are maintained in the dedicated repository [stefanutc1/smarthome](https://github.com/stefanutc1/smarthome).*
+

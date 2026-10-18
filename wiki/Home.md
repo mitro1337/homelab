@@ -90,5 +90,5 @@ flowchart TB
 3. **[[Infrastructure as Code|Infrastructure-as-Code]]** — Terraform Proxmox VM modules and multi-cloud preventative zero-cost guardrails.
 4. **[[Kubernetes & GitOps|Kubernetes-and-GitOps]]** — k3s edge worker cluster configuration, containerd runtime, and GitOps workflows.
 5. **[[Monitoring & Alerting|Monitoring-and-Alerting]]** — Prometheus metrics scraping, node-level alert triggers, and Discord webhook routing.
-6. **[[ESP32 Edge Systems|ESP32-Edge-Systems]]** — Embedded C++ firmware suite for access control, irrigation, rack thermals, and power failover.
+6. [**SmartHome & IoT Edge Systems**](https://github.com/stefanutc1/smarthome) — Standalone repository and [wiki](https://github.com/stefanutc1/smarthome/tree/main/wiki) for the embedded C++ firmware suite (access control, irrigation, rack thermals, power failover, smart thermostat, and smart motion sensor).
 7. **[[Runbooks & Disaster Recovery|Runbooks-and-Disaster-Recovery]]** — Operational runbooks, cold boot sequences, 3-2-1 backup strategy, and emergency shutdown procedures.
