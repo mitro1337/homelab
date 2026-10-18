@@ -12,13 +12,13 @@
 #   8. Internal Homelab Forensics (Media Galaxy, Revolut, Task Scam, Steam OpenID)
 # ------------------------------------------------------------------------------
 # Classification: TLP:CLEAR | Synchronized Daily at 00:00 Europe/Bucharest (24h)
-# Last Updated: 2026-10-18 17:08:42 UTC
-# Total Forbidden Domains: 18640
+# Last Updated: 2026-10-18 18:27:25 UTC
+# Total Forbidden Domains: 18645
 # Breakdown:
 #   - Local Forensics:               435
 #   - Romania (DNSC Blacklist):       10
-#   - European Union (CERT-EU/URLh): 850
-#   - Five Eyes Coalition (US/UK/CA/AU/NZ): 17401
+#   - European Union (CERT-EU/URLh): 851
+#   - Five Eyes Coalition (US/UK/CA/AU/NZ): 17405
 # ==============================================================================
 007tg.vip
 00rr59n2.en-pegasus.com
@@ -4350,6 +4350,7 @@ ddosp.org
 ddverp.com
 de.neueonlinecasinos.co.uk
 de.saunapolo56.pt
+de67y1vlab.workers.dev
 de95o09a.en-bizopp.com
 dea1e060.udeur.org
 deagroup-ks.com
@@ -5716,6 +5717,7 @@ ezgroupmanagement.com
 ezhealthyhabits.com
 ezippe.com
 ezlyfebd.com
+ezn9tfkz.bewiseimmunize.com
 ezzlife.com.au
 f-reklam.hu
 f113c084.wignalllindor.wiki
@@ -13285,6 +13287,7 @@ roefeldaggemert-bakel.nl
 roehrbein.de
 roeskeweb.de
 roestereibedarf.de
+rogocinu.workers.dev
 roisoftwaresolution.com
 rokkyho32.life
 rolex-replica-shop.com
@@ -15006,6 +15009,7 @@ t.vwgze.workers.dev
 t1gts4sv.bandargadget.com
 t2d2.ddns.net
 t3aindustry.com
+t7.88idn.net
 t86gg19h5q.workers.dev
 taazaproducts.com
 tab-consultancy.com
@@ -18477,6 +18481,7 @@ zakgz07369.workers.dev
 zalphabet.com
 zalupka.website
 zaluposs.com
+zamatours.net
 zambellispizza.com.au
 zambeziz.com
 zambraao.lol
