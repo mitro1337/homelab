@@ -10,7 +10,7 @@
 [![Primary Node](https://img.shields.io/badge/Hypervisor-Intel%20i3--10100F%20(12GB%20DDR4)-blue.svg?style=flat&logo=intel)](#host-proxmox-node-1--primary-hypervisor)
 [![Storage Node](https://img.shields.io/badge/Storage-ASUS%20X451MA%20(ZFS%20NAS)-059669.svg?style=flat&logo=asus)](#host-openmediavault-node-2--storage-nas)
 [![Edge Worker](https://img.shields.io/badge/Worker-AMD%20Athlon%20II%20X2%20(4GB%20DDR3)-8b5cf6.svg?style=flat&logo=amd)](#host-k8s-node-04-node-4--kubernetes-worker-node)
-[![Edge IoT](https://img.shields.io/badge/Edge%20Fleet-6%20ESP32%20Bare--Metal%20Nodes-e7352c.svg?style=flat&logo=espressif)](../iot/README.md)
+[![Edge IoT](https://img.shields.io/badge/Edge%20Fleet-6%20ESP32%20Bare--Metal%20Nodes-e7352c.svg?style=flat&logo=espressif)](https://github.com/stefanutc1/smarthome)
 [![Author](https://img.shields.io/badge/Hardware%20Architect-Moan%C4%83%20%C8%98tef%C4%83nu%C8%9B--Cornel-blue.svg?style=flat&logo=github)](https://github.com/stefanutc1)
 [![University](https://img.shields.io/badge/University-Universitatea%20din%20Craiova%20%C2%B7%20FEAA-0284c7.svg?style=flat&logo=academia)](https://feaa.ucv.ro)
 
@@ -145,7 +145,7 @@ This document describes the physical host hardware, compute chassis, power deliv
 
 <div align="center">
 
-## 2. Embedded Microcontroller Fleet (`iot/`)
+## 2. Embedded Microcontroller Fleet (`smarthome`)
 
 </div>
 
@@ -175,7 +175,7 @@ All microcontrollers are powered by dual-core 32-bit Xtensa LX6 processors clock
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-Detailed schematic documentation, GPIO pinouts, and source code reside in [`iot/README.md`](../iot/README.md).
+Detailed schematic documentation, GPIO pinouts, and source code reside in the dedicated repository [**stefanutc1/smarthome**](https://github.com/stefanutc1/smarthome).
 
 ---
 

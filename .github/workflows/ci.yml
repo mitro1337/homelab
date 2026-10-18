@@ -96,9 +96,6 @@ jobs:
           head -c 5 "$TMP_REPORT" | grep -q "%PDF-"
           echo "DFIR PDF Report generation verified successfully ($TMP_REPORT)."
 
-      - name: ESP32 Edge Firmware Suite Audit
-        run: |
-          python3 scripts/verify_esp32_firmware.py
 
       - name: Zero-Cost Cloud Guardrail Static Audit
         run: |

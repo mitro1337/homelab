@@ -9,7 +9,7 @@
 [![Network](https://img.shields.io/badge/Network-Enterprise%20Zero--Trust%20Architecture-0f172a.svg?style=flat&logo=cisco)](#)
 [![Firewall](https://img.shields.io/badge/Firewall-OPNsense%20Dual--Perimeter-f26522.svg?style=flat&logo=opnsense)](https://opnsense.org)
 [![VLANs](https://img.shields.io/badge/Segmentation-802.1Q%20Micro--Segmentation-0052cc.svg?style=flat&logo=wireshark)](#2-8021q-vlan-segmentation-matrix)
-[![IoT Containment](https://img.shields.io/badge/IoT%20Isolation-VLAN%2050%20Air--Gapped%20WAN-e7352c.svg?style=flat&logo=espressif)](iot/README.md)
+[![IoT Containment](https://img.shields.io/badge/IoT%20Isolation-VLAN%2050%20Air--Gapped%20WAN-e7352c.svg?style=flat&logo=espressif)](https://github.com/stefanutc1/smarthome)
 [![DNS Security](https://img.shields.io/badge/DNS-Unbound%20DoT%20%2B%20DNSC%20Sinkhole-10b981.svg?style=flat&logo=cloudflare)](#5-domain-name-resolution-dns-architecture)
 [![Author](https://img.shields.io/badge/Network%20Architect-Moan%C4%83%20%C8%98tef%C4%83nu%C8%9B--Cornel-blue.svg?style=flat&logo=github)](https://github.com/stefanutc1)
 [![University](https://img.shields.io/badge/University-Universitatea%20din%20Craiova%20%C2%B7%20FEAA-0284c7.svg?style=flat&logo=academia)](https://feaa.ucv.ro)

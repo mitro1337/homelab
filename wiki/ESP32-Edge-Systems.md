@@ -10,11 +10,13 @@
 
 The homelab integrates an autonomous fleet of ESP32 microcontrollers deployed across six physical domains. All nodes operate on isolated VLAN 50, reporting telemetry over MQTT to Home Assistant (`CT 100`) and exposing native Prometheus scrape endpoints to Prometheus TSDB (`CT 104`).
 
+*All firmware source code, pinouts, and hardware schematics are maintained in the dedicated repository [**stefanutc1/smarthome**](https://github.com/stefanutc1/smarthome).*
+
 ---
 
 <div align="center">
 
-## 1. Automated Irrigation Controller (`iot/irrigation/`)
+## 1. Automated Irrigation Controller (`smarthome/irrigation`)
 
 </div>
 
@@ -55,7 +57,7 @@ pins:
 
 <div align="center">
 
-## 2. Footprint Biometric & Presence Sensor (`iot/footprint/`)
+## 2. Footprint Biometric & Presence Sensor (`smarthome/footprint`)
 
 </div>
 
@@ -77,7 +79,7 @@ Presence and occupancy detection node paired with physical biometric gate access
 
 <div align="center">
 
-## 3. Datacenter Rack Thermal Monitor (`iot/datacenter_environment/`)
+## 3. Datacenter Rack Thermal Monitor (`smarthome/datacenter_environment`)
 
 </div>
 
@@ -98,7 +100,7 @@ Rack climate and thermal efficiency monitor managing cold/hot aisle delta-T and 
 
 <div align="center">
 
-## 4. Datacenter Power & UPS Safety Appliance (`iot/power_monitor/`)
+## 4. Datacenter Power & UPS Safety Appliance (`smarthome/power_monitor`)
 
 </div>
 
@@ -119,7 +121,7 @@ Grid failure detection and battery depletion monitor protecting bare-metal hyper
 
 <div align="center">
 
-## 5. Smart HVAC Thermostat Controller (`iot/smart_thermostat/`)
+## 5. Smart HVAC Thermostat Controller (`smarthome/smart_thermostat`)
 
 </div>
 
@@ -141,7 +143,7 @@ Multi-stage heating and cooling climate regulator with hardware interlocks and c
 
 <div align="center">
 
-## 6. Smart Motion Sensor Retrofit Appliance (`iot/smart_motion_sensor/`)
+## 6. Smart Motion Sensor Retrofit Appliance (`smarthome/smart_motion_sensor`)
 
 </div>
 

@@ -101,7 +101,7 @@ The platform operates across physical bare-metal nodes, a virtualized perimeter 
 | [**`CONTRIBUTING.md`**](CONTRIBUTING.md) | Contribution standards, IaC formatting, pre-commit validation gates, conventional commit standards | Contributors & Developers |
 | [**`docs/LICENTA_ARCHITECTURE.md`**](docs/LICENTA_ARCHITECTURE.md) | Bachelor's Thesis: Impactul tehnologiilor inteligente asupra securitatii digitale (Prof. univ. dr. Georgeta Soavă) | Academic Advisors & Researchers |
 | [**`docs/ACTIVE_DIRECTORY_LAB.md`**](docs/ACTIVE_DIRECTORY_LAB.md) | Multi-generational Active Directory forest (2008–2025), Kerberos, BloodHound, and Sysmon telemetry | Identity & Red Team Engineers |
-| [**`iot/README.md`**](iot/README.md) | Physical edge IoT fleet (Gate Biometrics, Irrigation, Thermal Monitor, Power/UPS, Smart Thermostat, Smart Motion Sensor) | Embedded & IoT Engineers |
+| [**`stefanutc1/smarthome`**](https://github.com/stefanutc1/smarthome) | Dedicated repository for physical edge IoT fleet (Gate Biometrics, Irrigation, Thermal Monitor, Power/UPS, Smart Thermostat, Smart Motion Sensor) | Embedded & IoT Engineers |
 | [**`cyber/ctf/19-09-2026/`**](cyber/ctf/19-09-2026/) | Complete 19.09.2026 InvataCyber.ro CTF writeups (3/3 flags · 100% solved with code solvers) | Reverse Engineers & CTF Players |
 | [**`cyber/cve/`**](cyber/cve/README.md) | Vulnerability research and coordinated disclosure reports for 7 identified CVEs across open-source kits | Security Researchers |
 
@@ -377,16 +377,16 @@ The repository provisions an isolated 6-node multi-generational Active Directory
 
 </div>
 
-The platform integrates six autonomous ESP32 microcontroller edge systems operating on isolated VLAN 50:
+The platform integrates six autonomous ESP32 microcontroller edge systems operating on isolated VLAN 50. Firmware source code, pinouts, and hardware schematics are maintained in the dedicated repository [**stefanutc1/smarthome**](https://github.com/stefanutc1/smarthome):
 
-| Node | Firmware Path | Primary Sensors & Actuators | Hardware Pinout Highlights | Telemetry & Health Endpoint |
+| Node | Firmware Repository Link | Primary Sensors & Actuators | Hardware Pinout Highlights | Telemetry & Health Endpoint |
 | :--- | :--- | :--- | :--- | :--- |
-| **Footprint Biometric Node** | [`iot/footprint/`](iot/footprint/) | Optical Fingerprint (R307/R504), Dual PIR, HC-SR04 Ultrasonic, 12V Solenoid Gate Lock | UART2 (RX2: 16, TX2: 17), Relay: 26, Trig: 5, Echo: 18, PIR: 27 | MQTT `homelab/access/gate/event`<br/>Auto-Discovery in Home Assistant |
-| **Smart 4-Zone Irrigation** | [`iot/irrigation/`](iot/irrigation/) | 4x Solenoid Relays (Active LOW), Capacitive Soil Moisture Probes, Rain Sensor, Flow Meter | Relays: 23, 22, 21, 19; ADC Moisture: 34, 35; Rain: 32; Flow: 33 | MQTT `homelab/irrigation/*`<br/>Safety cap: 15m max per zone |
-| **Rack Thermal Monitor** | [`iot/datacenter_environment/`](iot/datacenter_environment/) | BME280 (Temp/Humidity/Pressure), Dual DS18B20 1-Wire (Intake/Exhaust Delta-T), Noctua PWM Fans | I2C (SDA: 21, SCL: 22), 1-Wire: 4, PWM Fan: 18, Tach RPM: 19 | **Native Prometheus Exporter**<br/>`http://192.168.50.15:80/metrics` |
-| **Mains AC / UPS Safety Appliance**| [`iot/power_monitor/`](iot/power_monitor/) | 230V AC Optocoupler (PC817), INA219 Power Sensor, Battery Voltage Divider ADC | AC Cut Interrupt: 25, ADC Voltage: 36, I2C INA219: 21, 22 | **Native Prometheus Exporter**<br/>`http://192.168.50.16:80/metrics`<br/>Proxmox shutdown trigger <11.4V |
-| **Smart HVAC Thermostat** | [`iot/smart_thermostat/`](iot/smart_thermostat/) | DHT22 Temp/Humidity, 3x Optocoupled Relays (W1/Y1/G), Hardware Push Buttons | DHT: 4, Relays: 25, 26, 27, Buttons: 32, 33 | MQTT `homelab/climate/thermostat/*`<br/>Home Assistant Climate Entity |
-| **Smart Motion Retrofit** | [`iot/smart_motion_sensor/`](iot/smart_motion_sensor/) | Conventional PIR (HC-SR501), Microwave Radar (RCWL-0516), LDR Lux, Battery ADC | PIR: 13, Radar: 27, LDR ADC: 34, Battery: 35 | MQTT `homelab/sensors/motion/*`<br/>Home Assistant Binary Sensor & Telemetry |
+| **Footprint Biometric Node** | [`smarthome/footprint`](https://github.com/stefanutc1/smarthome/tree/main/footprint) | Optical Fingerprint (R307/R504), Dual PIR, HC-SR04 Ultrasonic, 12V Solenoid Gate Lock | UART2 (RX2: 16, TX2: 17), Relay: 26, Trig: 5, Echo: 18, PIR: 27 | MQTT `homelab/access/gate/event`<br/>Auto-Discovery in Home Assistant |
+| **Smart 4-Zone Irrigation** | [`smarthome/irrigation`](https://github.com/stefanutc1/smarthome/tree/main/irrigation) | 4x Solenoid Relays (Active LOW), Capacitive Soil Moisture Probes, Rain Sensor, Flow Meter | Relays: 23, 22, 21, 19; ADC Moisture: 34, 35; Rain: 32; Flow: 33 | MQTT `homelab/irrigation/*`<br/>Safety cap: 15m max per zone |
+| **Rack Thermal Monitor** | [`smarthome/datacenter_environment`](https://github.com/stefanutc1/smarthome/tree/main/datacenter_environment) | BME280 (Temp/Humidity/Pressure), Dual DS18B20 1-Wire (Intake/Exhaust Delta-T), Noctua PWM Fans | I2C (SDA: 21, SCL: 22), 1-Wire: 4, PWM Fan: 18, Tach RPM: 19 | **Native Prometheus Exporter**<br/>`http://192.168.50.15:80/metrics` |
+| **Mains AC / UPS Safety Appliance**| [`smarthome/power_monitor`](https://github.com/stefanutc1/smarthome/tree/main/power_monitor) | 230V AC Optocoupler (PC817), INA219 Power Sensor, Battery Voltage Divider ADC | AC Cut Interrupt: 25, ADC Voltage: 36, I2C INA219: 21, 22 | **Native Prometheus Exporter**<br/>`http://192.168.50.16:80/metrics`<br/>Proxmox shutdown trigger <11.4V |
+| **Smart HVAC Thermostat** | [`smarthome/smart_thermostat`](https://github.com/stefanutc1/smarthome/tree/main/smart_thermostat) | DHT22 Temp/Humidity, 3x Optocoupled Relays (W1/Y1/G), Hardware Push Buttons | DHT: 4, Relays: 25, 26, 27, Buttons: 32, 33 | MQTT `homelab/climate/thermostat/*`<br/>Home Assistant Climate Entity |
+| **Smart Motion Retrofit** | [`smarthome/smart_motion_sensor`](https://github.com/stefanutc1/smarthome/tree/main/smart_motion_sensor) | Conventional PIR (HC-SR501), Microwave Radar (RCWL-0516), LDR Lux, Battery ADC | PIR: 13, Radar: 27, LDR ADC: 34, Battery: 35 | MQTT `homelab/sensors/motion/*`<br/>Home Assistant Binary Sensor & Telemetry |
 
 ---
 
