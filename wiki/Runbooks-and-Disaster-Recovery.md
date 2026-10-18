@@ -33,7 +33,7 @@ Triggered manually or automatically via the `ESP32-EDGE-04` power monitor when b
 ```bash
 # Executed via scripts/emergency-shutdown.sh
 # 1. Tier 4 (Heavy Workloads & Media): Immich, Nextcloud, Jellyfin, qBittorrent
-pct shutdown 105 100b 101b
+pct shutdown 180 181 107
 
 # 2. Tier 3 (Virtual Machines): Windows Server, Kali, Research Lab VMs
 qm shutdown 201 300 301 302 310 311 313
@@ -80,7 +80,7 @@ Execute the sequential restoration script `scripts/cold-boot-sequence.sh`:
    - `pct start 100` (Home Assistant Core).
    - `pct start 101 && pct start 103` (Scrutiny & Uptime Kuma).
    - `pct start 104 && pct start 106` (Prometheus, Grafana & Wazuh SIEM).
-   - `pct start 105 100b 101b 161` (Media Suite, Immich, Nextcloud, MinIO).
+   - `pct start 180 181 107 105` (Media Suite, Immich, Nextcloud, OWASP Target).
 
 ---
 

@@ -288,13 +288,13 @@ The platform runs 26 core production workloads categorized into five availabilit
 | **Tier 2** | **OpenMediaVault NAS (Node 2)** | Bare | `192.168.1.135` | `80`, `445`, `2049` | 2,048 MB | Central ZFS storage, NFS/SMB shares, vzdump |
 | **Tier 2** | **Scrutiny SMART (CT 101)** | LXC | `192.168.1.108` | `8080` | 256 MB | Hard drive health & NVMe telemetry tracking |
 | **Tier 3** | **Ollama AI Inference (CT 102)** | LXC | `192.168.1.110` | `11434` | 2,048 MB | Local LLM inference (NVIDIA GTX 1050 Ti GPU) |
-| **Tier 3** | **Immich Photo Library** | LXC | `192.168.1.125` | `2283`, `3003` | 2,048 MB | Self-hosted machine-learning photo storage |
-| **Tier 3** | **Keycloak Identity (IAM)** | LXC | `192.168.1.126` | `8080`, `8443` | 1,024 MB | OAuth2 / OIDC Single Sign-On and MFA realm |
-| **Tier 3** | **NetBox DCIM / IPAM** | LXC | `192.168.1.127` | `8000` | 1,024 MB | Infrastructure single source of truth (SSOT) |
-| **Tier 3** | **Media-Arr Automation Stack** | LXC | `192.168.1.128` | `8989`, `7878` | 1,024 MB | Media pipeline, indexing and transcoding |
+| **Tier 3** | **Immich Photo Library (CT 181)**| LXC | `192.168.1.181` | `2283`, `3003` | 1,536 MB | Self-hosted machine-learning photo storage |
+| **Tier 3** | **Media Suite / Jellyfin (CT 180)**| LXC | `192.168.1.180` | `8096`, `8989` | 1,536 MB | Media pipeline, indexing and transcoding |
+| **Tier 3** | **Nextcloud Hub (CT 107)** | LXC | `192.168.1.8` | `8080` | 512 MB | File synchronization, WebDAV and collaboration |
+| **Tier 3** | **OWASP Pentest Target (CT 105)**| LXC | `192.168.1.175` | `80`, `3000` | 512 MB | Vulnerable web applications for security testing |
 | **Tier 4** | **Banking Core (VM 310–313)** | KVM | `192.168.20.50` | `8080`, `5432`, `8000`| 3,072 MB | Bachelor's thesis banking security cyberlab |
-| **Tier 4** | **Active Directory Range** | KVM | `192.168.40.10` | `88`, `389`, `445`, `636`| 4,096 MB | Enterprise identity range (VMs 400–405) |
-| **Tier 4** | **ESP32 Edge Fleet (4 Nodes)** | MCU | `192.168.50.12+`| `80/metrics`, `1883` | 520 KB | Physical datacenter telemetry & failover triggers |
+| **Tier 4** | **Active Directory Range** | KVM | `192.168.1.222` | `88`, `389`, `445`, `636`| 4,096 MB | Enterprise identity range (VMs 400–405) |
+| **Tier 4** | **ESP32 Edge Fleet (6 Nodes)** | MCU | `192.168.50.21–26`| `80/metrics`, `1883` | 520 KB | Physical datacenter telemetry & failover triggers |
 
 ---
 
@@ -560,6 +560,6 @@ npm start
 
 **[Moană Ștefănuț-Cornel (@stefanutc1)](https://github.com/stefanutc1)**  
 Universitatea din Craiova · FEAA — Informatică Economică (2024 – 2027)  
-Software Engineering since 2015 · Licensed under GNU AGPLv3
+Software Engineering since 2015 · Licensed under GNU AGPLv3 · Verified 18 October 2026
 
 </div>

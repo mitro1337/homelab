@@ -11,19 +11,23 @@ Complete breakdown of foundational and production services hosted across the inf
 | **Ingress & Perimeter** | OPNsense Firewall | `8443`, `53` | `gateway.lan` | VM 200 (Node 1) | `DEPLOYED` |
 | **Ingress & Security** | Caddy Reverse Proxy | `80`, `443` | `proxy.lan` | Node 1 (Host) | `DEPLOYED` |
 | **Identity & IAM** | Keycloak Enterprise SSO | `8484` | `auth.lan` | Node 1 (Docker) | `DECLARED` |
-| **Identity & Directory**| Active Directory DC | `389`, `636`, `88` | `ad2025.lan` | VM 400 (Node 1) | `DEPLOYED` |
+| **Identity & Directory**| Active Directory DC | `389`, `636`, `88` | `ad2022.lan` | VM 400 (Node 1) | `DEPLOYED` |
 | **Observability** | Prometheus TSDB | `9090` | `prometheus.lan` | CT 104 (Node 1) | `DEPLOYED` |
 | **Observability** | Grafana Dashboards | `3000` | `grafana.lan` | CT 104 (Node 1) | `DEPLOYED` |
 | **Observability** | Uptime Kuma | `3001` | `status.lan` | CT 103 (Node 1) | `DEPLOYED` |
 | **Observability** | Scrutiny S.M.A.R.T. | `8080` | `disks.lan` | CT 101 (Node 1) | `DEPLOYED` |
 | **Security & SIEM** | Wazuh Manager 4.14 | `1514`, `55000` | `wazuh.lan` | CT 106 (Node 1) | `DEPLOYED` |
-| **Storage & Object** | MinIO S3 API | `9000`, `9001` | `s3.lan` | CT 161 (Node 1) | `DEPLOYED` |
+| **Security & DFIR** | Windows Malware Sandbox | `3389` | `malware.lan` | VM 303 (Node 1) | `DEPLOYED` |
+| **Offensive Security**| Parrot Pentest Node | `22` | `parrot.lan` | VM 300 (Node 1) | `DEPLOYED` |
+| **Security & Lab** | OWASP Pentest Target | `80`, `3000` | `owasp.lan` | CT 105 (Node 1) | `DEPLOYED` |
+| **Productivity & Cloud**| Nextcloud Hub | `8080` | `cloud.lan` | CT 107 (Node 1) | `DEPLOYED` |
+| **Storage & Object** | MinIO S3 API | `9000`, `9001` | `s3.lan` | CT 161 (Node 1) | `DECLARED` |
 | **Storage & NAS** | OpenMediaVault ZFS | `80`, `445` | `nas.lan` | Node 2 (Bare-Metal) | `DEPLOYED` |
 | **Storage & Backup** | Proxmox Backup Server | `8007` | `pbs.lan` | Node 1 / 2 | `DEPLOYED` |
-| **Media & Streaming** | Jellyfin Media Server | `8096` | `media.lan` | Node 1 (Docker) | `DECLARED` |
+| **Media & Streaming** | Jellyfin Media Server | `8096` | `media.lan` | CT 180 (Node 1) | `DEPLOYED` |
 | **Media Automation** | Gluetun VPN Killswitch | `8085` | `vpn.lan` | Node 1 (Docker) | `DECLARED` |
 | **Media Automation** | Sonarr / Radarr / Prowlarr | `8989`, `7878`, `9696` | `arr.lan` | Node 1 (Docker) | `DECLARED` |
-| **Media Automation** | Immich Photo & Video | `2283` | `photos.lan` | Node 1 (Docker) | `DECLARED` |
+| **Media Automation** | Immich Photo & Video | `2283` | `photos.lan` | CT 181 (Node 1) | `DEPLOYED` |
 | **Home Automation** | Home Assistant Core | `8123` | `home.lan` | CT 100 (Node 1) | `DEPLOYED` |
 | **AI Platform** | Ollama GPU Inference | `11434` | `ai.lan` | CT 102 (Node 1) | `DEPLOYED` |
 | **Operations & SSoT** | NetBox DCIM / IPAM | `8000` | `netbox.lan` | Node 1 (Docker) | `DECLARED` |
@@ -34,5 +38,6 @@ Complete breakdown of foundational and production services hosted across the inf
 | **Edge IoT: Climate** | ESP32 Smart Thermostat | `1883` (MQTT) | `esp32-thermostat.lan` | ESP32-EDGE-05 | `DEPLOYED` |
 | **Edge IoT: Motion** | ESP32 Smart Motion Sensor | `1883` (MQTT) | `esp32-motion.lan` | ESP32-EDGE-06 | `DEPLOYED` |
 
-*Firmware source code, GPIO pinouts, and hardware schematics for Edge IoT nodes are maintained in the dedicated repository [stefanutc1/smarthome](https://github.com/stefanutc1/smarthome).*
+*Firmware source code, GPIO pinouts, and hardware schematics for Edge IoT nodes are maintained in the dedicated repository [stefanutc1/smarthome](https://github.com/stefanutc1/smarthome).*  
+*Factual audit and service state synchronization: 18 October 2026.*
 

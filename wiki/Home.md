@@ -7,6 +7,7 @@
 <div align="center">
 
 [![Wiki](https://img.shields.io/badge/Documentation-Homelab%20Knowledge%20Base-0f172a.svg?style=flat&logo=gitbook)](#)
+[![Verified](https://img.shields.io/badge/Verified-18%20October%202026-success.svg?style=flat&logo=checkmarx)](#)
 [![Architect](https://img.shields.io/badge/Author-Moan%C4%83%20%C8%98tef%C4%83nu%C8%9B--Cornel-blue.svg?style=flat&logo=github)](https://github.com/stefanutc1)
 [![University](https://img.shields.io/badge/University-Universitatea%20din%20Craiova%20%C2%B7%20FEAA-0284c7.svg?style=flat&logo=academia)](https://feaa.ucv.ro)
 [![Program](https://img.shields.io/badge/Degree-Informatic%C4%83%20Economic%C4%83%20(2024--2027)-10b981.svg?style=flat)](#)
@@ -51,8 +52,8 @@ flowchart TB
 
         subgraph RESEARCH["Layer 5: Academic & Cybersecurity Research Testbeds"]
             LICENTA["Bachelor's Thesis Cyber Defense Lab<br/>Impactul tehnologiilor inteligente asupra securitatii digitale"]
-            AD["Active Directory Enterprise Forest<br/>Windows Server 2008 R2–2025 Multi-Tier"]
-            CYBER["Offensive Security & Malware Range<br/>Kali Linux · Metasploitable 2 · OWASP Juice Shop"]
+            AD["Active Directory Enterprise Forest<br/>Windows Server 2012–2022 Multi-Tier"]
+            CYBER["Offensive Security & Malware Range<br/>Parrot Security · Malware Sandbox · OWASP"]
         end
     end
 

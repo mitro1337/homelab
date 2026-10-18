@@ -7,10 +7,11 @@
 <div align="center">
 
 [![Inventory](https://img.shields.io/badge/Fleet-Enterprise%20Hardware%20Inventory-0f172a.svg?style=flat&logo=serverfault)](#)
-[![Bare-Metal](https://img.shields.io/badge/Compute-3%20Physical%20Nodes%20%2B%204%20ESP32%20Nodes-2563eb.svg?style=flat&logo=intel)](#1-physical-hardware-fleet)
-[![Memory](https://img.shields.io/badge/RAM%20Capacity-12GB%20DDR4%20(75.5%25%20Governed)-8b5cf6.svg?style=flat&logo=databricks)](#4-physical-capacity-budget--memory-footprint-analysis)
-[![Edge IoT](https://img.shields.io/badge/Edge%20Fleet-4%20Bare--Metal%20ESP32%20Nodes-e7352c.svg?style=flat&logo=espressif)](esp32/README.md)
-[![Storage](https://img.shields.io/badge/Storage-NVMe%20LVM--thin%20%2B%20ZFS%20NAS-059669.svg?style=flat&logo=zfs)](#4-physical-capacity-budget--memory-footprint-analysis)
+[![Bare-Metal](https://img.shields.io/badge/Compute-3%20Physical%20Nodes%20%2B%206%20ESP32%20Nodes-2563eb.svg?style=flat&logo=intel)](#1-physical-hardware-fleet)
+[![Memory](https://img.shields.io/badge/RAM%20Capacity-12GB%20DDR4%20(77.1%25%20Governed)-8b5cf6.svg?style=flat&logo=databricks)](#5-physical-capacity-budget--memory-footprint-analysis)
+[![Edge IoT](https://img.shields.io/badge/Edge%20Fleet-6%20Bare--Metal%20ESP32%20Nodes-e7352c.svg?style=flat&logo=espressif)](https://github.com/stefanutc1/smarthome)
+[![Storage](https://img.shields.io/badge/Storage-NVMe%20LVM--thin%20%2B%20ZFS%20NAS-059669.svg?style=flat&logo=zfs)](#5-physical-capacity-budget--memory-footprint-analysis)
+[![Audit Status](https://img.shields.io/badge/Verified-18%20October%202026-success.svg?style=flat&logo=checkmarx)](#)
 [![Author](https://img.shields.io/badge/Architect-Moan%C4%83%20%C8%98tef%C4%83nu%C8%9B--Cornel-blue.svg?style=flat&logo=github)](https://github.com/stefanutc1)
 [![University](https://img.shields.io/badge/University-Universitatea%20din%20Craiova%20%C2%B7%20FEAA-0284c7.svg?style=flat&logo=academia)](https://feaa.ucv.ro)
 
@@ -91,32 +92,26 @@ All edge microcontrollers connect to **VLAN 50 (Isolated IoT Sensors)** and exec
 
 </div>
 
-All virtual machines execute under QEMU/KVM on Node 1 (`pve_primary_x64`).
+All virtual machines execute under QEMU/KVM on Node 1 (`pve_primary_x64`). Total declared fleet comprises **16 virtual machines** (9 deployed workloads active on hypervisor storage + 7 declared academic/financial research labs), maintaining strict even-number architectural harmony.
 
 | VMID | Name | Operating System | vCPU | Max RAM | Balloon RAM | Disk Size | Storage Pool | VLAN & Static IP | Operational State | Research Scope / Purpose |
 | :---: | :--- | :--- | :---: | :---: | :---: | :---: | :--- | :--- | :---: | :--- |
 | **200** | `opnsense-firewall` | FreeBSD 14 / OPNsense 24.x | 2 | 2,048 MB | 1,024 MB | 16 GB | `local-lvm` | VLAN 10 (`192.168.1.134`) | `DEPLOYED` | Core perimeter gateway, NAT, Suricata DPI, DoT Unbound DNS |
+| **300** | `parrot` | Parrot Security 7.3 | 1 | 1,536 MB | 1,024 MB | 65 GB | `local-lvm` | VLAN 30 (`192.168.1.210`) | `DEPLOYED` | Dedicated offensive testing and red team operator workstation |
+| **303** | `windows-malware` | Windows 10 Enterprise | 2 | 2,560 MB | 2,048 MB | 50 GB | `local-lvm` | VLAN 30 (`192.168.1.215`) | `DEPLOYED` | Dynamic malware execution, memory acquisition & DFIR sandbox |
+| **400** | `ad2022` | Windows Server 2022 Datacenter | 2 | 4,096 MB | 2,048 MB | 60 GB | `local-lvm` | VLAN 10 (`192.168.1.222`) | `DEPLOYED` | Primary Active Directory forest root & Kerberos DC |
+| **401** | `ad2016` | Windows Server 2016 Standard | 2 | 2,048 MB | 2,048 MB | 50 GB | `local-lvm` | VLAN 10 (`192.168.1.216`) | `DEPLOYED` | Replica Domain Controller and cross-forest trust partner |
+| **402** | `ad2012` | Windows Server 2012 R2 Standard | 2 | 1,024 MB | 1,024 MB | 50 GB | `local-lvm` | VLAN 10 (`192.168.1.212`) | `DEPLOYED` | Deprecated protocol testing (NTLMv1, SMBv1 teardown) |
+| **403** | `adwin10` | Windows 10 Enterprise Client | 2 | 2,048 MB | 2,048 MB | 50 GB | `local-lvm` | VLAN 10 (`192.168.1.217`) | `DEPLOYED` | Member workstation for AppLocker and GPO testing |
+| **404** | `adwin7` | Windows 7 Ultimate SP1 Client | 2 | 1,024 MB | 1,024 MB | 50 GB | `local-lvm` | VLAN 10 (`192.168.1.207`) | `DEPLOYED` | Legacy client testing for pass-the-hash and NetBIOS attacks |
+| **405** | `adrhel` | RHEL 9.8 Enterprise Domain Node | 2 | 1,536 MB | 1,024 MB | 50 GB | `local-lvm` | VLAN 10 (`192.168.1.228`) | `DEPLOYED` | SSSD / Realmd cross-platform Kerberos domain join |
 | **201** | `openstack` | Ubuntu 24.04 / Kolla OpenStack | 2 | 4,096 MB | 2,048 MB | 32 GB | `local-lvm` | VLAN 20 (`192.168.1.201`) | `DECLARED` | Private cloud orchestration and API testing |
-| **202** | `metasploitable2` | Metasploitable 2 Linux Target | 1 | 512 MB | 512 MB | 8 GB | `local-lvm` | VLAN 20 (`192.168.1.202`) | `DECLARED` | Network penetration testing and vulnerability verification |
-| **203** | `tpot-honeypot` | Debian 12 / T-Pot 24.04 Multi-Decoy | 4 | 8,192 MB | 4,096 MB | 60 GB | `local-lvm` | VLAN 40 (`192.168.1.203`) | `DECLARED` | Cyber deception platform and threat actor capture |
-| **204** | `securityonion` | Security Onion 3.2 / Wazuh SIEM | 4 | 8,192 MB | 4,096 MB | 50 GB | `local-lvm` | VLAN 10 (`192.168.1.204`) | `DECLARED` | Network security monitoring, Zeek, and full packet capture |
-| **205** | `remnux` | REMnux v7 / Ubuntu Malware DFIR | 2 | 4,096 MB | 2,048 MB | 40 GB | `local-lvm` | VLAN 30 (`192.168.1.205`) | `DECLARED` | Reverse engineering and malware behavioral analysis |
-| **301** | `metasploitable-licenta` | Metasploitable Linux Target | 2 | 2,048 MB | 1,024 MB | 20 GB | `local-lvm` | VLAN 30 (`192.168.1.211`) | `DECLARED` | Bachelor's Thesis target for automated exploit pipelines |
-| **302** | `kali-licenta` | Kali Linux Rolling Pentest Node | 2 | 4,096 MB | 2,048 MB | 30 GB | `local-lvm` | VLAN 30 (`192.168.30.102`) | `DECLARED` | Dedicated offensive testing and red team operator workstation |
+| **301** | `metasploitable2` | Metasploitable 2 Linux Target | 1 | 512 MB | 512 MB | 8 GB | `local-lvm` | VLAN 20 (`192.168.1.202`) | `DECLARED` | Network penetration testing and vulnerability verification |
+| **304** | `remnux` | REMnux v7 / Ubuntu Malware DFIR | 2 | 4,096 MB | 2,048 MB | 40 GB | `local-lvm` | VLAN 30 (`192.168.1.205`) | `DECLARED` | Reverse engineering and malware behavioral analysis |
 | **310** | `core-banking` | Debian 12 / Apache Fineract | 2 | 4,096 MB | 2,048 MB | 40 GB | `local-lvm` | VLAN 20 (`192.168.20.50`) | `DECLARED` | Bachelor's Thesis enterprise core-banking platform |
 | **311** | `banking-db` | Debian 12 / PostgreSQL 16 Ledger | 2 | 4,096 MB | 2,048 MB | 50 GB | `local-lvm` | VLAN 20 (`192.168.20.51`) | `DECLARED` | Financial transaction ledger, pgAudit, SCRAM-SHA-256 |
+| **312** | `payment-gw` | Bachelor Thesis Payment Gateway API | 2 | 2,048 MB | 1,024 MB | 25 GB | `local-lvm` | VLAN 20 (`192.168.20.52`) | `DECLARED` | Financial transaction routing and SWIFT messaging API |
 | **313** | `swift-jumpbox` | Hardened Linux Bastion Host | 2 | 2,048 MB | 1,024 MB | 25 GB | `local-lvm` | VLAN 10 (`192.168.10.50`) | `DECLARED` | SWIFT CSP privileged access bastion and MFA jumpbox |
-| **400** | `ad2025` | Windows Server 2025 Datacenter | 6 | 8,192 MB | 4,096 MB | 256 GB | `local-lvm` | VLAN 10 (`192.168.1.225`) | `DECLARED` | Primary Active Directory forest root & Kerberos DC |
-| **401** | `ad2022` | Windows Server 2022 Datacenter | 2 | 4,096 MB | 2,048 MB | 60 GB | `local-lvm` | VLAN 10 (`192.168.1.222`) | `DECLARED` | Replica Domain Controller and cross-forest trust partner |
-| **402** | `ad2019` | Windows Server 2019 Standard | 2 | 2,048 MB | 1,024 MB | 128 GB | `local-lvm` | VLAN 10 (`192.168.1.219`) | `DECLARED` | Legacy schema compatibility and migration testing |
-| **403** | `ad2016` | Windows Server 2016 Standard | 2 | 3,072 MB | 2,048 MB | 50 GB | `local-lvm` | VLAN 10 (`192.168.1.216`) | `DECLARED` | Functional level migration and Kerberos hardening lab |
-| **404** | `ad2012` | Windows Server 2012 R2 Standard | 2 | 2,048 MB | 1,024 MB | 40 GB | `local-lvm` | VLAN 10 (`192.168.1.212`) | `DECLARED` | Deprecated protocol testing (NTLMv1, SMBv1 teardown) |
-| **405** | `ad2008` | Windows Server 2008 R2 SP1 Standard | 2 | 2,048 MB | 1,024 MB | 40 GB | `local-lvm` | VLAN 10 (`192.168.1.208`) | `DECLARED` | Legacy cryptographic regression testing |
-| **406** | `adwin10` | Windows 10 Enterprise Client | 2 | 3,072 MB | 2,048 MB | 50 GB | `local-lvm` | VLAN 10 (`192.168.1.217`) | `DECLARED` | Member workstation for AppLocker and GPO testing |
-| **407** | `adwin11` | Windows 11 Enterprise Client | 2 | 4,096 MB | 2,048 MB | 60 GB | `local-lvm` | VLAN 10 (`192.168.1.218`) | `DECLARED` | Modern Windows client with TPM 2.0 and Credential Guard |
-| **408** | `adwin7` | Windows 7 Ultimate SP1 Client | 2 | 2,048 MB | 1,024 MB | 50 GB | `local-lvm` | VLAN 10 (`192.168.1.207`) | `DECLARED` | Legacy client testing for pass-the-hash and NetBIOS attacks |
-| **409** | `adrhel` | RHEL 9.8 Enterprise Domain Node | 2 | 2,048 MB | 1,024 MB | 50 GB | `local-lvm` | VLAN 10 (`192.168.1.228`) | `DECLARED` | SSSD / Realmd cross-platform Kerberos domain join |
-| **410** | `ad2003` | Windows Server 2003 R2 Enterprise | 2 | 2,048 MB | 1,024 MB | 40 GB | `local-lvm` | VLAN 10 (`192.168.1.209`) | `DECLARED` | Historical schema emulation and archived forensic research |
 
 ---
 
@@ -126,23 +121,20 @@ All virtual machines execute under QEMU/KVM on Node 1 (`pve_primary_x64`).
 
 </div>
 
-All containers execute on Node 1 (`pve_primary_x64`), sharing the host Linux 6.8+ kernel with unprivileged user namespace mapping.
+All containers execute on Node 1 (`pve_primary_x64`), sharing the host Linux 6.8+ kernel. Fleet comprises **10 production containers**, maintaining clean numeric numbering and even-number symmetry.
 
 | CTID | Hostname | Role / Service | OS Template | Allocated RAM | Root Disk | Unprivileged? | Network & Static IP | Operational State |
 | :---: | :--- | :--- | :--- | :---: | :---: | :---: | :--- | :---: |
-| **100** | `homeassistant` | Smart Home & Zigbee Automation | Debian 12 | 384 MB | 16 GB | Yes | VLAN 20 (`192.168.1.10`) | `DEPLOYED` |
-| **101** | `scrutiny` | S.M.A.R.T. Drive Health Daemon | Debian 12 | 128 MB | 4 GB | Yes | VLAN 20 (`192.168.1.108`) | `DEPLOYED` |
+| **100** | `homeassistant` | Smart Home & Zigbee Automation | Alpine 3.24 | 1,024 MB | 16 GB | No | VLAN 20 (`192.168.1.10`) | `DEPLOYED` |
+| **101** | `scrutiny` | S.M.A.R.T. Drive Health Daemon | Alpine 3.24 | 96 MB | 3 GB | No | VLAN 20 (`192.168.1.18`) | `DEPLOYED` |
 | **102** | `ollama` | Local GPU AI Inference Runtime | Debian 12 | 2,048 MB | 16 GB | No (GPU Passthrough) | VLAN 20 (`192.168.1.110`) | `DEPLOYED` |
-| **103** | `uptimekuma` | Synthetic Service Health Probing | Debian 12 | 128 MB | 2 GB | Yes | VLAN 20 (`192.168.1.119`) | `DEPLOYED` |
-| **104** | `monitoring` | Prometheus & Grafana Telemetry | Debian 12 | 1,024 MB | 20 GB | Yes | VLAN 20 (`192.168.1.121`) | `DEPLOYED` |
-| **105** | `media-suite` | Media Streaming (Jellyfin / *arr) | Debian 12 | 896 MB | 50 GB | Yes | VLAN 20 (`192.168.1.21`) | `DEPLOYED` |
-| **106** | `wazuh` | Wazuh SIEM / HIDS Server 4.14 | Debian 12 | 1,536 MB | 30 GB | Yes | VLAN 10 (`192.168.1.240`) | `DEPLOYED` |
-| **101b** | `nextcloud` | File Synchronization & WebDAV | Debian 12 | 512 MB | 20 GB | Yes | VLAN 20 (`192.168.1.8`) | `DEPLOYED` |
-| **100b** | `immich` | Machine-Learning Photo Backup | Debian 12 | 896 MB | 40 GB | Yes | VLAN 20 (`192.168.1.15`) | `DEPLOYED` |
-| **161** | `minio` | S3-Compatible Object Storage API | Alpine 3.19 | 256 MB | 10 GB | Yes | VLAN 20 (`192.168.1.161`) | `DEPLOYED` |
-| **175** | `owasp-core` | Pentest Target (Juice Shop / DVWA) | Alpine 3.19 | 512 MB | 8 GB | Yes | VLAN 30 (`192.168.1.175`) | `DECLARED` |
-| **303** | `owasp-licenta` | Bachelor Thesis Web Application Target | Alpine 3.19 | 512 MB | 8 GB | Yes | VLAN 30 (`192.168.30.103`) | `DECLARED` |
-| **312** | `payment-gw` | Bachelor Thesis Payment Gateway API | Debian 12 | 512 MB | 10 GB | Yes | VLAN 20 (`192.168.20.52`) | `DECLARED` |
+| **103** | `uptimekuma` | Synthetic Service Health Probing | Alpine 3.24 | 128 MB | 2 GB | Yes | VLAN 20 (`192.168.1.119`) | `DEPLOYED` |
+| **104** | `monitoring` | Prometheus & Grafana Telemetry | Alpine 3.24 | 256 MB | 4 GB | Yes | VLAN 20 (`192.168.1.121`) | `DEPLOYED` |
+| **105** | `owasp` | Vulnerable Web Application Target | Alpine 3.24 | 512 MB | 8 GB | Yes | VLAN 30 (`192.168.1.175`) | `DEPLOYED` |
+| **106** | `wazuh` | Wazuh SIEM / HIDS Server 4.14 | Ubuntu 24.04 | 4,096 MB | 35 GB | No | VLAN 10 (`192.168.1.240`) | `DEPLOYED` |
+| **107** | `nextcloud` | File Synchronization & WebDAV Hub | Alpine 3.24 | 512 MB | 8 GB | Yes | VLAN 20 (`192.168.1.8`) | `DEPLOYED` |
+| **180** | `jellyfin` | Media Streaming Suite (*arr Stack) | Ubuntu 24.04 | 1,536 MB | 30 GB | No | VLAN 20 (`192.168.1.180`) | `DEPLOYED` |
+| **181** | `immich` | Machine-Learning Photo Backup | Ubuntu 24.04 | 1,536 MB | 30 GB | No | VLAN 20 (`192.168.1.181`) | `DEPLOYED` |
 
 ---
 
@@ -161,22 +153,22 @@ All containers execute on Node 1 (`pve_primary_x64`), sharing the host Linux 6.8
 ```text
 Total Physical RAM: 12,288 MB (100.0%)
 ┌─────────────────────────────────────────────────────────────┬──────────────┐
-│ Always-On Production Workloads (Active 24/7): ~9,280 MB    │ Headroom     │
-│ (75.5% Physical Capacity)                                   │ ~3,008 MB    │
-│                                                             │ (24.5% Free) │
+│ Always-On Production Workloads (Active 24/7): ~9,472 MB    │ Headroom     │
+│ (77.1% Physical Capacity)                                   │ ~2,816 MB    │
+│                                                             │ (22.9% Free) │
 └─────────────────────────────────────────────────────────────┴──────────────┘
   ├─ Proxmox VE Host OS & Kernel Cache: 1,500 MB
   ├─ VM 200 (OPNsense Firewall & Suricata DPI): 1,536 MB (Balloon 1024-2048 MB)
   ├─ CT 102 (Ollama AI Inference Runtime): 2,048 MB (GPU handles model weights)
   ├─ CT 106 (Wazuh SIEM / HIDS Server): 1,536 MB
-  ├─ CT 104 (Prometheus & Grafana Observability): 1,024 MB
-  ├─ CT 105 (Media Suite / Jellyfin): 896 MB
-  ├─ CT 100b (Immich Photos): 896 MB
-  ├─ CT 101b (Nextcloud Collaboration Hub): 512 MB
-  ├─ CT 100 (Home Assistant Core): 384 MB
-  ├─ CT 161 (MinIO S3 Object Gateway): 256 MB
-  ├─ CT 101 (Scrutiny Drive Health): 128 MB
+  ├─ CT 180 (Jellyfin Media Suite): 1,536 MB
+  ├─ CT 181 (Immich Photos): 1,536 MB
+  ├─ CT 100 (Home Assistant Core): 1,024 MB
+  ├─ CT 107 (Nextcloud Collaboration Hub): 512 MB
+  ├─ CT 105 (OWASP Pentest Target): 512 MB
+  ├─ CT 104 (Prometheus & Grafana Observability): 256 MB
   ├─ CT 103 (Uptime Kuma Synthetic Availability): 128 MB
+  ├─ CT 101 (Scrutiny Drive Health): 96 MB
   └─ Ingress & Telemetry Proxies: 128 MB
 ```
 
@@ -196,6 +188,7 @@ Because total declared RAM across academic research workloads (Active Directory 
 <div align="center">
 
 *Engineered with precision by **Moană Ștefănuț-Cornel** (`@stefanutc1`).*  
-*Universitatea din Craiova · Facultatea de Economie și Administrarea Afacerilor (FEAA) · Informatică Economică (2024–2027).*
+*Universitatea din Craiova · Facultatea de Economie și Administrarea Afacerilor (FEAA) · Informatică Economică (2024–2027).*  
+*Factual audit and infrastructure verification: 18 October 2026.*
 
 </div>

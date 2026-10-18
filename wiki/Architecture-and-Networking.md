@@ -18,7 +18,7 @@ The network is segmented into isolated VLANs managed by the OPNsense core perime
 | **VLAN 20** | `192.168.20.0/24`| `192.168.20.1` | **Core Production** | Home Assistant, Nextcloud, Immich, Scrutiny, Ollama AI, Prometheus monitoring. | **DROP** (Explicit Whitelist Only) |
 | **VLAN 30** | `192.168.30.0/24`| `192.168.30.1` | **CyberLab & Sandboxes** | Kali Linux pentest workstation, Metasploitable targets, Bachelor Thesis Core-Banking lab. | **DROP** (Strict Inter-VLAN Block) |
 | **VLAN 40** | `192.168.40.0/24`| `192.168.40.1` | **DMZ & Honeypots** | T-Pot multi-honeypot decoy platform, public-facing reverse proxy honeypots. | **DROP** (Zero Lateral Movement) |
-| **VLAN 50** | `192.168.50.0/24`| `192.168.50.1` | **Isolated IoT Sensors** | Bare-metal ESP32 microcontrollers (`192.168.50.21` to `.24`), smart plugs, Zigbee bridges. | **DROP** (No WAN Access, HA State Track Only) |
+| **VLAN 50** | `192.168.50.0/24`| `192.168.50.1` | **Isolated IoT Sensors** | Bare-metal ESP32 microcontrollers (`192.168.50.21` to `.26`), smart plugs, Zigbee bridges. | **DROP** (No WAN Access, HA State Track Only) |
 
 ---
 
