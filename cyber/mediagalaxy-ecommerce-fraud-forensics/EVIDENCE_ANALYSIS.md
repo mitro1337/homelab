@@ -77,7 +77,7 @@ The campaign operated on a multi-tier infrastructure:
 - **Subject:** `Order Confirmation: Thank You for Your Purchase [229942-177457]`
 - **Sender:** `Customer Service <noreply@email.worvixglobal.com>`
 - **Recipient:** Target victim inbox (`08:17 AM`)
-- **Footer Text:** `"Dacă aveți întrebări, răspundeți la acest e-mail sau contactați-ne la MaryxBeckb96@gmail.com . ©2026 mediagalaxy-ro"`
+- **Footer Text:** `"Dacă aveți întrebări, răspundeți la acest e-mail sau contactați-ne la MaryxBeckb96@gmail.com . (c) 2026 mediagalaxy-ro"`
 - **Forensic Assessment:** The threat actor fabricated a structured order token `[229942-177457]` to create a false sense of legitimacy and prevent immediate panic or cancellation from the buyer.
 
 <div align="center">
@@ -247,9 +247,9 @@ The campaign operated on a multi-tier infrastructure:
 - **Source:** Facebook Mobile Application (Sponsored Feed Ad / Post Sponsorizat)
 - **Spoofed Brand / Page:** `Media Galaxy` (official brand identity & logo avatar co-opted)
 - **Ad Headline & Copy:**
-  > *"Espressor Philips LatteGO 4300 la doar 51 lei 😱*  
-  > *Datorită închiderii depozitelor noastre din România, lansăm o vânzare online prin care toată lumea poate cumpăra Philips LatteGO 4300 la un preț incredibil 🇷🇴*  
-  > *Faceți clic pe butonul „Aflați mai multe” de sub post pentru a participa la vânzarea noastră ⤵️"*
+  > *"Espressor Philips LatteGO 4300 la doar 51 lei*  
+  > *Datorită închiderii depozitelor noastre din România, lansăm o vânzare online prin care toată lumea poate cumpăra Philips LatteGO 4300 la un preț incredibil*  
+  > *Faceți clic pe butonul „Aflați mai multe” de sub post pentru a participa la vânzarea noastră"*
 - **Visual Staging & Asset:** Premium Philips LatteGO 4300 coffee machine showcased on a retail display shelf with a counterfeit yellow shelf price tag: `MEDIA GALAXY | PHILIPS LATTEGO 4300 | 51 lei`.
 - **Forensic Assessment & Social Engineering Mechanics:**
   1. **Warehouse Liquidation Pretext:** The attackers exploit artificial scarcity and urgency by fabricating a warehouse closure narrative (*"Datorită închiderii depozitelor noastre din România"*) to rationalize a 97%+ price collapse on a ~2,000+ RON appliance down to 51 lei (~10 EUR).

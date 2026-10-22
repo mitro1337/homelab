@@ -69,7 +69,7 @@ If evaluating a suspicious social media entrepreneur, run the following verifica
 
 1. **Profile Creation Date:** Check account registration age. Many high-velocity MRR accounts are less than 90 days old with high post counts uploaded in rapid succession.
 2. **Domain Registration History:** Using WHOIS lookup utilities, inspect when the custom domain was provisioned. Most threat operators utilize domains registered within the last 1–6 months.
-3. **Comment Section Sanitization:** Inspect post comments. If all comments consist exclusively of generic emojis (🔥, 👏) or keywords prompted by the creator (*"Comment 'FREEDOM' to get the link"*), the operator is using automated bot engagement to game algorithmic discovery.
+3. **Comment Section Sanitization:** Inspect post comments. If all comments consist exclusively of generic emojis (such as fire, clapping hands) or keywords prompted by the creator (*"Comment 'FREEDOM' to get the link"*), the operator is using automated bot engagement to game algorithmic discovery.
 
 ---
 

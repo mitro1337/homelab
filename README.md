@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🏛️ Enterprise Hybrid Datacenter, Cloud & Cybersecurity Laboratory
+# Enterprise Hybrid Datacenter, Cloud & Cybersecurity Laboratory
 ### Production-Grade Bare-Metal Virtualization · Zero-Trust Software-Defined Networking · Active Directory Enterprise Forest · Bachelor's Thesis Banking Security Lab · ESP32 Edge Telemetry Fleet
 
 
@@ -28,20 +28,20 @@
 <br/>
 
 <p align="center">
-  <b><a href="https://stefanutc1.github.io/infrastructure/">🌐 3D Interactive Topology Portal</a></b> •
-  <b><a href="#1-executive-summary">📋 Executive Summary</a></b> •
-  <b><a href="#2-master-platform-documentation-map">📚 Documentation Map</a></b> •
-  <b><a href="#3-high-level-architectural-blueprints">🏗️ Blueprints</a></b> •
-  <b><a href="#4-physical-compute-fleet--hardware-inventory">💻 Compute Fleet</a></b> •
-  <b><a href="#5-network-segmentation--8021q-vlan-matrix">🔒 Network & VLANs</a></b> •
-  <b><a href="#6-enterprise-workloads--services-catalog">📦 Services Catalog</a></b> •
-  <b><a href="#7-bachelors-thesis-banking-security-laboratory">🏦 Banking CyberLab</a></b> •
-  <b><a href="#8-active-directory-forest--identity-security-range">🌲 Active Directory</a></b> •
-  <b><a href="#9-esp32-physical-edge-telemetry-fleet">⚡ ESP32 Edge Fleet</a></b> •
-  <b><a href="#10-digital-forensics-incident-response--competitive-ctf">🕵️ Forensics & CTF</a></b> •
-  <b><a href="#11-devsecops-cicd--preventative-cloud-zero-cost-guardrails">🛡️ DevSecOps & Cloud</a></b> •
-  <b><a href="#12-operations-backup-and-disaster-recovery">🔄 Operations & DR</a></b> •
-  <b><a href="#13-quick-start">🚀 Quick Start</a></b>
+  <b><a href="https://stefanutc1.github.io/infrastructure/">3D Interactive Topology Portal</a></b> •
+  <b><a href="#1-executive-summary">Executive Summary</a></b> •
+  <b><a href="#2-master-platform-documentation-map">Documentation Map</a></b> •
+  <b><a href="#3-high-level-architectural-blueprints">Blueprints</a></b> •
+  <b><a href="#4-physical-compute-fleet--hardware-inventory">Compute Fleet</a></b> •
+  <b><a href="#5-network-segmentation--8021q-vlan-matrix">Network & VLANs</a></b> •
+  <b><a href="#6-enterprise-workloads--services-catalog">Services Catalog</a></b> •
+  <b><a href="#7-bachelors-thesis-banking-security-laboratory">Banking CyberLab</a></b> •
+  <b><a href="#8-active-directory-forest--identity-security-range">Active Directory</a></b> •
+  <b><a href="#9-esp32-physical-edge-telemetry-fleet">ESP32 Edge Fleet</a></b> •
+  <b><a href="#10-digital-forensics-incident-response--competitive-ctf">Forensics & CTF</a></b> •
+  <b><a href="#11-devsecops-cicd--preventative-cloud-zero-cost-guardrails">DevSecOps & Cloud</a></b> •
+  <b><a href="#12-operations-backup-and-disaster-recovery">Operations & DR</a></b> •
+  <b><a href="#13-quick-start">Quick Start</a></b>
 </p>
 
 </div>

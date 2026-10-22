@@ -74,7 +74,7 @@ Inspecting the DOM revealed that the popup was a layered `<div>` with `z-index: 
       <span class="ctrl-btn max"></span>
     </div>
     <div class="fake-address-bar">
-      <span class="ssl-padlock-icon">🔒</span>
+      <span class="ssl-padlock-icon">[SECURE]</span>
       <span class="fake-url">https://steamcommunity.com/openid/login?openid.ns=http%3A%2F%2Fspecs.openid.net...</span>
     </div>
   </div>

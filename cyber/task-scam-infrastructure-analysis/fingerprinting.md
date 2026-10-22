@@ -93,9 +93,9 @@ ctx.textBaseline = 'alphabetic';
 ctx.fillStyle = '#f60';
 ctx.fillRect(125, 1, 62, 20);
 ctx.fillStyle = '#069';
-ctx.fillText('Cwm fjordbank glyphs vext quiz, 😃', 2, 15);
+ctx.fillText('Cwm fjordbank glyphs vext quiz', 2, 15);
 ctx.fillStyle = 'rgba(102, 204, 0, 0.7)';
-ctx.fillText('Cwm fjordbank glyphs vext quiz, 😃', 4, 17);
+ctx.fillText('Cwm fjordbank glyphs vext quiz', 4, 17);
 const canvasHash = sha256(canvas.toDataURL());
 ```
 - Because different operating systems, GPU drivers, sub-pixel rendering algorithms, and font rasterizers render this specific string with micro-variations, the resulting Base64 DataURL produces a deterministic, platform-specific cryptographic hash (`fp_canvas`).
