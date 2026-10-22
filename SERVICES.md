@@ -11,7 +11,7 @@
 [![Media Automation](https://img.shields.io/badge/Media%20Suite-10%20Services%20(*arr%20%2B%20Immich)-8b5cf6.svg?style=flat&logo=jellyfin)](#12-media--personal-cloud-automation-arr-suite--immich)
 [![SOC DFIR](https://img.shields.io/badge/SOC%2FDFIR-9%20Security%20Workloads-e11d48.svg?style=flat&logo=wazuh)](#14-security-operations-center-soc-dfir--malware-lab)
 [![AI Platform](https://img.shields.io/badge/AI%20Subsystem-GTX%201050%20Ti%20Ollama%20%2B%20LiteLLM-f59e0b.svg?style=flat&logo=nvidia)](#15-artificial-intelligence--elo-research-platform)
-[![Edge IoT](https://img.shields.io/badge/Edge%20Fleet-6%20ESP32%20Bare--Metal%20Nodes-e7352c.svg?style=flat&logo=espressif)](https://github.com/stefanutc1/smarthome)
+[![Edge IoT](https://img.shields.io/badge/Edge%20Fleet-6%20ESP32%20Bare--Metal%20Nodes-e7352c.svg?style=flat&logo=espressif)](iot/README.md)
 [![Author](https://img.shields.io/badge/Architect-Moan%C4%83%20%C8%98tef%C4%83nu%C8%9B--Cornel-blue.svg?style=flat&logo=github)](https://github.com/stefanutc1)
 [![University](https://img.shields.io/badge/University-Universitatea%20din%20Craiova%20%C2%B7%20FEAA-0284c7.svg?style=flat&logo=academia)](https://feaa.ucv.ro)
 
@@ -177,9 +177,9 @@ Each service entry documents its operational role, deployment model, network loc
 
 <div align="center">
 
-### 1.6 Embedded Edge IoT Microcontroller Services (`smarthome`)
+### 1.6 Embedded Edge IoT Microcontroller Services (`iot/`)
 
-*Source code, GPIO pinouts, and hardware schematics are maintained in the dedicated repository [**stefanutc1/smarthome**](https://github.com/stefanutc1/smarthome).*
+*Source code, GPIO pinouts, and hardware schematics are maintained in the directory [`iot/`](iot/).*
 
 </div>
 | # | Node / Service | Operational Role | Firmware Type | Network / VLAN | Protocol & Port | Integration Target | Factual State |

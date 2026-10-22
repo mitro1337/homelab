@@ -9,6 +9,8 @@
 - [[Services Catalog|Services-Catalog]]
 - [[Infrastructure as Code|Infrastructure-as-Code]]
 - [[Kubernetes & GitOps|Kubernetes-and-GitOps]]
-- [[Monitoring & Alerting|Monitoring-and-Alerting]]
-- [SmartHome Edge Suite](https://github.com/stefanutc1/smarthome)
+- [[ESP32 Edge Systems|ESP32-Edge-Systems]]
+- [[Hardware Pinouts & Wiring|Hardware-Pinouts-and-Wiring]]
+- [[Home Assistant & MQTT|Home-Assistant-and-MQTT]]
+- [[Safety Systems & Fail-Safes|Safety-Systems-and-Fail-Safes]]
 - [[Runbooks & Disaster Recovery|Runbooks-and-Disaster-Recovery]]

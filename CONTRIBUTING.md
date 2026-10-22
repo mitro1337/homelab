@@ -9,7 +9,7 @@
 [![Engineering](https://img.shields.io/badge/Engineering-Platform%20Contribution%20Standards-0f172a.svg?style=flat&logo=git)](#)
 [![Code Quality](https://img.shields.io/badge/CI%20Gates-Lint%20%7C%20Security%20%7C%20Audit-10b981.svg?style=flat&logo=githubactions)](.github/workflows/ci.yml)
 [![Zero-Cost](https://img.shields.io/badge/Cloud%20Policy-%240.00%20Strict%20Free--Tier-059669.svg?style=flat&logo=terraform)](policy/cloud/zero_cost_policy.rego)
-[![Edge IoT](https://img.shields.io/badge/Firmware-ESP32%20Bare--Metal%20C%2B%2B-e7352c.svg?style=flat&logo=espressif)](https://github.com/stefanutc1/smarthome)
+[![Edge IoT](https://img.shields.io/badge/Firmware-ESP32%20Bare--Metal%20C%2B%2B-e7352c.svg?style=flat&logo=espressif)](iot/README.md)
 [![Author](https://img.shields.io/badge/Principal%20Maintainer-Moan%C4%83%20%C8%98tef%C4%83nu%C8%9B--Cornel-blue.svg?style=flat&logo=github)](https://github.com/stefanutc1)
 [![University](https://img.shields.io/badge/University-Universitatea%20din%20Craiova%20%C2%B7%20FEAA-0284c7.svg?style=flat&logo=academia)](https://feaa.ucv.ro)
 
@@ -115,10 +115,10 @@ cd web && npm run build && cd ..
 
 <div align="center">
 
-### 4.3 IoT & ESP32 Edge Firmware (`smarthome`)
+### 4.3 IoT & ESP32 Edge Firmware (`iot/`)
 
 </div>
-- Repository: Edge firmware has been migrated to the standalone repository [**stefanutc1/smarthome**](https://github.com/stefanutc1/smarthome).
+- Directory: Firmware source code resides in [`iot/`](iot/).
 - Language: Bare-metal C++ using the Arduino ESP32 Core.
 - Safety: Every project sketch must implement a Hardware Watchdog Timer (WDT) and non-blocking sensor sampling.
 - Configuration: Wi-Fi credentials, MQTT topics, and GPIO pinouts must be encapsulated cleanly in a dedicated `config.h`.
