@@ -27,7 +27,7 @@
     "fast-uri": "^3.1.8"
   },
   "dependencies": {
-    "@angular/common": "^20.3.33",
+    "@angular/common": "^20.3.34",
     "@angular/compiler": "^20.3.33",
     "@angular/core": "^20.3.33",
     "@angular/forms": "^20.3.33",
