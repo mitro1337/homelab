@@ -1,0 +1,42 @@
+<!--
+  =============================================================================
+  Reguli Personalizate Wazuh SIEM (local_rules.xml) pentru Sistemul AD-Fuzzy-SOAR
+  Se plasează în /var/ossec/etc/rules/local_rules.xml pe Wazuh Manager.
+  Wazuh citește raportul JSON de inferență fuzzy ("integration": "ad_fuzzy_soar")
+  și IA DECIZIA de declanșare a Active Response pe baza nivelului de risc!
+  =============================================================================
+-->
+<group name="ad_fuzzy_soar,active_directory,">
+
+  <!-- Regula de bază pentru toate evenimentele raportate de motorul Python AD-Fuzzy-SOAR -->
+  <rule id="110500" level="3">
+    <decoded_as>json</decoded_as>
+    <field name="integration">^ad_fuzzy_soar$</field>
+    <description>AD-Fuzzy-SOAR [MONITOR]: Evaluare Fuzzy Active Directory ($(scenario_name)) — Risc Global=$(fuzzy_inference.global_cyber_risk_score)</description>
+  </rule>
+
+  <!-- Risc MEDIU (ALERT_AND_AUDIT) -> Wazuh Level 8 -->
+  <rule id="110501" level="8">
+    <if_sid>110500</if_sid>
+    <field name="fuzzy_inference.risk_level">^MEDIUM$</field>
+    <description>AD-Fuzzy-SOAR [MEDIUM]: Anomalie Active Directory pe $(target.host) (User=$(target.user), Score=$(fuzzy_inference.global_cyber_risk_score)) — Audit declanșat</description>
+    <group>authentication_failures,gdpr_IV_32.2,</group>
+  </rule>
+
+  <!-- Risc RIDICAT (CONTAIN_ACCOUNT_AND_HOST) -> Wazuh Level 12 (Declanșează Active Response de Izolare Cont & IP) -->
+  <rule id="110502" level="12">
+    <if_sid>110500</if_sid>
+    <field name="fuzzy_inference.risk_level">^HIGH$</field>
+    <description>AD-Fuzzy-SOAR [HIGH]: Atac Active Directory detectat ($(mitre.technique)) pe $(target.host) de la $(target.source_ip) — Wazuh decide CONTAIN_ACCOUNT_AND_HOST</description>
+    <group>active_response,attack,pci_dss_11.4,</group>
+  </rule>
+
+  <!-- Risc CRITIC (EMERGENCY_DOMAIN_LOCKDOWN) -> Wazuh Level 15 (Declanșează Active Response Lockdown Tier-0 + Ansible) -->
+  <rule id="110503" level="15">
+    <if_sid>110500</if_sid>
+    <field name="fuzzy_inference.risk_level">^CRITICAL$</field>
+    <description>AD-Fuzzy-SOAR [CRITICAL]: Compromitere Critică Domeniu AD ($(mitre.technique)) pe $(target.host) [Score=$(fuzzy_inference.global_cyber_risk_score)] — Wazuh decide EMERGENCY_DOMAIN_LOCKDOWN!</description>
+    <group>active_response,attack,domain_compromise,gdpr_IV_35.7.d,</group>
+  </rule>
+
+</group>

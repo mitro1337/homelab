@@ -40,6 +40,7 @@ cyber/
 ├── tiktok-mrr-scam-infrastructure/           # SEC-2025-MRR-001:  Synthetic media funnels & $497 course resale syndicates
 ├── openid-mitm-phishing-forensics/           # SEC-2025-AITM-004: Steam OpenID Browser-in-the-Middle (BitM) credential harvesting
 │
+├── ad-fuzzy-soar/                            # Active Directory Fuzzy SOAR, Mamdani FIS risk engine & automated containment
 ├── antigravity/                              # Automated DFIR tooling (Apple Vision OCR, ad scrapers, DNS sinkhole sync)
 ├── opsec/                                    # Autonomous OPSEC & AI Countermeasure Framework (Scrubbing, Canaries, PromptGuard)
 ├── osint/                                    # Autonomous OSINT Intelligence Framework (Admiralty STANAG 2022, Entity Extraction)
@@ -250,6 +251,20 @@ Non-intrusive open-source intelligence collection, NATO Admiralty evaluation, an
 - **`lib/synthesis.py`**: Automated threat dossier compiler generating TLP-compliant incident response packages.
 - **`scripts/osint_cli.py`**: Unified command-line interface for indicator extraction, Admiralty scoring, and reconnaissance profiling.
 - **`scripts/audit_osint.py`**: Automated compliance auditor validating intelligence metrics and zero-emoji formatting.
+
+<div align="center">
+
+### 5.6. [`cyber/ad-fuzzy-soar/`](ad-fuzzy-soar/README.md) · Active Directory Fuzzy Risk & SOAR Response Engine
+
+</div>
+
+Intelligent cyber risk evaluation and automated incident response (SOAR) platform for enterprise Active Directory forests and hybrid identity topologies:
+- **`ad_fuzzy_soar/fuzzy_engine.py`**: Multi-layer Mamdani Fuzzy Inference System (FIS) utilizing Gaussian membership partitions and Centroid defuzzification ($R \in [0, 100]$) to eliminate rigid SIEM threshold false alarms.
+- **`ad_fuzzy_soar/experimental_engine.py`**: 4-Dimensional risk tensor evaluating Authentication Frequency ($F$), Behavioral Deviation ($A$), Event Severity ($S$), and Access Scope ($L$).
+- **`ad_fuzzy_soar/response_policy_engine.py`**: SOAR safety guardrails featuring dry-run simulations, Tier-0 asset allowlisting (`DC01`, `krbtgt`), human-in-the-loop analyst gates ($R \ge 85$), and JSONL audit logs.
+- **`ad_fuzzy_soar/wazuh_connector.py`**: Bidirectional REST API integration with Wazuh Manager (CT 106) and Wazuh Indexer for real-time telemetry streaming and active response invocation.
+- **`ansible/playbooks/ad_incident_response.yml`**: Automated containment playbooks enforcing network quarantine, Kerberos ticket revocation, and compromised account isolation.
+- **`docs/METODOLOGIE_EXPERIMENTALA_ZTS.md`**: Formal academic experimental validation methodology (ZTS / Bachelor's Thesis, FEAA UCV).
 
 ---
 

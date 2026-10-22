@@ -1,0 +1,24 @@
+# =============================================================================
+# Configurație AD-Fuzzy-SOAR (Active Directory Fuzzy Risk & Incident Response)
+# =============================================================================
+domain_name: "CORP.CYBERLAB.LOCAL"
+
+wazuh:
+  manager_url: "https://127.0.0.1:55000"
+  indexer_url: "https://127.0.0.1:9200"
+  api_user: "wazuh-wui"
+  api_password: "wazuh-wui"
+  indexer_user: "admin"
+  indexer_password: "admin"
+  verify_ssl: false
+  timeout_seconds: 5
+
+discord:
+  # Setează URL-ul de Discord Webhook sau variabila de mediu DISCORD_WEBHOOK_URL
+  webhook_url: ""
+  username: "AD-Fuzzy-SOAR Sentinel"
+  min_risk_score_to_alert: 40.0
+
+response:
+  dry_run: true
+  wazuh_decides_active_response: true

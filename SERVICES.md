@@ -160,6 +160,7 @@ Each service entry documents its operational role, deployment model, network loc
 | **35**| **Greenbone / OpenVAS** | Comprehensive vulnerability management & authenticated network scanner | Docker Compose | Node 1 | VLAN 20 | `9392/TCP` | Local User / 2FA | **P3 (Normal)** | `ROADMAP` |
 | **36**| **CAPEv2 Sandbox** | Automated malware execution, unpacking and behavioral reporting | KVM VM / Bridge | Node 1 | VLAN 66 (Quarantine) | `8000/TCP` | Admin Password | **P4 (Lab)** | `ROADMAP` |
 | **37**| **REMnux / FLARE-VM** | Specialized digital forensics & reverse engineering workstations | KVM VMs | Node 1 | VLAN 66 (Quarantine) | `22/TCP`, `3389` | Operator Password | **P4 (Lab)** | `DEPLOYED` |
+| **38**| **AD-Fuzzy-SOAR** | Active Directory Fuzzy SOAR, Mamdani FIS risk engine & automated containment | Python / Wazuh API | Node 1 | VLAN 10 / 40 | `55000/API`, Local | Wazuh API Token | **P1 (Critical)** | `DEPLOYED` |
 
 <div align="center">
 
@@ -168,12 +169,12 @@ Each service entry documents its operational role, deployment model, network loc
 </div>
 | # | Service Name | Operational Role | Deployment Model | Host Node | Network / VLAN | Internal Port | Auth Protocol | Criticality | Factual State |
 | :- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **38**| **Ollama GPU AI** | GPU-accelerated local LLM inference (CUDA 12.x on GTX 1050 Ti) | LXC CT 102 | Node 1 | VLAN 20 (`192.168.1.110`) | `11434/TCP` | Internal / Caddy | **P2 (High)** | `DEPLOYED` |
-| **39**| **LiteLLM Proxy** | Unified AI gateway: rate-limiting, load-balancing, provider abstraction | Docker Container | Node 1 | VLAN 20 (`192.168.1.110`) | `4000/TCP` | Virtual Master Keys | **P2 (High)** | `ROADMAP` |
-| **40**| **Qdrant Vector DB** | Dedicated vector search engine for persistent ELO long-term memory & RAG | Docker Container | Node 1 | VLAN 20 (`192.168.1.110`) | `6333/TCP` | API Key | **P2 (High)** | `ROADMAP` |
-| **41**| **Langfuse** | LLM observability: prompt versioning, token usage, latency & eval metrics| Docker Compose | Node 1 | VLAN 20 (`192.168.1.110`) | `3100/TCP` | Keycloak OIDC | **P3 (Normal)** | `ROADMAP` |
-| **42**| **Open WebUI** | Feature-rich AI workspace with multi-model chat, documents & tools | Docker Container | Node 1 | VLAN 20 (`192.168.1.110`) | `3000/TCP` | Keycloak OIDC | **P3 (Normal)** | `ROADMAP` |
-| **43**| **JupyterHub** | Multi-user Python data science and machine learning research platform | Docker / K8s Pod | Node 1 / 4 | VLAN 20 | `8000/TCP` | Keycloak OIDC | **P3 (Normal)** | `ROADMAP` |
+| **39**| **Ollama GPU AI** | GPU-accelerated local LLM inference (CUDA 12.x on GTX 1050 Ti) | LXC CT 102 | Node 1 | VLAN 20 (`192.168.1.110`) | `11434/TCP` | Internal / Caddy | **P2 (High)** | `DEPLOYED` |
+| **40**| **LiteLLM Proxy** | Unified AI gateway: rate-limiting, load-balancing, provider abstraction | Docker Container | Node 1 | VLAN 20 (`192.168.1.110`) | `4000/TCP` | Virtual Master Keys | **P2 (High)** | `ROADMAP` |
+| **41**| **Qdrant Vector DB** | Dedicated vector search engine for persistent ELO long-term memory & RAG | Docker Container | Node 1 | VLAN 20 (`192.168.1.110`) | `6333/TCP` | API Key | **P2 (High)** | `ROADMAP` |
+| **42**| **Langfuse** | LLM observability: prompt versioning, token usage, latency & eval metrics| Docker Compose | Node 1 | VLAN 20 (`192.168.1.110`) | `3100/TCP` | Keycloak OIDC | **P3 (Normal)** | `ROADMAP` |
+| **43**| **Open WebUI** | Feature-rich AI workspace with multi-model chat, documents & tools | Docker Container | Node 1 | VLAN 20 (`192.168.1.110`) | `3000/TCP` | Keycloak OIDC | **P3 (Normal)** | `ROADMAP` |
+| **44**| **JupyterHub** | Multi-user Python data science and machine learning research platform | Docker / K8s Pod | Node 1 / 4 | VLAN 20 | `8000/TCP` | Keycloak OIDC | **P3 (Normal)** | `ROADMAP` |
 
 <div align="center">
 

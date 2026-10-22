@@ -101,6 +101,7 @@ The platform operates across physical bare-metal nodes, a virtualized perimeter 
 | [**`CONTRIBUTING.md`**](CONTRIBUTING.md) | Contribution standards, IaC formatting, pre-commit validation gates, conventional commit standards | Contributors & Developers |
 | [**`docs/LICENTA_ARCHITECTURE.md`**](docs/LICENTA_ARCHITECTURE.md) | Bachelor's Thesis: Impactul tehnologiilor inteligente asupra securitatii digitale (Prof. univ. dr. Georgeta Soavă) | Academic Advisors & Researchers |
 | [**`docs/ACTIVE_DIRECTORY_LAB.md`**](docs/ACTIVE_DIRECTORY_LAB.md) | Multi-generational Active Directory forest (2008–2025), Kerberos, BloodHound, and Sysmon telemetry | Identity & Red Team Engineers |
+| [**`cyber/ad-fuzzy-soar/`**](cyber/ad-fuzzy-soar/README.md) | Active Directory Fuzzy SOAR, Mamdani FIS risk engine, Wazuh SIEM integration & automated response playbooks | SecOps & SOC Automation Engineers |
 | [**`iot/README.md`**](iot/README.md) | Physical edge IoT fleet (Gate Biometrics, Irrigation, Thermal Monitor, Power/UPS, Smart Thermostat, Smart Motion Sensor) | Embedded & IoT Engineers |
 | [**`cyber/ctf/19-09-2026/`**](cyber/ctf/19-09-2026/) | Complete 19.09.2026 InvataCyber.ro CTF writeups (3/3 flags · 100% solved with code solvers) | Reverse Engineers & CTF Players |
 | [**`cyber/cve/`**](cyber/cve/README.md) | Vulnerability research and coordinated disclosure reports for 7 identified CVEs across open-source kits | Security Researchers |
@@ -366,6 +367,7 @@ The repository provisions an isolated 6-node multi-generational Active Directory
 - **VM 403 — `adwin10` (Enterprise Workstation Client)**: Domain-joined client configured with Sysmon (SwiftOnSecurity baseline) streaming event telemetry directly to Wazuh SIEM.
 - **VM 404 — `adwin7` (Legacy Client & Vulnerability Sandbox)**: Isolated legacy client configured for testing SMBv1 (EternalBlue MS17-010) mitigations and NTLMv1 relay defenses.
 - **VM 405 — `adrhel` (Linux Kerberos Realm Integration)**: Red Hat Enterprise Linux 9 joined to the Active Directory domain via SSSD and realmd, demonstrating cross-platform enterprise SSO.
+- **Active Directory Fuzzy SOAR ([`cyber/ad-fuzzy-soar/`](cyber/ad-fuzzy-soar/))**: Intelligent cyber risk evaluation & automated response platform utilizing Mamdani Fuzzy Inference ($R \in [0, 100]$), Wazuh SIEM telemetry, and Ansible containment playbooks for Kerberoasting, DCSync, and lateral movement mitigation.
 
 ---
 

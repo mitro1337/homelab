@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AD-Fuzzy-SOAR Synthetic Dataset Schema",
+  "type": "object",
+  "properties": {
+    "record_id": {
+      "type": "string"
+    },
+    "scenario_id": {
+      "type": "string",
+      "enum": [
+        "N01",
+        "N02",
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "C01"
+      ]
+    },
+    "scenario_name": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "synthetic",
+        "homelab",
+        "wazuh"
+      ]
+    },
+    "partition": {
+      "type": "string",
+      "enum": [
+        "calibration",
+        "validation",
+        "test"
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "target_user": {
+      "type": "string"
+    },
+    "target_host": {
+      "type": "string"
+    },
+    "account_role": {
+      "type": "string"
+    },
+    "maintenance_window": {
+      "type": "boolean"
+    },
+    "auth_frequency": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "behavior_deviation": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "event_severity": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "access_scope": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "ground_truth": {
+      "type": "string",
+      "enum": [
+        "normal",
+        "suspicious",
+        "ambiguous"
+      ]
+    },
+    "has_missing_data": {
+      "type": "boolean"
+    },
+    "missing_fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "scenario_id",
+    "source",
+    "ground_truth"
+  ]
+}

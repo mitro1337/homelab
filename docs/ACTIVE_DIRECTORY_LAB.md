@@ -118,3 +118,7 @@ The laboratory leverages genuine Microsoft volume licensing mechanisms via **Mic
   * Root Inventory: [`inventory/hosts.yml`](../inventory/hosts.yml)
   * Homelab Inventory: [`ansible/inventories/homelab/hosts.yml`](../ansible/inventories/homelab/hosts.yml)
 * **Web UI Dashboard**: [`web/src/app/data/services.data.ts`](../web/src/app/data/services.data.ts) and [`web/src/app/data/hardware.data.ts`](../web/src/app/data/hardware.data.ts)
+* **Intelligent Risk Scoring & SOAR Response Engine**: [`cyber/ad-fuzzy-soar/`](../cyber/ad-fuzzy-soar/README.md)
+  * Multi-layer Mamdani Fuzzy Inference Engine evaluating Kerberos anomalies, failed logons, sensitive access, and lateral movement.
+  * Native Wazuh 4.14 SIEM active response connector and automated Ansible containment playbooks ([`ad_incident_response.yml`](../cyber/ad-fuzzy-soar/ansible/playbooks/ad_incident_response.yml)).
+  * Experimental methodology and Zero-Trust validation ([`METODOLOGIE_EXPERIMENTALA_ZTS.md`](../cyber/ad-fuzzy-soar/docs/METODOLOGIE_EXPERIMENTALA_ZTS.md)).

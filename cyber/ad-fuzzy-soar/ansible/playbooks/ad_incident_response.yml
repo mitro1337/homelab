@@ -1,0 +1,102 @@
+---
+# =============================================================================
+# Playbook Automatizat de Răspuns la Incidente (AD-Fuzzy-SOAR + Wazuh SIEM)
+# Acoperă:
+#   1. Noduri Windows Active Directory (Domain Controllers & Member Servers/Workstations)
+#   2. Noduri Linux înrolate în Active Directory (SSSD / realmd / Kerberos / PAM)
+# Declanșat de Wazuh Active Response sau direct de orchestratorul Python AD-Fuzzy-SOAR
+# =============================================================================
+
+- name: "AD-Fuzzy-SOAR | Orchestrare Răspuns la Incidente pe Windows Active Directory"
+  hosts: ad_domain_controllers:windows_domain_members
+  gather_facts: false
+  vars:
+    response_tier: "{{ response_tier | default('ALERT_AND_AUDIT') }}"
+    ad_user: "{{ ad_user | default('unknown_user') }}"
+    attacker_ip: "{{ attacker_ip | default('0.0.0.0') }}"
+    fuzzy_risk_score: "{{ fuzzy_risk_score | default(0.0) }}"
+    target_os: "{{ target_os | default('windows') }}"
+
+  tasks:
+    - name: "[Windows AD] Înregistrare eveniment SOAR în Windows Application EventLog"
+      ansible.windows.win_shell: |
+        Write-EventLog -LogName Application -Source "WSH" -EventId 9110 -EntryType Warning `
+          -Message "AD-Fuzzy-SOAR Evaluation: User={{ ad_user }} IP={{ attacker_ip }} Risk={{ fuzzy_risk_score }} Tier={{ response_tier }}"
+      when: target_os == 'windows'
+      changed_when: false
+
+    - name: "[Windows AD - CONTAIN/LOCKDOWN] Dezactivare cont Active Directory compromis și revocare sesiuni"
+      ansible.windows.win_shell: |
+        Import-Module ActiveDirectory
+        if ("{{ ad_user }}" -notmatch "^(krbtgt|Administrator)$") {
+            Disable-ADAccount -Identity "{{ ad_user }}" -Confirm:$false
+            Set-ADUser -Identity "{{ ad_user }}" -Description "CONT_BLOCAT_FUZZY_SOAR (Score={{ fuzzy_risk_score }})"
+        }
+        klist purge
+      when:
+        - target_os == 'windows'
+        - response_tier in ['CONTAIN_ACCOUNT_AND_HOST', 'EMERGENCY_DOMAIN_LOCKDOWN']
+
+    - name: "[Windows AD - CONTAIN/LOCKDOWN] Blocare IP atacator în Windows Defender Firewall"
+      ansible.windows.win_shell: |
+        $ruleName = "AD_Fuzzy_SOAR_Block_{{ attacker_ip }}"
+        if (-not (Get-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue)) {
+            New-NetFirewallRule -DisplayName $ruleName -Direction Inbound -Action Block -RemoteAddress "{{ attacker_ip }}" -Profile Any
+            New-NetFirewallRule -DisplayName ($ruleName + "_Out") -Direction Outbound -Action Block -RemoteAddress "{{ attacker_ip }}" -Profile Any
+        }
+      when:
+        - target_os == 'windows'
+        - attacker_ip != '0.0.0.0'
+        - response_tier in ['CONTAIN_ACCOUNT_AND_HOST', 'EMERGENCY_DOMAIN_LOCKDOWN']
+
+    - name: "[Windows AD - EMERGENCY_DOMAIN_LOCKDOWN] Protecție Tier-0 Domain Controller (DCSync / Golden Ticket)"
+      ansible.windows.win_shell: |
+        Import-Module ActiveDirectory
+        # Audităm modificările pe ACL-urile Domain Root pentru identificarea drepturilor DS-Replication-Get-Changes-All
+        $domainDN = (Get-ADDomain).DistinguishedName
+        $aclReport = (Get-Acl "AD:\$domainDN").Access | Where-Object { $_.IdentityReference -match "{{ ad_user }}" }
+        $aclReport | Export-Csv -Path "C:\Windows\Temp\fuzzy_soar_dcsync_acl_audit.csv" -NoTypeInformation
+        # Blocăm sesiunile SMB deschise de la IP-ul suspect
+        Get-SmbSession | Where-Object { $_.ClientComputerName -eq "{{ attacker_ip }}" } | Close-SmbSession -Force
+      when:
+        - target_os == 'windows'
+        - response_tier == 'EMERGENCY_DOMAIN_LOCKDOWN'
+
+
+- name: "AD-Fuzzy-SOAR | Orchestrare Răspuns la Incidente pe Noduri Linux din Domeniul AD"
+  hosts: linux_domain_nodes
+  become: true
+  gather_facts: false
+  vars:
+    response_tier: "{{ response_tier | default('ALERT_AND_AUDIT') }}"
+    ad_user: "{{ ad_user | default('unknown_user') }}"
+    attacker_ip: "{{ attacker_ip | default('0.0.0.0') }}"
+    fuzzy_risk_score: "{{ fuzzy_risk_score | default(0.0) }}"
+    target_os: "{{ target_os | default('linux') }}"
+
+  tasks:
+    - name: "[Linux AD Node] Scriere eveniment în syslog și Wazuh active-responses.log"
+      ansible.builtin.shell: |
+        logger -t ad-fuzzy-soar "Fuzzy Risk={{ fuzzy_risk_score }} Tier={{ response_tier }} User={{ ad_user }} SrcIP={{ attacker_ip }}"
+      changed_when: false
+
+    - name: "[Linux AD Node - CONTAIN/LOCKDOWN] Blocare cont local/SSSD și purjare cache tichete Kerberos"
+      ansible.builtin.shell: |
+        # Blocăm utilizatorul local dacă există și invalidăm cache-ul SSSD / Kerberos
+        id "{{ ad_user }}" >/dev/null 2>&1 && usermod -L "{{ ad_user }}" || true
+        command -v sss_cache >/dev/null 2>&1 && sss_cache -u "{{ ad_user }}" || true
+        rm -f /tmp/krb5cc_*
+        pkill -KILL -u "{{ ad_user }}" || true
+      when:
+        - response_tier in ['CONTAIN_ACCOUNT_AND_HOST', 'EMERGENCY_DOMAIN_LOCKDOWN']
+
+    - name: "[Linux AD Node - CONTAIN/LOCKDOWN] Blocare IP atacator prin UFW / IPTables"
+      ansible.builtin.shell: |
+        if command -v ufw >/dev/null 2>&1; then
+            ufw insert 1 deny from "{{ attacker_ip }}" to any
+        elif command -v iptables >/dev/null 2>&1; then
+            iptables -C INPUT -s "{{ attacker_ip }}" -j DROP 2>/dev/null || iptables -I INPUT 1 -s "{{ attacker_ip }}" -j DROP
+        fi
+      when:
+        - attacker_ip != '0.0.0.0'
+        - response_tier in ['CONTAIN_ACCOUNT_AND_HOST', 'EMERGENCY_DOMAIN_LOCKDOWN']

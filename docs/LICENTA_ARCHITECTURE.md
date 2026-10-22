@@ -47,7 +47,7 @@ This document specifies the architecture, network segmentation, virtualization p
 * **Threat Detection & Intelligence**: Sysmon, Sigma rules, YARA rules, Snort, MISP.
 * **Digital Forensics & Reverse Engineering**: Malware Autopsy, Volatility memory forensics, Ghidra, IDA Pro, x64dbg.
 * **Governance, Frameworks & Compliance**: NIS2 Directive compliance, MITRE ATT&CK enterprise attack mapping.
-* **Infrastructure as Code & Automated Response**: Ansible, Python, and Terraform for IaC, automating compromised VM isolation triggered by SIEM alerts.
+* **Infrastructure as Code & Automated Response**: Ansible, Python, and Terraform for IaC, automating compromised VM isolation triggered by SIEM alerts via the **AD-Fuzzy-SOAR** engine ([`cyber/ad-fuzzy-soar/`](../cyber/ad-fuzzy-soar/README.md)) using Mamdani Fuzzy Inference.
 * **Cloud & Orchestration**: Kubernetes, AWS.
 
 <div align="center">

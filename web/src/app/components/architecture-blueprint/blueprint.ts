@@ -2232,7 +2232,7 @@ export class ArchitectureBlueprintComponent implements OnInit {
       title: 'Automation, Scripting & SCM',
       badge: 'SecOps & DevSecOps',
       description: 'Automated threat hunting agents, incident response playbooks, triage collectors, and version-controlled configuration.',
-      tools: ['PowerShell Core', 'Python 3.12 (FastAPI / Scapy)', 'Git', 'Ansible Hardening Playbooks', 'Woodpecker CI', 'Shuffle SOAR']
+      tools: ['PowerShell Core', 'Python 3.12 (FastAPI / Scapy)', 'Git', 'Ansible Hardening Playbooks', 'Woodpecker CI', 'Shuffle SOAR', 'AD-Fuzzy-SOAR (Mamdani FIS)']
     }
   ];
 
@@ -2283,7 +2283,7 @@ export class ArchitectureBlueprintComponent implements OnInit {
       title: 'Automatizare, Scripting & SCM',
       badge: 'SecOps & DevSecOps',
       description: 'Agenți automați de threat hunting, playbook-uri de răspuns la incidente, colectoare de triaj și configurație versionată prin Git.',
-      tools: ['PowerShell Core', 'Python 3.12 (FastAPI / Scapy)', 'Git', 'Playbook-uri Ansible Hardening', 'Woodpecker CI', 'Shuffle SOAR']
+      tools: ['PowerShell Core', 'Python 3.12 (FastAPI / Scapy)', 'Git', 'Playbook-uri Ansible Hardening', 'Woodpecker CI', 'Shuffle SOAR', 'AD-Fuzzy-SOAR (Mamdani FIS)']
     }
   ];
 
