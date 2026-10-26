@@ -25,4 +25,4 @@ This directory contains only the x64 Proxmox VE guests represented in the curren
 
 The `.conf` files are Proxmox guest definitions. Docker Compose manifests are stored in the corresponding guest directories and describe applications running in those guests. Proxmox virtual machines are not Docker Compose services, so this directory does not have an aggregate `docker-compose.yml`.
 
-Each guest directory contains an English README describing its role and tracked files.
+Guest definitions and application manifests are kept in their corresponding directories. The root README summarizes the guest list; see the tracked configuration files for details.

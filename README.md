@@ -1,33 +1,119 @@
 # Infrastructure
 
-Infrastructure as code, Proxmox guest definitions, service configuration, and operational documentation for this homelab.
+This repository contains configuration, automation, and operational material for a personal infrastructure lab. It includes Proxmox guest definitions, service manifests, Terraform and Ansible code, cloud and Kubernetes configuration, IoT firmware, and cybersecurity research.
+
+The repository describes intended or tracked configuration. A file being present here does not confirm that a machine, container, or application is currently running. For the current x64 Proxmox guest list, use the [x64 inventory](services/x64/README.md) and the corresponding guest configuration files.
+
+## Contents
+
+| Path | What it contains |
+| --- | --- |
+| `services/x64/` | Proxmox LXC and QEMU guest definitions and selected application manifests for the x64 node. |
+| `terraform/` | Proxmox infrastructure configuration and reusable modules for VMs, LXC guests, network segments, SDN, and firewalling. |
+| `ansible/` | Inventories, playbooks, and roles for host setup, services, networking, storage, security, and maintenance. |
+| `cloud/` | Terraform configurations for AWS, Azure, and Google Cloud. |
+| `kubernetes/` | Kubernetes and GitOps configuration, applications, and supporting automation. |
+| `hypervisors/` | Terraform configurations for Proxmox and other hypervisor platforms. |
+| `iot/` | ESP32 firmware and supporting code for sensing, access control, irrigation, power monitoring, motion sensing, and climate control. |
+| `cyber/` | Defensive tooling, threat intelligence, incident analysis, CTF material, and vulnerability research. |
+| `hardware/`, `inventory/` | Hardware notes and host inventory data. |
+| `scripts/` | Administration, backup, health-check, audit, and recovery utilities. |
+| `.github/workflows/` | GitHub Actions workflows for CI, CD, and chaos-related jobs. |
 
 ## Current x64 Proxmox inventory
 
-The x64 node currently contains the 16 guests listed in [services/x64/README.md](services/x64/README.md): LXC containers 100, 101, 104–109; and QEMU virtual machines 200, 300, 301, 400–403, and 405.
+The tracked x64 inventory contains 16 guests. The names below follow the current Proxmox node view.
 
-The inventory README is the source of truth for guest IDs, display names, types, and tracked service manifests. In particular:
+| ID | Name | Type | Directory |
+| ---: | --- | --- | --- |
+| 100 | Home Assistant | LXC | `services/x64/homeassistant/` |
+| 101 | Mosquitto | LXC | `services/x64/mosquitto/` |
+| 104 | Monitoring | LXC | `services/x64/monitoring/` |
+| 105 | OWASP | LXC | `services/x64/owasp/` |
+| 106 | Wazuh | LXC | `services/x64/wazuh/` |
+| 107 | Nextcloud | LXC | `services/x64/nextcloud/` |
+| 108 | ESPHome | LXC | `services/x64/esphome/` |
+| 109 | Immich | LXC | `services/x64/immich/` |
+| 200 | OPNsense | QEMU VM | `services/x64/opnsense/` |
+| 300 | Parrot | QEMU VM | `services/x64/parrot/` |
+| 301 | Sandbox | QEMU VM | `services/x64/sandbox/` |
+| 400 | DC | QEMU VM | `services/x64/dc/` |
+| 401 | SV1 | QEMU VM | `services/x64/sv1/` |
+| 402 | SV2 | QEMU VM | `services/x64/sv2/` |
+| 403 | Active Directory client | QEMU VM | `services/x64/client/` |
+| 405 | RHEL | QEMU VM | `services/x64/rhel/` |
 
-- CT 100 is Home Assistant.
-- VM 403 is the Active Directory client.
-- VM 404 is not part of the current inventory.
-- Docker Compose files are kept with the guest application they configure. Proxmox VM definitions remain separate .conf files.
+Each guest directory contains its Proxmox `.conf` definition. Selected LXC guests also have application configuration. VM definitions are QEMU/Proxmox configuration files; they are not Docker Compose services. The x64 directory has no root-level aggregate `docker-compose.yml`.
 
-## Repository documentation
+### Tracked application manifests
 
-- [x64 Proxmox inventory](services/x64/README.md) — current guest list and configuration layout.
-- [Architecture](ARCHITECTURE.md) — how the tracked x64 guest definitions are organized.
-- [Infrastructure inventory](INFRASTRUCTURE.md) — guest IDs, names, and tracked files.
-- [Services](SERVICES.md) — application manifests tracked for the x64 guests.
-- [Network](NETWORK.md), [operations](OPERATIONS.md), [backup](BACKUP.md), and [disaster recovery](DISASTER-RECOVERY.md) — domain-specific plans and runbooks.
-- [Security](SECURITY.md) and [contributing](CONTRIBUTING.md) — security and repository practices.
+| Guest | Files tracked for the application |
+| --- | --- |
+| Home Assistant (100) | `docker-compose.yml`; configuration is mounted from `homeassistant/config/`. |
+| Monitoring (104) | Compose stack with Grafana, Prometheus, Loki, Promtail, and Node Exporter; Prometheus scrape configuration. |
+| OWASP (105) | Compose definition for OWASP Juice Shop, an intentionally vulnerable training application. |
+| Wazuh (106) | `wazuh.conf`; application deployment is managed inside the guest. |
+| Immich (109) | Compose stack, `.env.example`, and a guest definition. See [`services/x64/immich/README.md`](services/x64/immich/README.md). |
 
-Service-level details belong beside the corresponding configuration. A guest's presence in the Proxmox inventory does not by itself assert that its application is currently running.
+Mosquitto, Nextcloud, and ESPHome have guest definitions in this directory; their application configuration is managed inside the guests and is not represented by a tracked Compose file here.
 
+## Running a Compose stack
 
-<!-- AUTO-METRICS-START -->
-[![Active Workloads](https://img.shields.io/badge/Workloads-4%20Services-blue?style=flat&logo=docker)](https://stefanutc1.github.io/infrastructure/)
-[![CI Pipeline](https://img.shields.io/badge/CI%20Pipeline-Passed%20(100%25)-brightgreen?style=flat&logo=githubactions)](https://github.com/stefanutc1/infrastructure/actions/workflows/ci.yml)
-[![CD Pipeline](https://img.shields.io/badge/CD%20Pipeline-Active-blue?style=flat&logo=githubactions)](https://github.com/stefanutc1/infrastructure/actions/workflows/cd.yml)
-[![Last Sync](https://img.shields.io/badge/Last%20Auto--Sync-2026--10--26-informational?style=flat&logo=githubactions)](https://github.com/stefanutc1/infrastructure/actions)
-<!-- AUTO-METRICS-END -->
+Compose manifests are scoped to a guest directory. Run Docker Compose from the relevant directory, on the system that hosts that guest's application:
+
+```sh
+cd services/x64/homeassistant
+docker compose up -d
+```
+
+Use the same pattern for `monitoring`, `owasp`, or `immich`. The Immich stack needs a local `.env` based on the tracked `.env.example`; set the storage and database values for the host before starting it. Do not commit credentials or a populated `.env` file.
+
+For a Proxmox guest, use its `.conf` file as the tracked configuration reference. Terraform and Ansible have their own inventories, examples, and playbooks; review those files before applying changes to a host or cloud account. This README does not prescribe applying every configuration in the repository.
+
+## IoT firmware
+
+The `iot/` directory contains separate firmware projects and project-level notes for:
+
+- `footprint/` — fingerprint, motion, and gate-control hardware.
+- `irrigation/` — multi-zone irrigation control and sensors.
+- `datacenter_environment/` — environmental measurements for equipment monitoring.
+- `power_monitor/` — mains and power telemetry.
+- `smart_motion_sensor/` — motion sensing.
+- `smart_thermostat/` — thermostat control.
+
+Firmware configuration is project-specific. Check the `config.h`, `.yaml`, and README files in the relevant directory before building or flashing a device.
+
+## Cybersecurity material
+
+The `cyber/` tree contains defensive and research material, including:
+
+- tools and data for threat intelligence and blocklist management;
+- incident and infrastructure analysis case files;
+- Active Directory automation and fuzzy SOAR experiments;
+- CTF writeups and vulnerability reports;
+- OPSEC and OSINT utilities.
+
+Some directories contain proof-of-concept or intentionally vulnerable material. Use it only in systems and environments where you have authorization. Keep training targets isolated from trusted networks.
+
+## Automation and validation
+
+The GitHub Actions workflows are in `.github/workflows/`: `ci.yml`, `cd.yml`, and `chaos.yml`. The CI workflow defines checks for areas including secrets scanning, shell and YAML linting, Markdown linting, infrastructure audits, IoT firmware checks, cloud policy checks, and security analysis. The CD workflow handles repository automation and deployment-related jobs. Consult the workflow files for their exact triggers and behavior.
+
+Useful local scripts include:
+
+- `scripts/audit_infrastructure.py` — repository infrastructure audit;
+- `scripts/verify_esp32_firmware.py` — firmware checks;
+- `scripts/verify_zero_cloud_cost.py` — static cloud configuration policy check;
+- `scripts/audit_mermaid_diagrams.py` — Mermaid diagram audit;
+- `scripts/backup-configs.sh` and `scripts/backup-configs.ps1` — configuration backup helpers;
+- `scripts/healthcheck-fleet.sh` and `scripts/healthcheck-fleet.ps1` — fleet health-check helpers.
+
+Run a script only after checking its options and target environment. Some scripts can change remote systems or require credentials and network access.
+
+## Configuration and secrets
+
+Templates and examples are provided for some tools, including Terraform variable files and service environment files. Supply local credentials through the mechanism expected by the specific tool. Do not commit passwords, API tokens, private keys, generated state files, or populated environment files.
+
+## License
+
+This repository is distributed under the GNU Affero General Public License v3.0. See [`LICENSE`](LICENSE).
