@@ -1,8 +1,4 @@
-<div align="center">
-
 # Google Safe Browsing Malicious Entity Incident Report
-
-</div>
 
 **Case File Reference:** `SEC-2026-ECOM-005`  
 **Target Authority:** Google Safe Browsing Team / Security Threat Submission Desk  
@@ -11,21 +7,7 @@
 **Investigator:** `@stefanutc1`  
 **Submission Status:** Submitted & Confirmed (DNSC #178465 Correlated)
 
-<div align="center">
-
-[![Threat Level](https://img.shields.io/badge/Threat%20Level-CRITICAL-red.svg?style=flat&logo=securityscorecard)](#)
-[![Submission Status](https://img.shields.io/badge/Status-Submitted%20%26%20Blacklisted-brightgreen.svg?style=flat&logo=google)](#)
-[![Impact](https://img.shields.io/badge/Impact-Financial%20Theft%20%26%20Credential%20Harvester-orange.svg?style=flat&logo=visa)](#)
-
-</div>
-
----
-
-<div align="center">
-
 ## 1. Incident Overview & Threat Description
-
-</div>
 
 To the Google Safe Browsing Engineering Team,
 
@@ -33,13 +15,7 @@ We formally report an active, organized network of fraudulent e-commerce phishin
 
 The threat infrastructure misleads European consumers with heavily discounted household promotions, lures them through in-app webviews to an unauthorized cloned checkout portal, and executes unauthorized payment card debits under shell billing merchant descriptors (e.g., `morvethemi london`, `dreamwardrobe.online`).
 
----
-
-<div align="center">
-
 ## 2. Malicious Indicators of Compromise (IoCs) to Block
-
-</div>
 
 | Priority | Malicious Indicator / URL | Threat Role & Architectural Function | Recommended Action |
 | :---: | :--- | :--- | :--- |
@@ -49,13 +25,7 @@ The threat infrastructure misleads European consumers with heavily discounted ho
 | `04` | `worvixglobal.com` | Mail sender & fake order confirmation dispatch (`noreply@email.worvixglobal.com`) | Blacklist domain & mail relay |
 | `05` | `yiyangsaas.com` | Cloudflare-proxied backend SaaS phishing engine (`eName Technology Co., Ltd.`) | Flag as phishing C2 infrastructure |
 
----
-
-<div align="center">
-
 ## 3. Threat Flow & In-Browser Phishing Teardown
-
-</div>
 
 ```mermaid
 flowchart LR
@@ -68,13 +38,7 @@ flowchart LR
 - **Brand Theft:** The web page renders authentic Media Galaxy logos, navigation ribbons, and product imagery scraped directly from legitimate Romanian infrastructure.
 - **Cloaking Behavior:** Once a credit card is harvested or security auditing tools are detected, the server returns an HTTP 200 HTML maintenance page (*"Website is under maintenance"*), attempting to evade automated crawlers and dynamic sandbox evaluation.
 
----
-
-<div align="center">
-
 ## 4. Cross-Reference & National Coordination
-
-</div>
 
 This campaign has been formally reported to the **Romanian National Cyber Security Directorate (DNSC)** under incident ticket **`[D.N.S.C. #178465]`**, which confirmed the activation of PNRISC blacklisting and subsequent domain deactivation.
 

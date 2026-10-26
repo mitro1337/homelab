@@ -1,8 +1,4 @@
-<div align="center">
-
 # Technical Analysis: Steam OpenID AiTM & Browser-in-the-Middle (BitM) Mechanics
-
-</div>
 
 **Case File Reference:** `SEC-2025-AITM-004`  
 **Classification:** `TLP:CLEAR`  
@@ -10,13 +6,7 @@
 **Primary Analyst:** `@stefanutc1`  
 **Threat Vector:** Browser-in-the-Middle (BitM) DOM Window Emulation, Real-Time OpenID 2.0 Session Relay, Post-Exploitation Persistence via Family View & Web API Keys
 
----
-
-<div align="center">
-
 ## 1. Laboratory Environment & Containment Topology
-
-</div>
 
 All forensic probing, DOM deconstruction, and network traffic captures were executed inside a tightly isolated sandbox environment:
 
@@ -49,21 +39,12 @@ flowchart TD
     end
 ```
 
----
-
-<div align="center">
-
 ## 2. Browser-in-the-Middle (BitM) DOM Teardown
-
-</div>
 
 Traditional credential harvesting redirects the browser to an external domain (e.g., `steamcomnmunity[.]com`), allowing users to detect discrepancies in the address bar. The BitM technique eliminates this indicator by keeping the user on the primary domain (`cs2-tournament-bracket[.]top`) and generating an in-page window using HTML5, CSS3, and JavaScript.
 
-<div align="center">
-
 ### 2.1. Simulated Window Architecture
 
-</div>
 Inspecting the DOM revealed that the popup was a layered `<div>` with `z-index: 999999`:
 ```html
 <div class="modal-window-wrapper draggable">
@@ -85,19 +66,10 @@ Inspecting the DOM revealed that the popup was a layered `<div>` with `z-index: 
 - **Interactive Deception:** The window header implemented JavaScript drag-and-drop event listeners (`mousedown`, `mousemove`, `mouseup`), allowing victims to drag the faux window around the viewport exactly like a native OS window.
 - **SSL Indicator:** Clicking the padlock icon rendered a high-fidelity popup claiming *"Connection is secure · Certificate valid (Issued by DigiCert)"*.
 
----
-
-<div align="center">
-
 ## 3. Real-Time OpenID Session Relay Engine
-
-</div>
-
-<div align="center">
 
 ### 3.1. Credential Capture & Handshake Forwarding
 
-</div>
 When the target submits credentials into the simulated frame:
 1. Client-side JavaScript bundles intercept the submission and serialize the input:
    ```json
@@ -116,21 +88,12 @@ When the target submits credentials into the simulated frame:
    - **`sessionid`**: CSRF protection token required for state-changing POST requests.
    - **`steamMachineAuth<STEAMID>`**: Machine authorization token for Steam Guard.
 
----
-
-<div align="center">
-
 ## 4. Post-Exploitation & Account Takeover Chain
-
-</div>
 
 Once authenticated session cookies are established, the attacker's automated worker script executes three sequential operations:
 
-<div align="center">
-
 ### 4.1. Family View PIN Lockout (Persistence & Denial of Recovery)
 
-</div>
 The attacker script issues a POST request to Steam's parental control interface:
 ```http
 POST /parental/ajaxsetparental HTTP/1.1
@@ -142,11 +105,8 @@ sessionid=89a1f02...&pin=4821&recovery_email=attacker_drop@mail.xyz
 ```
 - **Operational Impact:** Steam Family View restricts access to account settings, store purchases, inventory trading, and email/password modifications unless an active 4-digit PIN is entered. By locking the account with an unknown PIN, the adversary prevents the victim from immediately revoking active sessions or altering their password.
 
-<div align="center">
-
 ### 4.2. Rogue Steam Web API Key Provisioning
 
-</div>
 The worker accesses `https://steamcommunity.com/dev/registerkey` and registers an arbitrary domain name to obtain a permanent Web API Key:
 ```http
 POST /dev/registerkey HTTP/1.1
@@ -158,11 +118,8 @@ domain=cs2-tournament-bracket.top&agreeToTerms=agreed&sessionid=89a1f02...
 ```
 - **Operational Impact:** The Web API Key grants continuous, programmatic read access to `IEconService/GetTradeOffers`, allowing the threat actor to monitor trade activities without needing an active web session.
 
-<div align="center">
-
 ### 4.3. Automated Trade Offer Interception (Skin Hijacking)
 
-</div>
 Whenever the victim initiates a trade offer (e.g., selling an item on an external marketplace like Skinport or CSFloat):
 1. The attacker's bot detects the pending trade via `GetTradeOffers`.
 2. The bot instantly issues a cancellation request via `CancelTradeOffer`.
@@ -170,13 +127,7 @@ Whenever the victim initiates a trade offer (e.g., selling an item on an externa
 4. The bot creates an identical trade offer from the victim's account to the impostor mule account.
 5. Unsuspecting victims approve the trade on their Steam Mobile Authenticator, believing they are trading with their friend or legitimate marketplace.
 
----
-
-<div align="center">
-
 ## 5. Indicators of Compromise (IoCs)
-
-</div>
 
 | Type | Indicator | Attribution / Classification |
 | :--- | :--- | :--- |
@@ -186,13 +137,7 @@ Whenever the victim initiates a trade offer (e.g., selling an item on an externa
 | **Reverse Proxy Endpoint** | `/api/v2/auth/steam_callback` | Real-time Credential & TOTP Ingress Handler |
 | **Attacker Drop Mail** | `recovery_drop_491@proton.me` | Bound to unauthorized Family View configurations |
 
----
-
-<div align="center">
-
 ## 6. Strategic Mitigation & Cross-Analysis
-
-</div>
 
 - **Platform Mitigation:** Always authenticate via official platforms (`steamcommunity.com`) prior to accessing external community sites. If an OpenID portal does not automatically recognize an existing logged-in browser session, the prompt is fraudulent.
 - **Related Investigation:** For a forensic analysis of how templated white-label fraud kits operate across other threat categories, see [`../task-scam-infrastructure-analysis/README.md`](../task-scam-infrastructure-analysis/README.md).

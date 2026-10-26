@@ -1,8 +1,4 @@
-<div align="center">
-
 # Frontend State Integrity & Localization Bypass Analysis
-
-</div>
 
 **Case File Reference:** `SEC-2026-TASK-003`  
 **Classification:** `TLP:CLEAR`  
@@ -10,13 +6,7 @@
 **Primary Analyst:** `@stefanutc1`  
 **Vulnerability Focus:** Insecure Client-Side State Management, White-Label Russian Origin Leakage, Non-Functional Decorative Components
 
----
-
-<div align="center">
-
 ## 1. Overview & Threat Context
-
-</div>
 
 The task scam platform leverages a modern, responsive Single Page Application (SPA) built using **Vue.js 3** and bundled via **Vite**. The user interface is engineered to project the appearance of an enterprise-grade fintech portal, complete with dynamic task progress meters, simulated cryptocurrency wallets, and animated commission updates.
 
@@ -41,19 +31,10 @@ flowchart TD
     end
 ```
 
----
-
-<div align="center">
-
 ## 2. Technical Vulnerability Demonstration
-
-</div>
-
-<div align="center">
 
 ### 2.1. Uncovering the Russian White-Label Codebase
 
-</div>
 The public-facing portal presented text translated into Romanian (e.g., *"Platformă de Optimizare E-Commerce"*). However, inspecting the JavaScript localization bundle (`locale-ro.js`) revealed that the base application strings originated from an underground Russian turnkey scam kit.
 
 By modifying the client storage state directly in the browser console:
@@ -71,11 +52,8 @@ window.location.reload();
   - *"Portofel virtual"* reverted to **`"Мой кошелек"`**.
   - Customer support labels defaulted to Russian Telegram handles (`@tg_support_master`).
 
-<div align="center">
-
 ### 2.2. Architectural Desynchronization: The Smoking Gun
 
-</div>
 While the user interface was forced into the Russian language, the backend configuration (`/api/v1/site/config`) retained its strict Romanian campaign lock:
 - The phone input mask remained hardcoded to **`+40`**.
 - Submitting a Russian mobile number (`+7...`) was rejected by the server:
@@ -86,11 +64,8 @@ While the user interface was forced into the Russian language, the backend confi
 > [!NOTE]
 > This disconnect provides definitive architectural proof that the threat actors did not build custom software. They purchased or rented an off-the-shelf **Russian white-label task scam template**, hastily configured a single Romanian campaign identifier (`+40`), and deployed it without sanitizing the underlying multilingual language bundles.
 
-<div align="center">
-
 ### 2.3. Decorative "Dead" UI Components
 
-</div>
 To simulate legitimate distributed cloud computing or product optimization work, the dashboard displayed complex widgets:
 1. **"GPU Cluster Load & Mining Hashrate":**  
    - DOM selector: `.gpu-telemetry-gauge`
@@ -99,13 +74,7 @@ To simulate legitimate distributed cloud computing or product optimization work,
    - DOM selector: `.btn-verify-bank`
    - Clicking the button triggered an empty callback returning `console.log("channel checking...")` with no outbound HTTP network traffic observed in Burp Suite.
 
----
-
-<div align="center">
-
 ## 3. Threat Intelligence Implications
-
-</div>
 
 1. **Syndicate Industrialization:** Fraud operations are supported by centralized software developers who sell plug-and-play scam kits on underground cybercrime forums (dark web markets and specialized Telegram channels) for \$500–\$2,000 per deployment.
 2. **Campaign Localization Speed:** A single syndicate can pivot from targeting Romania (`+40`) to Poland (`+48`), Spain (`+34`), or Germany (`+49`) in less than 30 minutes simply by altering two fields in the backend JSON config while reusing the identical frontend infrastructure.

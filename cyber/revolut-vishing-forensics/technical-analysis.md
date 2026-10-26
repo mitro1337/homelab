@@ -1,8 +1,4 @@
-<div align="center">
-
 # Technical Analysis: Revolut Vishing & Telephony Infrastructure
-
-</div>
 
 **Case File Reference:** `SEC-2026-VISH-002`  
 **Classification:** `TLP:CLEAR`  
@@ -10,13 +6,7 @@
 **Primary Analyst:** `@stefanutc1`  
 **Attack Vectors:** SIP VoIP Caller ID Spoofing, Smishing Redirects, Cloned Reverse Proxy, Real-Time OTP Exfiltration
 
----
-
-<div align="center">
-
 ## 1. Multi-Stage Attack Architecture
-
-</div>
 
 The campaign operates via a synchronized, dual-channel exploitation pipeline designed to bypass traditional 2FA/3DS safeguards by maintaining high-pressure psychological control over the target.
 
@@ -44,19 +34,10 @@ sequenceDiagram
     Bank-->>Proxy: Transaction authorized ($/EUR deducted)
 ```
 
----
-
-<div align="center">
-
 ## 2. Telephony Subsystem & SIP Manipulation
-
-</div>
-
-<div align="center">
 
 ### 2.1. Caller ID Spoofing Mechanics
 
-</div>
 Analysis of the incoming call metadata revealed that the threat actors utilized wholesale SIP trunk providers that omit cryptographic caller verification standards (STIR/SHAKEN).
 
 - **Injected SIP Header Structure:**
@@ -72,19 +53,10 @@ Analysis of the incoming call metadata revealed that the threat actors utilized 
   ```
 - **Operator Evasion:** The `+40749` allocation corresponds to genuine Romanian mobile ranges (Orange/Vodafone blocks), preventing common spam filters from auto-flagging the incoming call as international robocall traffic.
 
----
-
-<div align="center">
-
 ## 3. Web Cloning & In-Browser Interception Engine
-
-</div>
-
-<div align="center">
 
 ### 3.1. Cloned Landing Interface Teardown
 
-</div>
 Targets were directed through shortened redirection URLs terminating on disposable Top-Level Domains (`.tk`, `.ml`, `.xyz`) protected with automated Let's Encrypt Domain Validated (DV) certificates.
 
 - **DOM Inspection Findings:**
@@ -115,11 +87,8 @@ document.getElementById('verify-form').addEventListener('submit', async function
 });
 ```
 
-<div align="center">
-
 ### 3.2. Real-Time OTP Interception Flow
 
-</div>
 The backend acted as an automated headless browser / API client:
 1. As soon as the card details arrived at `/api/v2/card/relay`, the attacker's server-side worker initiated a payment or money transfer on a third-party merchant processor.
 2. The merchant invoked Revolut's 3D Secure verification, triggering an authentic SMS OTP from Revolut to the victim's phone.
@@ -127,13 +96,7 @@ The backend acted as an automated headless browser / API client:
    *"A 6-digit confirmation code was sent to your phone to reverse the pending charge. Enter it below within 120 seconds."*
 4. Submitting this code sent it back to the attacker's worker, which completed the authorization challenge on the merchant processor.
 
----
-
-<div align="center">
-
 ## 4. Indicators of Compromise (IoCs)
-
-</div>
 
 | Indicator Type | Value / Pattern | Context / Classification | Action Taken |
 | :--- | :--- | :--- | :--- |
@@ -143,19 +106,10 @@ The backend acted as an automated headless browser / API client:
 | **Shortlink Provider**| `bit.ly/rev-verify-*` | Redirection mask to conceal phishing destination | Abuse Report Filed |
 | **Exfiltration URI** | `/api/v2/card/relay` | C2 API receiver for card data and SMS OTPs | Suricata Rule Deployed |
 
----
-
-<div align="center">
-
 ## 5. Detection Engineering Signatures
-
-</div>
-
-<div align="center">
 
 ### Suricata NIDS Rule for Gateway Inspection
 
-</div>
 ```suricata
 alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"THREAT-INTEL Revolut Phishing Card Exfiltration (/api/v2/card/relay)"; flow:established,to_server; http.method; content:"POST"; http.uri; content:"/api/v2/card/relay"; file_data; content:"pan"; content:"cvv"; content:"session_id"; classtype:credential-theft; sid:2026010; rev:1;)
 ```

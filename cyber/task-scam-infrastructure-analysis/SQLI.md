@@ -1,8 +1,4 @@
-<div align="center">
-
 # SQL Injection (SQLi) Attack Surface & Input Validation Audit
-
-</div>
 
 **Case File Reference:** `SEC-2026-TASK-003`  
 **Classification:** `TLP:CLEAR`  
@@ -11,13 +7,7 @@
 **Vulnerability Class:** Common Weakness Enumeration [CWE-89](https://cwe.mitre.org/data/definitions/89.html) (SQL Injection)  
 **Database Technology:** MySQL 8.0 / MariaDB behind Laravel Eloquent ORM with Raw Concatenation Flaws
 
----
-
-<div align="center">
-
 ## 1. Executive Summary & Threat Profile
-
-</div>
 
 During the reconnaissance and dynamic auditing phase of the task scam platform, multiple unauthenticated input fields were evaluated for improper sanitization and query concatenation.
 
@@ -40,19 +30,10 @@ flowchart TD
     CONTROLLER -->|"Exposes Differential Response Timing"| ATTACKER
 ```
 
----
-
-<div align="center">
-
 ## 2. Identified Vulnerable Vectors & Payload Analysis
-
-</div>
-
-<div align="center">
 
 ### 2.1. Vector A: The Mandatory `invite_code` Parameter
 
-</div>
 Registration requires a valid sponsor or campaign code (e.g., `888888`). The backend verifies this code against an internal campaigns table to credit the referring syndicate operator.
 
 - **Vulnerable Endpoint:** `POST /api/v1/user/auth/register`
@@ -72,11 +53,8 @@ Registration requires a valid sponsor or campaign code (e.g., `888888`). The bac
     `SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax near ''888888'''`
   - Submitting a boolean tautology (`888888' OR '1'='1' #`) successfully associated the account with the first record in the database (`admin_super_campaign`), confirming that string input was directly concatenated into the SQL statement.
 
-<div align="center">
-
 ### 2.2. Vector B: Blind Time-Based Inferences on `username`
 
-</div>
 Testing for blind time-based SQL injection on the login endpoint:
 - **Target Endpoint:** `POST /api/v1/user/auth/login`
 - **Fuzzing Payload:**
@@ -95,13 +73,7 @@ Testing for blind time-based SQL injection on the login endpoint:
 > [!WARNING]
 > The ~3 second execution delay observed during Attempt 04 strongly indicates that the database parser executed the `SLEEP()` function within the query context of an authentic administrative record.
 
----
-
-<div align="center">
-
 ## 3. Root Cause Analysis
-
-</div>
 
 Decompiled artifacts of similar open-source and leaked scam backends reveal common coding anti-patterns responsible for these vulnerabilities:
 
@@ -122,21 +94,12 @@ public function register(Request $request) {
 }
 ```
 
----
-
-<div align="center">
-
 ## 4. Remediation & Hardening Playbook
-
-</div>
 
 To eliminate SQL injection surfaces, modern web architectures must strictly adhere to the following controls:
 
-<div align="center">
-
 ### 4.1. Parameterized Queries (Prepared Statements)
 
-</div>
 All user-supplied input must be passed as parameterized data bindings, preventing the SQL interpreter from treating user input as executable SQL logic:
 
 ```php
@@ -158,11 +121,8 @@ public function register(Request $request) {
 }
 ```
 
-<div align="center">
-
 ### 4.2. Web Application Firewall (WAF) Rule Deployment
 
-</div>
 Configure edge WAF filters to drop common SQL injection syntax patterns before reaching application compute:
 
 ```nginx

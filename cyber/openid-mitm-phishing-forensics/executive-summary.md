@@ -1,8 +1,4 @@
-<div align="center">
-
 # Executive Threat Intelligence Briefing: Steam OpenID AiTM & BitM Campaign
-
-</div>
 
 **Case File Reference:** `SEC-2025-AITM-004`  
 **Classification:** `TLP:CLEAR`  
@@ -11,21 +7,7 @@
 **Primary Analyst:** `@stefanutc1`  
 **Target Ecosystem:** Valve Steam Community / Competitive Gaming (CS2, Dota 2)
 
-<div align="center">
-
-[![Threat Level](https://img.shields.io/badge/Threat%20Level-CRITICAL-red.svg?style=flat&logo=counterstrike)](#)
-[![MITRE ATT&CK](https://img.shields.io/badge/MITRE-T1566.001%20%7C%20T1557.001%20%7C%20T1098%20%7C%20T1496-blue.svg?style=flat&logo=target)](#)
-[![Remediation Status](https://img.shields.io/badge/Status-Mitigated%20%26%20Documented-brightgreen.svg?style=flat&logo=shield)](#)
-
-</div>
-
----
-
-<div align="center">
-
 ## 1. Executive Summary & Impact Analysis
-
-</div>
 
 On **22 November 2025**, an in-depth forensic investigation dissected an advanced **Adversary-in-the-Middle (AiTM)** and **Browser-in-the-Middle (BitM)** phishing campaign targeting esports players and competitive gaming enthusiasts. Threat actors distributed spearphishing lures across Discord and Steam community forums, inviting targets to vote for competitive teams participating in fake tournaments (e.g., `cs2-tournament-bracket[.]top`).
 
@@ -43,13 +25,7 @@ flowchart LR
     C --> E["Rogue Web API Key<br/>Interception of skin trade offers"]
 ```
 
----
-
-<div align="center">
-
 ## 2. Key Executive Indicators
-
-</div>
 
 | Dimension | Forensic Metric | Operational Detail |
 | :--- | :--- | :--- |
@@ -60,24 +36,12 @@ flowchart LR
 | **Defense Testing** | Air-Gapped Windows 10 VM | Disposable test accounts registered via throwaway emails |
 | **Mitigation Status** | Incident Filed with Valve | Malicious domain and reverse proxy IP submitted for takedown |
 
----
-
-<div align="center">
-
 ## 3. Investigation Containment & Safety Protocol
-
-</div>
 
 > [!NOTE]
 > All dynamic interaction, reverse engineering, and payload interception were conducted within an isolated Windows 10 virtual machine running on an air-gapped VirtualBox / Proxmox environment. Only synthetic, disposable test accounts were used. Zero personal credentials, payment methods, or real inventory assets were exposed.
 
----
-
-<div align="center">
-
 ## 4. Documentation Navigation
-
-</div>
 
 - **Detailed Technical Teardown:** [`technical-analysis.md`](technical-analysis.md)
 - **Valve Security Incident Submission:** [`steam-report.md`](steam-report.md)

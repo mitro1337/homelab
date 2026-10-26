@@ -1,8 +1,4 @@
-<div align="center">
-
 # Forensic Disclosures, National CSIRT Filings & Takedown Records
-
-</div>
 
 **Case File Reference:** `SEC-2026-ECOM-005`  
 **Classification:** `TLP:CLEAR`  
@@ -10,22 +6,7 @@
 **Lead Investigator:** `@stefanutc1`  
 **Primary Outcome:** **Takedown Confirmed** by National Cyber Security Directorate ([`D.N.S.C. #178465`](DNSC_TAKEDOWN_CONFIRMATION_178465.md))
 
-<div align="center">
-
-[![National CSIRT](https://img.shields.io/badge/National%20CSIRT-DNSC%20Romania-red.svg?style=flat&logo=shield)](DNSC_TAKEDOWN_CONFIRMATION_178465.md)
-[![Ticket](https://img.shields.io/badge/Ticket-D.N.S.C.%20%23178465-brightgreen.svg?style=flat&logo=jira)](DNSC_RESPONSE_178465.md)
-[![Remediation Status](https://img.shields.io/badge/Remediation-Deactivated%20%26%20Blacklisted-brightgreen.svg?style=flat&logo=checkmarx)](DNSC_TAKEDOWN_CONFIRMATION_178465.md)
-[![Banking Dispute](https://img.shields.io/badge/Dispute-BCR%20Chargeback%20Filed-blue.svg?style=flat&logo=visa)](BCR_CHARGEBACK_FRAUD_DISCLOSURE.md)
-
-</div>
-
----
-
-<div align="center">
-
 ## 1. Overview & Disclosure Lifecycle
-
-</div>
 
 This directory archives the complete, verified legal and technical disclosure dossier compiled during the **Media Galaxy Brand Impersonation & E-Commerce Phishing Investigation** (`SEC-2026-ECOM-005`).
 
@@ -44,13 +25,7 @@ flowchart TD
     PNRISC --> CONFIRM["Confirmed Domain Deactivation (21.09.2026)"]
 ```
 
----
-
-<div align="center">
-
 ## 2. Notification & Disclosure Master Index
-
-</div>
 
 | Document | Recipient & Counterpart | Operational Scope & Objective | Language | Status |
 | :--- | :--- | :--- | :---: | :---: |
@@ -63,13 +38,7 @@ flowchart TD
 | **[`CLOUDFLARE_ABUSE_REPORT.md`](./CLOUDFLARE_ABUSE_REPORT.md)** | Cloudflare Trust & Safety Desk | High-priority ToS abuse submission against backend C2 domain `yiyangsaas.com`. | EN | Submitted |
 | **[`CIPRIAN_LOSPA_PROPOSAL.md`](./CIPRIAN_LOSPA_PROPOSAL.md)** | Ciprian Lospa (Investigative Journalist) | Case study presentation and dataset sharing for public consumer awareness video. | RO / EN | Pitched |
 
----
-
-<div align="center">
-
 ## 3. Key Telemetry Communicated Across All Authorities
-
-</div>
 
 - **Phishing Lure FQDN:** `mediagalaxy.voetbalshop-nlco.com` (Subdomain spoof on compromised Dutch domain).
 - **Backend C2 Infrastructure:** `yiyangsaas.com` (Cloudflare-fronted SaaS platform, Yunnan, China).

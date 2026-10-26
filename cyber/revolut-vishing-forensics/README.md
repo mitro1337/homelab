@@ -1,24 +1,11 @@
-<div align="center">
-
 # Incident Analysis: Voice Phishing (Vishing) & Real-Time FinTech Credential Relay (Revolut)
 
-</div>
 **Case File Reference:** `SEC-2026-VISH-002`  
 **Classification:** `TLP:CLEAR`  
 **Investigation Date:** 10 August 2026  
 **Primary Analyst:** `@stefanutc1`  
 
-[![Threat Level](https://img.shields.io/badge/Threat%20Level-CRITICAL-red.svg)](#)
-[![MITRE ATT&CK](https://img.shields.io/badge/MITRE-T1598%20%7C%20T1583.001%20%7C%20T1566.004%20%7C%20T1556%20%7C%20T1499-blue.svg)](#)
-[![Status](https://img.shields.io/badge/Status-Remediated%20%26%20Documented-brightgreen.svg)](#)
-
----
-
-<div align="center">
-
 ## 1. Project Overview
-
-</div>
 
 This repository documents the forensic teardown, telephony infrastructure analysis, reverse-proxy credential relay mechanics, and official remediation of an aggressive **Voice Phishing (Vishing) and Smishing** campaign targeting European digital banking and FinTech users (specifically impersonating **Revolut**).
 
@@ -29,7 +16,6 @@ Threat actors leveraged international **SIP VoIP Caller ID spoofing** to inject 
 > Following investigative disclosures reported by [Financiarul.ro](https://financiarul.ro/tehnologie/revolut-a-divulgat-date-sensibile-ale-unor-clienti-dupa-solicitari/) and [TechCrunch](https://techcrunch.com/2026/09/12/revolut-confirms-customer-data-breach-through-fake-government-requests/), Revolut confirmed that sensitive customer dossiers and KYC records were disclosed to an unauthorized third party following fraudulent requests sent from a compromised government agency domain.
 > 
 > **Why Vishing Will Persist & Escalate:** Threat rings now possess verified user phone numbers, full names, dates of birth, residential addresses, transaction histories, and government ID scans (passports/licenses). Rather than untargeted spray-and-pray robocalls, attackers can stage **hyper-personalized spear-vishing calls**, citing real balance amounts, past merchants, and identity details to deceive even technically literate users into authorizing 3DS prompts or transfer approvals.
-
 
 ```text
 /cyber/revolut-vishing-forensics/
@@ -42,19 +28,9 @@ Threat actors leveraged international **SIP VoIP Caller ID spoofing** to inject 
 └── takedown.md               # Post-incident takedown verification and infrastructure remediation
 ```
 
----
-
-<div align="center">
-
 ## 2. Attack Lifecycle & Infrastructure Architecture
 
-</div>
-
-<div align="center">
-
 ### 2.1 Attack Sequence & Real-Time Credential Relay
-
-</div>
 
 ```mermaid
 sequenceDiagram
@@ -82,13 +58,7 @@ sequenceDiagram
     Relay->>Attacker: Confirms successful cashout to mule / mixer wallet
 ```
 
----
-
-<div align="center">
-
 ### 2.2 Attack Lifecycle & Incident Response Workflow
-
-</div>
 
 ```mermaid
 flowchart TD
@@ -122,31 +92,19 @@ flowchart TD
     end
 ```
 
----
-
-<div align="center">
-
 ## 3. Threat Persistence Analysis: Revolut Government-Domain Breach & KYC Exfiltration (September 2026)
-
-</div>
 
 On September 12, 2026, financial and cybersecurity investigative outlets ([Financiarul.ro](https://financiarul.ro/tehnologie/revolut-a-divulgat-date-sensibile-ale-unor-clienti-dupa-solicitari/), citing [TechCrunch](https://techcrunch.com/2026/09/12/revolut-confirms-customer-data-breach-through-fake-government-requests/)) confirmed that **Revolut suffered an external data breach**, disclosing sensitive customer records and KYC archives to an unauthorized third party. This development provides critical intelligence explaining why voice phishing (vishing) operations targeting Revolut users remain persistent, recurring, and exceptionally dangerous.
 
-<div align="center">
-
 ### 3.1 Breach Anatomy & Government Impersonation Vector
 
-</div>
 - **Ingress Mechanism:** Threat actors executed an advanced external social engineering attack by compromising or spoofing the email domain of a legitimate government/law enforcement agency.
 - **Fraudulent Information Requests:** The adversary submitted counterfeit legal/regulatory data requests (subpoenas / law enforcement information requests - LEIR). Believing the requests originated from a genuine regulatory body, Revolut personnel disclosed unredacted customer records.
 - **Remediation Actions Taken:** Revolut severed communication, blocked the offending email address upon detecting the fraud, notified affected users, and alerted relevant law enforcement and data protection regulators. Revolut stated that core banking ledgers and customer funds were not directly accessed.
 - **Target Profiling:** On-chain intelligence specialist and crypto researcher **ZachXBT** revealed that the compromised cohort heavily centered on **High-Net-Worth Individuals (HNWI)** and active crypto/FinTech asset holders.
 
-<div align="center">
-
 ### 3.2 Compromised Telemetry & Exfiltrated Datasets
 
-</div>
 The data exfiltrated directly equips fraud rings with the exact intelligence required to execute high-conviction social engineering:
 
 | Exfiltrated Data Category | Specific Compromised Telemetry | Weaponization in Vishing Operations |
@@ -157,49 +115,28 @@ The data exfiltrated directly equips fraud rings with the exact intelligence req
 | **Biometric Verification** | Verification selfies and liveness check captures | Exploited for fraudulent account creation on third-party crypto and fiat off-ramps. |
 | **Banking & Financial Metadata** | Official account statements, recent transaction history, card activity records | Operators quote real past transactions ("Did you authorize €120 at X?"), completely bypassing victim skepticism. |
 
-<div align="center">
-
 ### 3.3 The Causal Link: Why Vishing Will Persist and Escalate
 
-</div>
 The availability of this exfiltrated database fundamentally alters the threat model for Revolut users:
 1. **From Cold Calling to Precision Spear-Vishing:** Standard vishing relies on unverified cold dials with generic scripts. Armed with exfiltrated transaction history and verified KYC details, attackers conduct hyper-targeted spear-vishing, greeting targets by their full name and quoting exact account details.
 2. **Neutralizing Fraud Awareness:** Modern banking users are trained to be suspicious of callers who lack account context. When a caller recites the victim's partial passport number, date of birth, and recent merchant charges, the psychological defense barrier collapses.
 3. **Infrastructure Re-spawning:** While specific disposable phishing domains (`.xyz`, `.top`) are continuously sinkholed and taken down, the exfiltrated offline database remains in the hands of threat actors. Attackers can provision new disposable infrastructure and continue dialing victims indefinitely.
 
----
-
-<div align="center">
-
 ## 4. Deep-Dive Technical Findings
-
-</div>
-
-<div align="center">
 
 ### 4.1 SIP Telephony Exploitation & CLI Spoofing
 
-</div>
 - **P-Asserted-Identity Manipulation**: The adversary routed outbound traffic through unauthenticated international SIP trunk providers that permit raw injection into the `P-Asserted-Identity`, `Remote-Party-ID`, and `From` SIP headers.
 - **National Number Masking**: The campaign injected Romanian mobile number allocations matching the `0749-XXX-XXX` prefix block to exploit regional trust.
 - **Audio Engineering**: Threat operators operated from call centers with synthesized corporate background noise (subtle keyboard typing, simulated multi-operator murmur) to manufacture legitimacy and discourage out-of-band verification.
 
-<div align="center">
-
 ### 4.2 Dynamic Phishing Architecture & Defensive Evasion
 
-</div>
 1. **Multi-Hop Redirection**: Victims received SMS shortlinks resolving through intermediate HTTP 302 redirect chains to prevent static domain reputation flagging.
 2. **Device-Specific Fingerprinting**: The ingress reverse-proxy inspected incoming `User-Agent` headers. Desktop crawlers, automated threat analysis sandboxes, and cloud ASN IP ranges received generic HTTP 404 or connection resets. Mobile WebKit and Android Chrome clients were routed to the active phishing DOM.
 3. **Bi-Directional WebSocket Relay**: Stolen payment cards were submitted automatically to real financial merchant endpoints. When 3DS challenges or in-app push verifications were issued, the phishing backend dynamically injected an identical verification modal into the victim's browser within $<3$ seconds.
 
----
-
-<div align="center">
-
 ## 5. Indicators of Compromise (IoCs)
-
-</div>
 
 | Indicator Type | Value / Identifier | Threat Context |
 | :--- | :--- | :--- |
@@ -212,13 +149,7 @@ The availability of this exfiltrated database fundamentally alters the threat mo
 | **Target Application** | Revolut (Retail & Business accounts) | Impersonated brand and victim ecosystem. |
 | **Breach Reference** | `TechCrunch / Financiarul.ro (12 Sept 2026)` | Upstream government-impersonation data disclosure incident. |
 
----
-
-<div align="center">
-
 ## 6. MITRE ATT&CK Matrix Mapping
-
-</div>
 
 | Tactic | Technique ID | Technique Name | Operational Context |
 | :--- | :--- | :--- | :--- |
@@ -229,13 +160,7 @@ The availability of this exfiltrated database fundamentally alters the threat mo
 | **Credential Access** | `T1556` | **Modify Authentication Process** | Real-time interception and relay of 3DS SMS OTP and push notifications. |
 | **Impact** | `T1499` | **Financial Fraud / Account Takeover** | Immediate execution of SEPA Instant transfers to money mule networks. |
 
----
-
-<div align="center">
-
 ## 7. Official Revolut Advisory & Security Guidance
-
-</div>
 
 Following our formal disclosure report, Revolut provided official acknowledgement and security directives for public educational documentation (detailed in [`revolut-response.md`](revolut-response.md)):
 
@@ -247,32 +172,16 @@ Following our formal disclosure report, Revolut provided official acknowledgemen
 > 4. **Prohibit Remote Access Software**: Never download remote desktop tools (AnyDesk, TeamViewer, RustDesk) at the request of an inbound caller.
 > 5. **Verify Strictly In-App**: In-app chat is the only authoritative, end-to-end authenticated support channel.
 
----
-
-<div align="center">
-
 ## 8. Defense-in-Depth Homelab Correlation
-
-</div>
 
 This investigation directly feeds detection engineering rules across the homelab infrastructure:
 - **OPNsense Gateway (`192.168.1.1`):** Unbound DNS sinkholing (`0.0.0.0`) of all identified phishing domains and newly registered `.xyz` / `.top` FinTech typosquatting patterns.
 - **Suricata IDS/IPS:** Ingress packet inspection for known WebSocket credential-relay signatures and suspicious HTTP redirection headers.
 - **Wazuh SIEM (LXC 106):** Automated alerting on mobile device DNS queries resolving against high-risk disposable TLDs.
 
----
-
-<div align="center">
-
 ## 9. Practical Security Guidelines: DOs and DON'Ts
 
-</div>
-
-<div align="center">
-
 ### WHAT TO DO (DOs) - Immediate Defensive Actions
-
-</div>
 
 | Recommended Action | Detailed Operational Procedure |
 | :--- | :--- |
@@ -282,13 +191,7 @@ This investigation directly feeds detection engineering rules across the homelab
 | **4. Report spoofed caller numbers to your national CSIRT** | Submit the spoofed phone numbers, timestamps, and received SMS links to national cyber authorities (e.g., [DNSC](https://dnsc.ro) via `alerte@dnsc.ro`). |
 | **5. Enable Biometric Authentication & In-App Security** | Require FaceID / Fingerprint authorization for every outbound transaction and card detail view within your banking apps. |
 
----
-
-<div align="center">
-
 ### WHAT NOT TO DO (DON'Ts) - Critical Mistakes to Avoid
-
-</div>
 
 | Critical Mistake | Threat Impact & Hazard |
 | :--- | :--- |

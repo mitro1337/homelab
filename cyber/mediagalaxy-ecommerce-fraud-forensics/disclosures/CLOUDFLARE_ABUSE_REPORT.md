@@ -1,8 +1,4 @@
-<div align="center">
-
 # Cloudflare Abuse & Infrastructure Phishing Takedown Request
-
-</div>
 
 **Case File Reference:** `SEC-2026-ECOM-005`  
 **Recipient Authority:** Cloudflare Abuse, Trust & Safety Team (`abuse@cloudflare.com`)  
@@ -12,21 +8,7 @@
 **Investigator:** `@stefanutc1`  
 **Operational Status:** Formally Submitted & Tracked
 
-<div align="center">
-
-[![Abuse Desk](https://img.shields.io/badge/Authority-Cloudflare%20Trust%20%26%20Safety-orange.svg?style=flat&logo=cloudflare)](#)
-[![Threat Class](https://img.shields.io/badge/Category-Financial%20Phishing%20%26%20Brand%20Theft-red.svg?style=flat&logo=securityscorecard)](#)
-[![National CSIRT](https://img.shields.io/badge/Correlated%20Ticket-DNSC%20%23178465-blue.svg?style=flat&logo=shield)](DNSC_TAKEDOWN_CONFIRMATION_178465.md)
-
-</div>
-
----
-
-<div align="center">
-
 ## 1. Formal Incident Notification Statement
-
-</div>
 
 Dear Cloudflare Trust & Safety / Abuse Team,
 
@@ -36,13 +18,7 @@ The primary malicious domain operating as the command, control, and multi-tenant
 - **`yiyangsaas.com`** (Cloudflare Proxy IP: `104.16.145.247`, `104.16.146.247`)
 - **Associated Phishing Ingress:** `mediagalaxy.voetbalshop-nlco.com`
 
----
-
-<div align="center">
-
 ## 2. Infrastructure Architecture & Threat Telemetry
-
-</div>
 
 ```mermaid
 flowchart LR
@@ -52,11 +28,8 @@ flowchart LR
     ORIGIN -->|"Harvests Credit Card Telemetry"| FRAUD["Debit Card Settlement: morvethemi london (~21 EUR)"]
 ```
 
-<div align="center">
-
 ### 2.1. The "Smoking Gun" TLS Certificate Pivot
 
-</div>
 Direct TLS handshakes on the Cloudflare front-end edge serving `mediagalaxy.voetbalshop-nlco.com` returned a Subject Alternative Name (SAN) and Common Name (CN) pointing directly to:
 ```text
 Common Name (CN): yiyangsaas.com
@@ -65,26 +38,14 @@ Issuer: Cloudflare Inc ECC CA-3
 ```
 WHOIS analysis indicates `yiyangsaas.com` is registered through **eName Technology Co., Ltd.** based in Yunnan, China, operating continuously as an underground SaaS kit for fraudulent online shopping storefronts.
 
----
-
-<div align="center">
-
 ## 3. Violations of Cloudflare Terms of Service (ToS)
-
-</div>
 
 This operation engages in direct violations of Cloudflare's Acceptable Use Policy:
 1. **Phishing & Brand Impersonation:** Unlawful cloning of Romanian retail trademark **Media Galaxy** (Altex România S.A.).
 2. **Financial Theft:** Unauthorized card charges generated via rogue merchant aggregator accounts (`morvethemi london`).
 3. **Malicious Cloaking:** Deploying fake HTTP 200 maintenance screens to bypass automated security crawlers.
 
----
-
-<div align="center">
-
 ## 4. Action Requested
-
-</div>
 
 We formally request that Cloudflare Trust & Safety:
 1. Immediately suspend Cloudflare proxying and caching services for the domain **`yiyangsaas.com`** and its subdomains.

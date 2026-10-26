@@ -1,20 +1,10 @@
-<div align="center">
-
 # DNSC Official Incident Notification / Notificare Incident de Securitate Cibernetică
-
-</div>
 
 **Autoritate:** Directoratul Național de Securitate Cibernetică (DNSC)  
 **Clasificare:** TLP:CLEAR  
 **Tip Incident:** Phishing, Fraudă Electronică, Spoofing Retail  
 
----
-
-<div align="center">
-
 ## Versiunea in Limba Romana (Original)
-
-</div>
 
 **Subiect:** Notificare Incident de Securitate Cibernetică / Phishing și Fraudă E-Commerce – Fals Media Galaxy  
 **Prioritate:** Urgentă / Risc Ridicat  
@@ -23,21 +13,15 @@ Către Directoratul Național de Securitate Cibernetică (DNSC),
 
 Prin prezenta, dorim să semnalăm o campanie activă de înșelăciune informatică (phishing și social engineering) care afectează consumatorii din România, folosind în mod fraudulos identitatea vizuală a retailerului Media Galaxy.
 
-<div align="center">
-
 ### Indicatori Tehnici Compleți ai Incidentului (IoC-uri):
 
-</div>
 Pentru protejarea utilizatorilor și blocarea infrastructurii atacatorilor, vă punem la dispoziție toate domeniile și subdomeniile identificate în campanie:
 - **Subdomeniu principal de phishing / reclamă TikTok:** `mediagalaxy.voetbalshop-nlco.com` (găzduit pe o infrastructură olandeză compromisă).
 - **Domeniu e-mail de confirmare scam:** `noreply@email.worvixglobal.com` (înregistrat în SUA pe 08.02.2025) cu adresa de răspuns suspectă `brekerfurught@outlook.com`.
 - **Infrastructură backend / CDN centralizată:** `yiyangsaas.com` (ascuns în spatele Cloudflare, înregistrat la 12.09.2023).
 
-<div align="center">
-
 ### Impact și Mod de Operare:
 
-</div>
 Victimele sunt atrase prin prețuri false, introducând datele cardurilor bancare (procesate fraudulos prin debitări directe pe carduri de debit/credit bancare). Pagubele raportate per victimă se ridică la aproximativ 21 de euro, campania vizând colectarea frauduloasă de fonduri și date financiare.
 
 Vă transmitem acești indicatori în vederea analizării și emiterii eventualelor avertismente publice specifice pentru protejarea utilizatorilor români în fața acestei rețele de scam.
@@ -45,13 +29,7 @@ Vă transmitem acești indicatori în vederea analizării și emiterii eventuale
 Cu stimă,  
 **Echipa de Analiză și Răspuns la Incidente**
 
----
-
-<div align="center">
-
 ## English Translation
-
-</div>
 
 **Subject:** Cybersecurity Incident Notification / Phishing and E-Commerce Fraud – Media Galaxy Brand Impersonation  
 **Priority:** Urgent / High Risk  
@@ -60,21 +38,15 @@ To the National Cyber Security Directorate (DNSC - Romania),
 
 We hereby report an active cyber deception and social engineering campaign targeting Romanian citizens, fraudulent using the visual and brand identity of major electronics retailer Media Galaxy.
 
-<div align="center">
-
 ### Technical Indicators of Compromise (IoCs):
 
-</div>
 To facilitate infrastructure takedown and protect internet users, we submit the following identified campaign assets:
 - **Primary Phishing / Sponsored TikTok Landing Subdomain:** `mediagalaxy.voetbalshop-nlco.com` (hosted on hijacked/aged Dutch infrastructure).
 - **Scam Order Confirmation Email Relay:** `noreply@email.worvixglobal.com` (registered in the US on 2025-02-08) with suspicious reply-to address `brekerfurught@outlook.com`.
 - **Centralized Backend / CDN Infrastructure:** `yiyangsaas.com` (proxied behind Cloudflare, registered 2023-09-12).
 
-<div align="center">
-
 ### Impact and Threat Assessment:
 
-</div>
 Victims are lured with counterfeit pricing and enter sensitive debit/credit card credentials (processed directly against legitimate retail bank debit/credit cards). Direct losses average approximately €21 per victim. The infrastructure is configured for persistent recurring harvesting and account takeover lures.
 
 We submit these findings for ingestion into national threat intelligence feeds and the issuance of public security advisories to safeguard consumers.
@@ -82,17 +54,10 @@ We submit these findings for ingestion into national threat intelligence feeds a
 Respectfully,  
 **Incident Analysis & Response Team**
 
----
-
-<div align="center">
-
 ## Official Resolution & Response / Rezolutie Oficiala
-
-</div>
 
 - **Ticket ID:** `[D.N.S.C. #178465]`  
 - **Received:** September 18, 2026, 11:22 EEST  
 - **Authority:** Directoratul Național de Securitate Cibernetică (DNSC) – Direcția Generală Operațiuni Tehnice  
 - **Status:** Investigation Completed & Enforced – Threat infrastructure officially published and blacklisted on the national PNRISC Blacklist ([`blacklist.dnsc.ro`](https://blacklist.dnsc.ro/)) on September 18, 2026 under classification *Impersonation* (`dm.voetbalshop-nlco.com`, `gonser.voetbalshop-nlco.com`).  
 - **Full Dossier (RO / EN):** See [`DNSC_RESPONSE_178465.md`](./DNSC_RESPONSE_178465.md).
-

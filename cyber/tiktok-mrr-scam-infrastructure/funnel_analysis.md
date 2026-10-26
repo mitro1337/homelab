@@ -1,21 +1,11 @@
-<div align="center">
-
 # Technical Teardown: Social Video Algorithmic Funnels & Synthetic Media Generation
-
-</div>
 
 **Case File Reference:** `SEC-2025-MRR-001`  
 **Classification:** `TLP:CLEAR`  
 **Investigation Scope:** Short-Form Video Algorithmic Exploitation, AI Voice Cloning, High-Velocity In-App Browser Funnel  
 **Target Ecosystem:** TikTok FYP (For You Page) Recommendation Engine, CapCut Automation, Stan.store Checkout
 
----
-
-<div align="center">
-
 ## 1. Executive Metric Summary
-
-</div>
 
 | Dimension | Telemetry & Observational Metric | Operational Context |
 | :--- | :--- | :--- |
@@ -25,13 +15,7 @@
 | **Target Demographic** | Students, stay-at-home parents, Eastern European / Balkans | Economically vulnerable users seeking remote income |
 | **Financial Threshold** | \$497.00 USD (Anchored against fake \$1,997 valuation) | Non-refundable digital license under Master Resell Rights |
 
----
-
-<div align="center">
-
 ## 2. Algorithmic Exploitation Mechanics on Short-Form Feeds
-
-</div>
 
 The Master Resell Rights (MRR) phenomenon relies on reverse-engineering the algorithmic mechanics of the TikTok recommendation engine to achieve mass reach without advertising expenditure.
 
@@ -57,32 +41,20 @@ flowchart TD
     end
 ```
 
-<div align="center">
-
 ### 2.1. The 6-Second Retention Loop Trigger
 
-</div>
 TikTok's recommendation engine heavily weights **Watch Time** and **Video Completion Rate**. Threat actors craft videos strictly between **5 and 7 seconds** in length:
 - The video displays a wall of text that takes 8 to 10 seconds to read.
 - As the user reads the text, the 6-second video loops in the background.
 - This creates an artificial completion rate exceeding **130–150%**, tricking the recommendation algorithm into classifying the content as exceptionally engaging and pushing it to thousands of new feeds.
 
-<div align="center">
-
 ### 2.2. Multi-Account Swarm Automation
 
-</div>
 Operators do not manage single personal profiles. They deploy distributed swarms:
 - 5 to 10 throwaway TikTok profiles managed via residential rotating proxies or 4G/5G mobile dongles to bypass IP velocity limits.
 - Automated Python/Selenium or Appium scripts handle bulk scheduling, uploading, and tag injection (`#digitalmarketing`, `#sidehustle2026`, `#makemoneyonline`, `#mrr`).
 
----
-
-<div align="center">
-
 ## 3. In-App Browser to Landing Page Conversion Chain
-
-</div>
 
 When a victim clicks the link in the TikTok profile bio, the navigation occurs within the sandboxed **TikTok In-App Webview** rather than the device's native browser (Safari or Chrome):
 
@@ -100,20 +72,11 @@ When a victim clicks the link in the TikTok profile bio, the navigation occurs w
    └── 1-Click Payment Settlement: Apple Pay / Google Pay / Stripe Connect
 ```
 
-<div align="center">
-
 ### Forensic Timing Analysis
 
-</div>
 By leveraging digital wallets (Apple Pay / Google Pay) integrated directly into the webview, the temporal gap between initial video impression and irrevocable financial authorization is compressed to **less than 45 seconds**. This eliminates the reflective cognitive buffer that typically prompts consumers to conduct independent web searches or scam verification.
 
----
-
-<div align="center">
-
 ## 4. Detection Signatures & Indicators
-
-</div>
 
 1. **Audio Fingerprinting:** Videos utilizing identical ElevenLabs speech-synthesis model audio files across diverse profile handles.
 2. **Metadata Invariance:** Video files possessing identical FFMPEG encoding profiles and aspect ratios (`1080x1920`, 30fps, 5.8s duration).

@@ -1,8 +1,4 @@
-<div align="center">
-
 # Forensic Investigation Methodology & Traffic Interception Log
-
-</div>
 
 **Case File Reference:** `SEC-2026-TASK-003`  
 **Classification:** `TLP:CLEAR`  
@@ -10,13 +6,7 @@
 **Primary Analyst:** `@stefanutc1`  
 **Platform Architecture:** Vue.js / Vite SPA Frontend, PHP / Laravel REST API Backend, Nginx Web Server
 
----
-
-<div align="center">
-
 ## 1. Laboratory Environment & Containment Protocol
-
-</div>
 
 To safely reverse-engineer the fraudulent platform without exposing local host assets, operational telemetry, or corporate network identities, an isolated sandbox environment was provisioned:
 
@@ -28,24 +18,15 @@ flowchart LR
     BURP --> WAN["Target Platform Infrastructure<br/>Cloudflare CDN / Origin Server"]
 ```
 
-<div align="center">
-
 ### Sandbox Specifications
 
-</div>
 - **Hypervisor:** Proxmox VE 9.2 (`pve_primary_x64`, `192.168.1.132`).
 - **Guest OS:** Kali Linux 2026.1 (64-bit Rolling Release, 2 vCPUs, 4GB RAM).
 - **Network Isolation:** Bound strictly to `vmbr1` (CyberLab isolated bridge) with NAT routing; direct Layer-2 communication to production LAN (`vmbr0`, `192.168.1.0/24`) and Active Directory forest is permanently dropped by OPNsense firewall packet filters.
 - **Client Emulation:** Chromium browser running inside a temporary sandboxed profile (`--incognito --disable-sync --user-data-dir=/tmp/burp_profile`).
 - **Egress Routing:** Multi-hop WireGuard VPN tunnel terminating in Western Europe to mask analyst residential ISP IP space.
 
----
-
-<div align="center">
-
 ## 2. Multi-Stage Investigation Workflow
-
-</div>
 
 ```text
 [ Phase 1: Static Reconnaissance ] 
@@ -67,28 +48,15 @@ flowchart LR
   └── Input sanitization auditing on registration parameters (SQLi surface)
 ```
 
----
-
-<div align="center">
-
 ## 3. Burp Suite Interception Setup & Telemetry Capture
-
-</div>
-
-<div align="center">
 
 ### 3.1. Proxy Configuration
 
-</div>
 - **Burp Listener:** `127.0.0.1:8080` (Intercepting HTTP/1.1 and HTTP/2).
 - **SSL Pass-through:** Disabled; wildcard CA certificate imported into Chromium's NSS database.
 - **Match and Replace Rules:** Configured to highlight sensitive JSON keys (`withdraw`, `token`, `password`, `invite_code`, `defaultCountryCode`).
 
-<div align="center">
-
 ### 3.2. Captured Session Traffic Log
-
-</div>
 
 | Sequence | HTTP Method | Target Endpoint | HTTP Status | Response Size | Primary Observation |
 | :---: | :---: | :--- | :---: | :---: | :--- |
@@ -101,13 +69,7 @@ flowchart LR
 | `007` | `POST` | `/api/v1/task/submit` | `200 OK` | 450 B | Returns manipulated commission calculation (+180 USD phantom balance). |
 | `008` | `POST` | `/api/v1/wallet/withdraw` | `403 Forbidden` | 124 B | Error payload: `"Withdrawal channel currently unavailable. VIP level required."` |
 
----
-
-<div align="center">
-
 ## 4. Key Forensic Observations
-
-</div>
 
 1. **Unauthenticated Configuration Disclosure:**  
    The endpoint `/api/v1/site/config` did not require any bearer token or session cookie. An unauthenticated GET request leaked complete operational parameters, payment method states, customer service links, and geographic targeting rules.
@@ -118,13 +80,7 @@ flowchart LR
 3. **Rate Limiting Deficiencies:**  
    The authentication endpoints `/api/v1/user/auth/login` and `/api/v1/user/auth/register` possessed zero rate limiting, CAPTCHA validation, or exponential backoff mechanisms. Automated enumeration could be conducted at sustained speeds exceeding 40 requests per second without IP blocking by Cloudflare.
 
----
-
-<div align="center">
-
 ## 5. Defensive Verification Checklist
-
-</div>
 
 - [x] Sandboxed VM isolation verified (`vmbr1` traffic cannot traverse to `vmbr0` production LAN).
 - [x] Burp Suite project file encrypted and stored with sanitized credentials.

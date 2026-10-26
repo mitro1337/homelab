@@ -1,20 +1,10 @@
-<div align="center">
-
 # Propunere Investigativă YouTube – Ciprian Lospa / Investigative Content Proposal
-
-</div>
 
 **Destinatar:** Ciprian Lospa (`ciprianlospa`)  
 **Expeditor:** Ștefănuț (`boostcroyale18@gmail.com`)  
 **Tema:** Investigarea tehnică a rețelei chinezești de phishing / reclame sponsorizate TikTok (Media Galaxy Clone)  
 
----
-
-<div align="center">
-
 ## Versiunea in Limba Romana (Original)
-
-</div>
 
 **Subiect:** Propunere material YouTube (analiză material de phishing prin impersonarea Media Galaxy)  
 **De la:** Ștefănuț `<boostcroyale18@gmail.com>`  
@@ -30,13 +20,7 @@ Dacă te interesează detalii tehnice brute, payload-uri, vectori de livrare sau
 
 Spor și o zi frumoasă să ai!
 
----
-
-<div align="center">
-
 ## English Translation
-
-</div>
 
 **Subject:** YouTube Investigation Proposal: Technical Teardown of Media Galaxy Phishing Campaign  
 **From:** Ștefănuț `<boostcroyale18@gmail.com>`  

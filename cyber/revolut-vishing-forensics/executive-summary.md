@@ -1,8 +1,4 @@
-<div align="center">
-
 # Executive Intelligence Briefing: Revolut Vishing & Credential Relay
-
-</div>
 
 **Case File Reference:** `SEC-2026-VISH-002`  
 **Classification:** `TLP:CLEAR`  
@@ -11,31 +7,14 @@
 **Primary Analyst:** `@stefanutc1`  
 **Target Entity:** FinTech Consumers (Revolut Bank UAB) · Romanian Market
 
-<div align="center">
-
-[![Threat Level](https://img.shields.io/badge/Threat%20Level-HIGH-orange.svg?style=flat&logo=alert)](#)
-[![MITRE ATT&CK](https://img.shields.io/badge/MITRE-T1566.004%20%7C%20T1556%20%7C%20T1056.001-blue.svg?style=flat&logo=target)](#)
-[![Remediation Status](https://img.shields.io/badge/Status-Mitigated%20%26%20Takedown%20Closed-brightgreen.svg?style=flat&logo=checkmarx)](#)
-
-</div>
-
----
-
-<div align="center">
-
 ## 1. Incident Overview & Impact Assessment
-
-</div>
 
 On **10 August 2026**, a coordinated Voice Phishing (Vishing) campaign targeted mobile banking consumers across Romania. Threat actors executed automated outbound telephone calls utilizing VoIP Caller ID spoofing within the Romanian mobile allocation space (`0749-XXX-XXX`). 
 
 Impersonating official Revolut Anti-Fraud personnel, the attackers manufactured synthetic panic by claiming the user's account had been compromised by a pending high-value international transaction or negative balance liquidation. Targets were coerced into accessing disposable web phishing portals designed to harvest full card telemetry (Primary Account Numbers, CVVs, expiration dates) and intercept real-time One-Time Passwords (OTP) and 3D Secure verification codes.
 
-<div align="center">
-
 ### Key Executive Metrics
 
-</div>
 | Dimension | Value | Operational Context |
 | :--- | :--- | :--- |
 | **Ingress Channel** | Voice Call (VoIP SIP Trunk) | Spoofed Romanian mobile CLI (`0749-XXX-XXX`) |
@@ -44,13 +23,7 @@ Impersonating official Revolut Anti-Fraud personnel, the attackers manufactured 
 | **Potential Loss** | Uncapped Account Balance | Prevented via rapid call termination and app security triage |
 | **National Escalation** | DNSC & Revolut Fraud Operations | Telephony and infrastructure IoCs submitted for regional blacklisting |
 
----
-
-<div align="center">
-
 ## 2. High-Level Attack Timeline
-
-</div>
 
 ```mermaid
 flowchart TD
@@ -62,25 +35,13 @@ flowchart TD
     T6 --> T7["14:30 UTC — Remediation Complete<br/>Registrar null-routes phishing domain; Revolut security validates account safety"]
 ```
 
----
-
-<div align="center">
-
 ## 3. Threat Actor Profile & Capabilities
-
-</div>
 
 - **Telephony Ingress:** Access to commercial SIP trunking providers with permissive Caller ID header injection (`P-Asserted-Identity`), enabling spoofed domestic mobile prefixes.
 - **Dynamic Web Engineering:** Utilization of automated web scraping frameworks to deploy pixel-perfect clones of Revolut's web authentication and card management interfaces.
 - **Real-Time Token Harvesting:** Deployment of reverse-proxy C2 architectures capable of maintaining active user sessions and requesting two-factor verification codes synchronously while the victim is engaged on the voice call.
 
----
-
-<div align="center">
-
 ## 4. Remediation & Strategic Defense
-
-</div>
 
 1. **Zero-Trust Communication Policy:** Financial institutions never contact customers via voice to request payment card CVVs, SMS one-time passwords, or in-app biometric approvals.
 2. **Homelab Perimeter Defense:** All identified domains and IP addresses were immediately appended to [`cyber/forbidden_domains.txt`](../forbidden_domains.txt) and sinkholed on the OPNsense perimeter router (`192.168.1.134`).

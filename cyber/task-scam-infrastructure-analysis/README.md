@@ -1,24 +1,11 @@
-<div align="center">
-
 # Incident Analysis: Fraudulent Task Scam & Cryptocurrency Drainage Platform
 
-</div>
 **Case File Reference:** `SEC-2026-TASK-003`  
 **Classification:** `TLP:CLEAR`  
 **Investigation Date:** 17 April 2026  
 **Primary Analyst:** `@stefanutc1`  
 
-[![Threat Level](https://img.shields.io/badge/Threat%20Level-CRITICAL-red.svg)](#)
-[![MITRE ATT&CK](https://img.shields.io/badge/MITRE-T1592%20%7C%20T1566%20%7C%20T1027%20%7C%20T1499-blue.svg)](#)
-[![Status](https://img.shields.io/badge/Status-Analyzed%20%26%20Exposed-brightgreen.svg)](#)
-
----
-
-<div align="center">
-
 ## 1. Project Overview
-
-</div>
 
 This repository documents the forensic reverse engineering, backend API inspection, SQL injection surface analysis, and financial entrapment mechanics of a global **Task Scam / Pig Butchering platform**.
 
@@ -35,19 +22,9 @@ Organized fraud syndicates recruit victims through unsolicited WhatsApp, Telegra
 └── investigation.md        # Investigative log and Burp Suite traffic analysis notes
 ```
 
----
-
-<div align="center">
-
 ## 2. Infrastructure Architecture & Fraudulent Data Flow
 
-</div>
-
-<div align="center">
-
 ### 2.1 Technical Entrapment & Drainage Sequence
-
-</div>
 
 ```mermaid
 sequenceDiagram
@@ -76,13 +53,7 @@ sequenceDiagram
     Recruiter->>Victim: Demands secondary 500 USDT deposit with funds permanently lost
 ```
 
----
-
-<div align="center">
-
 ### 2.2 System Component Architecture
-
-</div>
 
 ```mermaid
 flowchart TD
@@ -118,19 +89,10 @@ flowchart TD
     TASK -->|Forces Escrow Deposit| CRYPTO
 ```
 
----
-
-<div align="center">
-
 ## 3. Deep-Dive Technical Findings
-
-</div>
-
-<div align="center">
 
 ### 3.1 Unauthenticated Configuration Disclosure (`/api/v1/site/config`)
 
-</div>
 Interrogating the unauthenticated backend configuration endpoint disclosed the underlying operational rules of the scam infrastructure:
 
 ```json
@@ -156,39 +118,24 @@ Interrogating the unauthenticated backend configuration endpoint disclosed the u
 - **Regional Targeting**: The `defaultCountryCode` parameter enforced `+40`, confirming deliberate targeting of the Romanian domestic market.
 - **Fabricated Authority Feed**: The "AI NEWS" section is driven by static, hardcoded JSON objects with fabricated partner press releases designed to simulate corporate credibility.
 
-<div align="center">
-
 ### 3.2 SQL Injection (SQLi) Surface (`SQLI.md`)
 
-</div>
 - **Vulnerable Entry Points**: The `invite_code` parameter (validated as `888888` or `VIP999`) and the `username` parameter in `POST /api/v1/user/auth/login` exhibited clear signs of unparameterized string concatenation.
 - **Time-Based Inference**: Injecting quote delimiters and sleep primitives produced measurable latency spikes in API responses, indicating unescaped query execution against campaign authentication tables.
 
-<div align="center">
-
 ### 3.3 Hardware Fingerprinting & Anti-Analysis (`fingerprinting.md`)
 
-</div>
 The web client executes aggressive fingerprinting stored in browser `localStorage`:
 - **Canvas / WebGL Fingerprinting**: Renders invisible 2D/3D geometries to compute a unique hardware hash of the client's GPU (identifying the analysis environment's GTX 1050 Ti).
 - **Hardware Architecture**: Queries `navigator.hardwareConcurrency` (2 cores in test sandbox) and OS architecture (`x86_64`).
 - **Device Tracking UUIDs**: Persists `device_id` and `device_send` tokens across sessions to detect security researchers or multi-account bot probes.
 
-<div align="center">
-
 ### 3.4 White-Label Localization Leaks (`ui_manipulation.md`)
 
-</div>
 - Directly altering the `lang` key in browser `localStorage` to `ru` instantly translated the entire interface into Russian (`Регистрация`, `Авторизация`).
 - Despite forcing Russian strings, the regional dialing prefix remained locked to `+40`, conclusively demonstrating that the platform is a commercial off-the-shelf white-label scam kit deployed by Russian-speaking developers and purchased by regional affiliate operators.
 
----
-
-<div align="center">
-
 ## 4. Indicators of Compromise (IoCs)
-
-</div>
 
 | Category | Identifier / Value | Threat Description |
 | :--- | :--- | :--- |
@@ -200,13 +147,7 @@ The web client executes aggressive fingerprinting stored in browser `localStorag
 | **Technology Stack** | Vue.js SPA, PHP Laravel, Vite, Nginx | Signature software bundle used in Task Scam / Pig Butchering kits. |
 | **Regional Dialing Lock**| `+40` (Romania) | Hardcoded national campaign restriction. |
 
----
-
-<div align="center">
-
 ## 5. MITRE ATT&CK Matrix Mapping
-
-</div>
 
 | Tactic | Technique ID | Technique Name | Operational Context |
 | :--- | :--- | :--- | :--- |
@@ -215,31 +156,15 @@ The web client executes aggressive fingerprinting stored in browser `localStorag
 | **Defense Evasion** | `T1027` | **Obfuscated Files or Information** | Minified client bundles, obfuscated UUID tracking, and CDN proxying. |
 | **Impact** | `T1499` | **Financial Extortion / Resource Theft** | Irreversible extortion of cryptocurrency deposits through bogus withdrawal blockers. |
 
----
-
-<div align="center">
-
 ## 6. Defense-in-Depth Homelab Correlation
-
-</div>
 
 - **OPNsense Gateway (`192.168.1.1`):** Ingress DNS sinkholing of disposable Task Scam domains and TRON node API endpoints used by the scam kits.
 - **Suricata IDS:** Alerting on unencrypted HTTP requests matching pattern `/api/v1/site/config` containing `withdrawMethodBank: false`.
 - **Wazuh SIEM (LXC 106):** Correlation of endpoint browser logs connecting to high-risk task domains and tracking UUID exfiltration.
 
----
-
-<div align="center">
-
 ## 7. Practical Security Guidelines: DOs and DON'Ts
 
-</div>
-
-<div align="center">
-
 ### WHAT TO DO (DOs) - Protective Actions
-
-</div>
 
 | Recommended Action | Detailed Instructions |
 | :--- | :--- |
@@ -249,13 +174,7 @@ The web client executes aggressive fingerprinting stored in browser `localStorag
 | **4. Trace blockchain transactions on TRONSCAN** | Export the attacker's TRC-20 deposit address and transaction hashes (`txid`). Check on TRONSCAN / Etherscan to identify exchange deposit clusters (Binance, OKX, Bybit). |
 | **5. File complaints with Exchange Compliance Desks** | If transaction hops reveal funds entering centralized exchanges, immediately submit an emergency fraud report with law enforcement case references to freeze the destination accounts. |
 
----
-
-<div align="center">
-
 ### WHAT NOT TO DO (DON'Ts) - Critical Traps to Avoid
-
-</div>
 
 | Critical Trap | Threat Rationale |
 | :--- | :--- |

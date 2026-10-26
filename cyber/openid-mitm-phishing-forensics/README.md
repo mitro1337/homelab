@@ -1,24 +1,11 @@
-<div align="center">
-
 # Incident Analysis: Adversary-in-the-Middle (AiTM) Attack on Steam OpenID Authentication
 
-</div>
 **Case File Reference:** `SEC-2025-AITM-004`  
 **Classification:** `TLP:CLEAR`  
 **Investigation Date:** 22 November 2025  
 **Primary Analyst:** `@stefanutc1`  
 
-[![Threat Level](https://img.shields.io/badge/Threat%20Level-CRITICAL-red.svg)](#)
-[![MITRE ATT&CK](https://img.shields.io/badge/MITRE-T1566.002%20%7C%20T1204.001%20%7C%20T1557.001%20%7C%20T1098%20%7C%20T1496-blue.svg)](#)
-[![Status](https://img.shields.io/badge/Status-Mitigated%20%26%20Documented-brightgreen.svg)](#)
-
----
-
-<div align="center">
-
 ## 1. Project Overview
-
-</div>
 
 This repository documents the forensic investigation, technical telemetry, and account takeover mechanics of an advanced **Adversary-in-the-Middle (AiTM)** and **Browser-in-the-Middle (BitM)** phishing campaign targeting competitive gaming ecosystems (Counter-Strike 2, Dota 2).
 
@@ -33,19 +20,9 @@ Threat actors distributed spearphishing lures across Discord and Steam community
 └── steam-report.md         # Valve incident report filing and defensive recommendations
 ```
 
----
-
-<div align="center">
-
 ## 2. Attack Lifecycle & Infrastructure Architecture
 
-</div>
-
-<div align="center">
-
 ### 2.1 Browser-in-the-Middle (BitM) & Session Relay Sequence
-
-</div>
 
 ```mermaid
 sequenceDiagram
@@ -70,13 +47,7 @@ sequenceDiagram
     Victim->>Victim: Unaware that account settings and trade queues are compromised
 ```
 
----
-
-<div align="center">
-
 ### 2.2 Attack Lifecycle & Persistence Workflow
-
-</div>
 
 ```mermaid
 flowchart TD
@@ -110,28 +81,16 @@ flowchart TD
     end
 ```
 
----
-
-<div align="center">
-
 ## 3. Deep-Dive Technical Findings
-
-</div>
-
-<div align="center">
 
 ### 3.1 Browser-in-the-Middle (BitM) Mechanics
 
-</div>
 - **In-DOM Window Emulation**: Instead of invoking `window.open()`, which creates an inspectable external operating system window, the phishing script constructs an absolute-positioned HTML container (`<div class="modal-browser">`).
 - **Simulated Chrome / Chromium Shell**: The container features rendered minimize/maximize buttons, a draggable title bar, a counterfeit address bar reading `https://steamcommunity.com/openid/login`, and an interactive green/grey SSL padlock that displays fake certificate details upon clicking.
 - **Address Bar Obfuscation**: The victim never leaves the attacker's origin domain (`cs2-tournament-bracket[.]top`), but visually perceives a legitimate Valve authentication window.
 
-<div align="center">
-
 ### 3.2 Real-Time Session Cookie Relay (`technical-analysis.md`)
 
-</div>
 1. Client-side JavaScript bundles (`main.bundle.js`) intercept form inputs.
 2. Credentials and 2FA tokens are dispatched via asynchronous `fetch()` requests to `/api/v2/auth/steam_callback`.
 3. The backend proxy immediately negotiates an authenticated session against Valve's servers, capturing the high-value session cookies:
@@ -139,22 +98,13 @@ flowchart TD
    - `sessionid`: CSRF prevention token required for state-changing calls.
    - `steamMachineAuth*`: Persistent device authorization tokens.
 
-<div align="center">
-
 ### 3.3 Post-Compromise Persistence & Trade Hijacking
 
-</div>
 1. **Automated Family View Lockout**: The attacker's script immediately activates Steam's parental control feature (**Family View**) using a random 4-digit PIN. This prevents the genuine account owner from revoking authorized sessions, changing credentials, or disabling Steam Guard.
 2. **Steam Web API Key Registration**: The attacker queries `https://steamcommunity.com/dev/apikey` to generate an API key.
 3. **Trade Interception (API Scamming)**: Whenever the victim attempts to trade high-value virtual items with trusted friends or commercial skin marketplaces, the bot detects the pending trade via the API, cancels it instantly, and sends an identical trade request from a cloned imposter profile to siphon the assets.
 
----
-
-<div align="center">
-
 ## 4. Indicators of Compromise (IoCs)
-
-</div>
 
 | Category | Identifier / Value | Threat Description |
 | :--- | :--- | :--- |
@@ -166,13 +116,7 @@ flowchart TD
 | **C2 Endpoints** | `/api/v2/stream/event` | Telemetry and automated session handoff endpoint. |
 | **Stolen Tokens** | `steamLoginSecure`, `sessionid` | Valve authentication session cookies exfiltrated by threat actor. |
 
----
-
-<div align="center">
-
 ## 5. MITRE ATT&CK Matrix Mapping
-
-</div>
 
 | Tactic | Technique ID | Technique Name | Operational Context |
 | :--- | :--- | :--- | :--- |
@@ -183,31 +127,15 @@ flowchart TD
 | **Exfiltration** | `T1048` | **Exfiltration Over C2 Channel** | Stealing session cookies and transmitting them to automated trade bots. |
 | **Impact** | `T1496` | **Resource Hijacking / Inventory Theft** | Automated rerouting of in-game cosmetic item trades to attacker mules. |
 
----
-
-<div align="center">
-
 ## 6. Defense-in-Depth Homelab Correlation
-
-</div>
 
 - **OPNsense Gateway (`192.168.1.1`):** Sinkholing newly registered domains (NRDs) under `.top` and `.com` containing gaming keywords (`cs2`, `tournament`, `steam`, `league`).
 - **Suricata IDS:** Detection signatures flagging HTTP POST traffic directed to `/api/v2/auth/steam_callback`.
 - **Wazuh SIEM (LXC 106):** Alerting on high-volume Discord desktop client DNS queries resolving to unranked external tournament domains.
 
----
-
-<div align="center">
-
 ## 7. Practical Security Guidelines: DOs and DON'Ts
 
-</div>
-
-<div align="center">
-
 ### WHAT TO DO (DOs) - Immediate Defensive Actions
-
-</div>
 
 | Recommended Action | Detailed Instructions |
 | :--- | :--- |
@@ -217,13 +145,7 @@ flowchart TD
 | **4. Deauthorize all devices and rotate passwords** | Go to Steam Settings -> Security -> "Deauthorize all devices", change your account password, and update your Steam Guard authenticator. |
 | **5. Contact Steam Support for Family View lockout** | If threat actors locked your account with a Family View PIN, submit an urgent recovery ticket to Valve Support with proof of original account ownership (e.g. CD keys, original payment card receipts). |
 
----
-
-<div align="center">
-
 ### WHAT NOT TO DO (DON'Ts) - Critical Traps to Avoid
-
-</div>
 
 | Critical Trap | Threat Impact |
 | :--- | :--- |

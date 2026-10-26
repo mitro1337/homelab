@@ -1,57 +1,23 @@
-<div align="center">
-
 # Infrastructure Cybersecurity: Vulnerability & Threat Intelligence Hub
 
-</div>
-
-<div align="center">
-
-[![Classification](https://img.shields.io/badge/Classification-TLP%3ACLEAR-brightgreen.svg?style=flat&logo=securityscorecard)](#)
-[![Max Severity](https://img.shields.io/badge/CVSS%20v3.1-9.8%20CRITICAL-red.svg?style=flat&logo=target)](#)
-[![Target Hypervisors](https://img.shields.io/badge/Hypervisors-Proxmox%20VE%20%7C%20Hyper--V-orange.svg?style=flat&logo=proxmox)](#)
-[![Identity Systems](https://img.shields.io/badge/Ecosystem-Active%20Directory%20Forest-blue.svg?style=flat&logo=windows)](#)
-[![Remediation Status](https://img.shields.io/badge/Remediation-100%25%20Hardening%20Playbooks-brightgreen.svg?style=flat&logo=checkmarx)](#)
-[![Author](https://img.shields.io/badge/Analyst-Moan%C4%83%20%C8%98tef%C4%83nu%C8%9B--Cornel-blue.svg?style=flat&logo=github)](https://github.com/stefanutc1)
-[![University](https://img.shields.io/badge/University-Universitatea%20din%20Craiova%20%C2%B7%20FEAA-0284c7.svg?style=flat&logo=academia)](https://feaa.ucv.ro)
-
-</div>
-
----
-
-<div align="center">
-
 ## Critical Ecosystem CVE Assessments & Hardening Playbooks (Windows & Proxmox VE)
-
-</div>
 
 **Lead Threat Analyst:** Moană Ștefănuț-Cornel ([`@stefanutc1`](https://github.com/stefanutc1))  
 **Academic Affiliation:** Universitatea din Craiova · FEAA — Informatică Economică (2024–2027)  
 **Classification:** TLP:CLEAR / Technical Cyber Threat Intelligence  
 **Scope:** Impact analysis on bare-metal Proxmox VE, Windows Hyper-V, and multi-tier Active Directory Domain Controllers.
 
----
-
-<div align="center">
-
 ## 1. Vulnerability Matrix & Threat Dashboard
-
-</div>
 
 | CVE Identifier | Affected Component | CVSS v3.1 | Vulnerability Class | Infrastructure Impact & Vector | Technical Dossier | Remediation Playbook |
 | :--- | :--- | :---: | :--- | :--- | :---: | :---: |
-| **CVE-2023-54391** | Proxmox VE (`libpve-access-control` < 8.0.4) | **9.8**<br>(Critical) | Authentication Bypass via `tfa-challenge` Parameter | **Hypervisor Root Takeover:** Unauthenticated network attacker bypasses password auth to obtain `root@pam` on `pve_primary_x64` (192.168.1.132); total control over all VMs, containers, and ZFS pools. | [Technical Report](./CVE-2023-54391/report.md) | [Hardening Plan](./CVE-2023-54391/fix.md) |
-| **CVE-2025-57539** | Proxmox VE 8.4 (`pve-manager` / ExtJS GUI) | **5.4**<br>(High Risk) | Stored Cross-Site Scripting (XSS) in U2F Origin Field | **Root Privilege Escalation:** Low-privilege/token operator injects XSS in `datacenter.cfg`. When `root@pam` views Datacenter Options, payload exfiltrates session tokens and issues rogue API keys. | [Technical Report](./CVE-2025-57539/report.md) | [Hardening Plan](./CVE-2025-57539/fix.md) |
-| **CVE-2026-69603**<br>**CVE-2026-80083** | Windows Hyper-V Virtualization Stack | **8.8**<br>(High/Crit) | Out-of-Bounds Write & Use-After-Free in VMBus Synthetic SCSI/Net | **Guest-to-Host Escape:** Compromise of physical Hyper-V host from untrusted VMs; total cross-VM memory & VHDX virtual disk exposure. | [Technical Report](./CVE-2026-69603-CVE-2026-80083/report.md) | [Hardening Plan](./CVE-2026-69603-CVE-2026-80083/fix.md) |
-| **CVE-2026-69730** | Windows DNS Server Service (`dns.exe`) | **9.8**<br>(Critical) | Remote Code Execution via Malformed DNS Record Parsing (Wormable) | **Domain Controller Takeover:** Unauthenticated RCE as `SYSTEM` on `ad2025_vm`, `ad2022_vm`, `ad2019_vm`. Full Active Directory database (`ntds.dit`) dump and Golden Ticket forgery. | [Technical Report](./CVE-2026-69730/report.md) | [Hardening Plan](./CVE-2026-69730/fix.md) |
-| **CVE-2026-69845**<br>**CVE-2026-72979** | Windows DHCP Server Service (`dhcpssvc.dll`) | **9.8**<br>(Critical) | Heap-based Buffer Overflow & Use-After-Free via Option 43/82 | **Subnet Compromise & MitM:** Unauthenticated remote execution via UDP port 67 broadcast; rogue client lease poisoning, DNS redirection, and lateral movement to Domain Controllers. | [Technical Report](./CVE-2026-69845-CVE-2026-72979/report.md) | [Hardening Plan](./CVE-2026-69845-CVE-2026-72979/fix.md) |
-
----
-
-<div align="center">
+| **CVE-2023-54391** | Proxmox VE (`libpve-access-control` < 8.0.4) | **9.8** / (Critical) | Authentication Bypass via `tfa-challenge` Parameter | **Hypervisor Root Takeover:** Unauthenticated network attacker bypasses password auth to obtain `root@pam` on `pve_primary_x64` (192.168.1.132); total control over all VMs, containers, and ZFS pools. | [Technical Report](./CVE-2023-54391/report.md) | [Hardening Plan](./CVE-2023-54391/fix.md) |
+| **CVE-2025-57539** | Proxmox VE 8.4 (`pve-manager` / ExtJS GUI) | **5.4** / (High Risk) | Stored Cross-Site Scripting (XSS) in U2F Origin Field | **Root Privilege Escalation:** Low-privilege/token operator injects XSS in `datacenter.cfg`. When `root@pam` views Datacenter Options, payload exfiltrates session tokens and issues rogue API keys. | [Technical Report](./CVE-2025-57539/report.md) | [Hardening Plan](./CVE-2025-57539/fix.md) |
+| **CVE-2026-69603** / **CVE-2026-80083** | Windows Hyper-V Virtualization Stack | **8.8** / (High/Crit) | Out-of-Bounds Write & Use-After-Free in VMBus Synthetic SCSI/Net | **Guest-to-Host Escape:** Compromise of physical Hyper-V host from untrusted VMs; total cross-VM memory & VHDX virtual disk exposure. | [Technical Report](./CVE-2026-69603-CVE-2026-80083/report.md) | [Hardening Plan](./CVE-2026-69603-CVE-2026-80083/fix.md) |
+| **CVE-2026-69730** | Windows DNS Server Service (`dns.exe`) | **9.8** / (Critical) | Remote Code Execution via Malformed DNS Record Parsing (Wormable) | **Domain Controller Takeover:** Unauthenticated RCE as `SYSTEM` on `ad2025_vm`, `ad2022_vm`, `ad2019_vm`. Full Active Directory database (`ntds.dit`) dump and Golden Ticket forgery. | [Technical Report](./CVE-2026-69730/report.md) | [Hardening Plan](./CVE-2026-69730/fix.md) |
+| **CVE-2026-69845** / **CVE-2026-72979** | Windows DHCP Server Service (`dhcpssvc.dll`) | **9.8** / (Critical) | Heap-based Buffer Overflow & Use-After-Free via Option 43/82 | **Subnet Compromise & MitM:** Unauthenticated remote execution via UDP port 67 broadcast; rogue client lease poisoning, DNS redirection, and lateral movement to Domain Controllers. | [Technical Report](./CVE-2026-69845-CVE-2026-72979/report.md) | [Hardening Plan](./CVE-2026-69845-CVE-2026-72979/fix.md) |
 
 ## 2. Threat Topology & Attack Surface Intersection
-
-</div>
 
 ```mermaid
 graph TD
@@ -103,13 +69,7 @@ graph TD
   OPNsense -.->|"Shielding & DoT Forwarding"| AD2025
 ```
 
----
-
-<div align="center">
-
 ## 3. Remediation Playbooks & Action Guides
-
-</div>
 
 Each vulnerability dossier contains a technical analysis report (`report.md`) and an actionable hardening playbook (`fix.md`):
 
@@ -129,11 +89,5 @@ Each vulnerability dossier contains a technical analysis report (`report.md`) an
    * [Technical Analysis Report (CVE-2026-69845 & CVE-2026-72979)](./CVE-2026-69845-CVE-2026-72979/report.md)
    * [Remediation & Hardening Playbook (Windows DHCP)](./CVE-2026-69845-CVE-2026-72979/fix.md)
 
----
-
-<div align="center">
-
 *Threat Intelligence & Cybersecurity Research · **Moană Ștefănuț-Cornel** (`@stefanutc1`).*  
 *Universitatea din Craiova · Facultatea de Economie și Administrarea Afacerilor (FEAA) · Informatică Economică (2024–2027).*
-
-</div>

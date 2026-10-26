@@ -1,8 +1,4 @@
-<div align="center">
-
 # Case Study: Forensic Investigation of TikTok Digital Marketing Funnels & Recursive Master Resell Rights (MRR) Schemes
-
-</div>
 
 | Field | Value |
 | :--- | :--- |
@@ -13,13 +9,7 @@
 | **Classification** | `TLP:CLEAR` |
 | **Author** | `@stefanutc1` |
 
----
-
-<div align="center">
-
 ## 1. Threat Narrative & Incident Context
-
-</div>
 
 Between June 2025 and April 2026, an extensive forensic evaluation was conducted into automated "faceless" digital marketing funnels operating across social media platforms, with a primary focus on TikTok algorithmic feeds targeting users in Romania, Eastern Europe, and the Balkan region.
 
@@ -31,21 +21,11 @@ Upon post-purchase technical extraction, the delivered package was revealed to c
 
 This model constitutes a classic recursive pyramid scheme disguised as digital education.
 
----
-
-<div align="center">
-
 ## 2. Formal Abuse Escalation & Communications
-
-</div>
 
 Prior to public research archiving, formal abuse notifications were transmitted to the hosting platform's Trust & Safety infrastructure, the underlying payment acquirers, and consumer protection bodies.
 
-<div align="center">
-
 ### Official Abuse Notice Dispatched (Dispatched: Sat, 18 Apr 2026, 21:22:00 EEST)
-
-</div>
 
 ```text
 To: abuse@stan.store, compliance@stan.store
@@ -58,13 +38,7 @@ As a security researcher and student, I have documented how these stores target 
 Failure to act will result in a formal report to Stripe's Integrity Team and the FTC regarding the facilitation of "get-rich-quick" schemes through your platform.
 ```
 
----
-
-<div align="center">
-
 ## 3. Technical Investigation & Funnel Architecture
-
-</div>
 
 ```
 +-------------------------------------------------------------------------+
@@ -98,44 +72,24 @@ Failure to act will result in a formal report to Stripe's Integrity Team and the
 +-------------------------------------------------------------------------+
 ```
 
-<div align="center">
-
 ### Forensic Analysis of Delivered LLM Artifacts
-
-</div>
 
 Extracted PDF metadata and lexical analysis demonstrated that over 94% of the textual content was generated using basic prompt chaining:
 * Default LLM transition markers: *"In conclusion, it is important to remember..."*, *"In today's fast-paced digital world..."*.
 * Zero verifiable citations, code repositories, ad campaign telemetry, or measurable marketing strategies.
 * Synthesized graphic covers generated via mid-tier Canva templates with stock photography.
 
----
-
-<div align="center">
-
 ## 4. Payment Gateway & Merchant Platform Exploitation
-
-</div>
 
 1. **Stripe Connect Sub-Merchant Abuse**: Funnel platforms utilize Stripe Connect onboarding. Because the parent platform acts as the platform provider, individual storefront operators frequently bypass standard underwriting checks and high-risk merchant categorization for digital goods.
 2. **Dispute Evasion Tactics**: Storefronts enforce aggressive "No Refund" policies buried in footer terms, falsely claiming that "instant digital file delivery waives all statutory cooling-off rights under consumer protection laws."
 3. **Multi-Platform Failover**: When accounts are suspended on one payment gateway, operators rapidly switch their Stan.store backend to alternative processors (PayPal, Whop, or crypto checkout widgets).
 
----
-
-<div align="center">
-
 ## 5. Comprehensive Defensive & Prevention Guide: How to Avoid and Combat Digital Marketing Scams
-
-</div>
 
 To protect users, students, and family members from predatory Master Resell Rights and automated LLM digital product funnels, the following technical and operational heuristics must be applied:
 
-<div align="center">
-
 ### A. Immediate Red Flags (Triage Checklist)
-
-</div>
 
 1. **Recursive Product Value ("Sell the Rights to Sell")**:
    If the primary value proposition of an online course or guide is that you get 100% rights to resell the course itself, it is by definition a pyramid-style scheme. Legitimate courses teach specialized technical skills (software development, data analysis, certified cloud security) where value exists independently of reselling the material.
@@ -146,33 +100,19 @@ To protect users, students, and family members from predatory Master Resell Righ
 4. **Vague, Buzzword-Heavy Syllabi**:
    Content outlines that promise "Financial Freedom", "Mindset Mastery", and "Digital Growth Secrets" without providing verifiable curriculum details, instructor credentials, or actionable frameworks.
 
-<div align="center">
-
 ### B. Technical Verification & Due Diligence
-
-</div>
 
 * **Reverse Image & Text Search**: Copy paragraphs from preview pages or promotional materials into search engines or AI detection tools. Over 90% of MRR materials are identical copies of public domain prompt dumps.
 * **Inspect the Hosting & Merchant Chain**: Identify if the vendor operates on an ephemeral single-page checkout (`*.stan.store`, `*.beacons.ai`) without an established company domain, registered fiscal code (CIF/CUI), or physical corporate address.
 
-<div align="center">
-
 ### C. Remediation & Chargeback Protocol
-
-</div>
 
 If a transaction has already occurred:
 1. **Initiate a Bank Chargeback**: Contact your card-issuing bank immediately. Request a chargeback under **Reason Code 4853 (Mastercard: Goods/Services Not Provided or Defective/Not as Described)** or **Visa Condition 13.3 (Not as Described / Deceptive Practices)**. Provide evidence that the content was misrepresented as a genuine training course but constitutes an illicit multi-level resale scheme.
 2. **File PayPal Disputes**: Open a dispute under "Significantly Not As Described" and upload screenshots showing the lack of genuine educational content and the recursive resale requirement.
 3. **Escalate to Regulatory Bodies**: File formal consumer complaints with national consumer protection agencies (ANPC in Romania, FTC in the United States, or the European Consumer Centre Network ECC-Net).
 
----
-
-<div align="center">
-
 ## 6. Regulatory & Legal Frameworks
-
-</div>
 
 * **United States Federal Trade Commission (FTC Act Section 5, 15 U.S.C. § 45)**: Prohibits unfair or deceptive acts or practices in or affecting commerce, specifically targeting get-rich-quick and deceptive multi-level marketing structures.
 * **European Union Directive 2005/29/EC (Unfair Commercial Practices)**: Annex I, Item 14 explicitly bans *"Establishing, operating or promoting a pyramid promotional scheme where a consumer gives consideration for the opportunity to receive compensation that is derived primarily from the introduction of other consumers into the scheme rather than from the sale or consumption of products."*

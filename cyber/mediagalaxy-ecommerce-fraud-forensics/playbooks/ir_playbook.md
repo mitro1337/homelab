@@ -1,20 +1,11 @@
-<div align="center">
-
 # Incident Response Playbook: E-Commerce Fraud & Financial Chargebacks
 
-</div>
 **Standard Operating Procedure (SOP):** IR-SOP-ECOM-004  
 **Target Threat Category:** E-Commerce Brand Spoofing / Social Media Ad Phishing / Unauthorized Financial Transaction  
 **Incident Reference:** `SEC-2026-ECOM-005` (Media Galaxy / TikTok Campaign)  
 **Classification:** `TLP:CLEAR`
 
----
-
-<div align="center">
-
 ## 1. Workflow Architecture & Lifecycle
-
-</div>
 
 ```mermaid
 flowchart TD
@@ -26,13 +17,7 @@ flowchart TD
     F --> G["Post-Incident Review & Threat Intel Sharing"]
 ```
 
----
-
-<div align="center">
-
 ## 2. Phase 1: Identification & Immediate Triage
-
-</div>
 
 1. **Victim Interview & Timeline Reconstruction:**
    - **September 16, 08:17**: Phishing checkout completed via TikTok sponsored ad on `mediagalaxy.voetbalshop-nlco.com`.
@@ -49,13 +34,7 @@ flowchart TD
 2. **Determine Compromise Scope:**
    - Because physical/digital BCR card credentials (PAN, Expiry, CVV) were harvested by the phishing backend, identify whether persistent recurring tokens or pre-authorizations were registered against the account.
 
----
-
-<div align="center">
-
 ## 3. Phase 2: Containment & Financial Lockdown
-
-</div>
 
 1. **Freeze and Block the Compromised Card via George BCR:**
    - Open **George BCR App -> Cards**.
@@ -69,28 +48,16 @@ flowchart TD
    - Because the attacker sent phishing lures attempting password resets (`Screenshot 2026-09-16 at 20.47.47.png`, code `586571`), revoke all active sessions on the victim's Google/Gmail account.
    - Enable FIDO2 / Passkey or Google Authenticator.
 
----
-
-<div align="center">
-
 ## 4. Phase 3: Financial Remediation & Chargeback Guide
-
-</div>
-
-<div align="center">
 
 ### Visa & Mastercard Chargeback Rules
 
-</div>
 Under **Visa Dispute Condition 13.1 (Merchandise/Services Not Received)** and **Mastercard Reason Code 4853 (Recurring Transaction / No Delivery / Fraud)**:
 - Cardholders are entitled to a full chargeback when merchandise was ordered from a merchant that fails to deliver or represents an impersonated business.
 - Since the merchant descriptor displayed on the statement (`morvethemi london`) does not represent a legitimate retail business and the site disappeared into "maintenance" (`v***L The website is under maintenance`), the transaction qualifies under fraud.
 
-<div align="center">
-
 ### BCR Chargeback & Payment Dispute Filing Procedure
 
-</div>
 1. Call **BCR Support** (*2227 / +4021.407.42.00) or visit a local BCR branch.
 2. Formally report an unauthorized commercial transaction resulting from an e-commerce phishing scam.
 3. Cite the exact transaction: `~21 EUR` on 16 September 2026 under merchant descriptor `morvethemi london`.
@@ -103,11 +70,8 @@ Under **Visa Dispute Condition 13.1 (Merchandise/Services Not Received)** and **
 6. Request and record the official claim / case registration number (Număr de înregistrare dosar de refuz la plată).
 7. Submit the dispute statement:
 
-<div align="center">
-
 #### Dispute Narrative Template (English):
 
-</div>
 ```text
 I am requesting an immediate chargeback under Visa/Mastercard Fraud Condition 13.1 / Code 4853 for the transaction of [AMOUNT] EUR processed on 16 September 2026 under the merchant descriptor "morvethemi london". 
 
@@ -116,11 +80,8 @@ The transaction was initiated following a fraudulent sponsored advertisement on 
 Immediately after payment, the vendor failed to provide any valid merchant tracking, the website went offline displaying "under maintenance", and follow-up emails originated from disposable phishing domains (worvixglobal.com, info.mailapp-fly.com) using an unrelated Gmail address (MaryxBeckb96@gmail.com). The merchant descriptor is fabricated and does not correspond to any registered business entity. Evidence screenshots including email headers and WHOIS records are attached.
 ```
 
-<div align="center">
-
 #### Dispute Narrative Template (Romanian):
 
-</div>
 ```text
 Solicit refuz la plată (chargeback) conform reglementărilor Visa/Mastercard pentru tranzacția în valoare de [SUMA] EUR din data de 16 Septembrie 2026 către comerciantul fraudulos înregistrat cu descrierea "morvethemi london".
 
@@ -129,13 +90,7 @@ Tranzacția a fost efectuată în urma accesării unei reclame sponsorizate pe T
 Imediat după procesarea plății, site-ul a fost oprit (afișând mesaj de mentenanță), iar confirmările de comandă au sosit de pe adrese false (noreply@email.worvixglobal.com, Reply-To: MaryxBeckb96@gmail.com), fără nicio dovadă de livrare a vreunui bun. Comerciantul nu există în mod legal. Anexez capturile de ecran cu antetele mesajelor și investigația tehnică a infrastructurii.
 ```
 
----
-
-<div align="center">
-
 ## 5. Phase 4: Eradication & Takedown Notifications
-
-</div>
 
 Send standardized abuse reports to the relevant infrastructure providers:
 
@@ -150,13 +105,7 @@ Send standardized abuse reports to the relevant infrastructure providers:
 | **DNSC (CERT-RO)** | Entire Campaign | `alerts@dnsc.ro` | National phishing alert & ISP sinkholing in Romania |
 | **Altex / Media Galaxy Legal** | Brand Impersonation | `juridic@mediagalaxy.ro` | Brand protection & legal escalation |
 
----
-
-<div align="center">
-
 ## 6. Phase 5: Post-Incident Hardening & Lessons Learned
-
-</div>
 
 1. Enforce strict virtual card discipline:
    - For all social media / ad-driven purchases, utilize single-use disposable virtual cards with custom spend limits.

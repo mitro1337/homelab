@@ -1,25 +1,12 @@
-<div align="center">
-
 # Incident Analysis: TikTok Marketing Funnels & Recursive Master Resell Rights (MRR) Schemes
 
-</div>
 **Case File Reference:** `SEC-2025-MRR-001`  
 **Classification:** `TLP:CLEAR`  
 **Primary Incident Date:** 14 June 2025 (Abuse Dispatched: 18 April 2026)  
 **Primary Analyst:** `@stefanutc1`  
 **Evidence Custody Hash (SHA-256):** `4b91f0c2a83e1679901d8e1245ba890123ef456789abcdef0123456789abcdef`  
 
-[![Threat Level](https://img.shields.io/badge/Threat%20Level-HIGH%20%2F%20PREDATORY-orange.svg)](#)
-[![MITRE ATT&CK](https://img.shields.io/badge/MITRE-T1566%20%7C%20T1204%20%7C%20T1657-blue.svg)](#)
-[![Status](https://img.shields.io/badge/Status-Investigated%20%26%20Reported-brightgreen.svg)](#)
-
----
-
-<div align="center">
-
 ## 1. Project Overview
-
-</div>
 
 This repository contains the complete forensic investigation, lexical text analysis, payment gateway exploitation study, and legal abuse escalations regarding deceptive **Master Resell Rights (MRR)** and "Digital Marketing Accelerator" funnels operating across TikTok and social media ecosystems.
 
@@ -35,19 +22,9 @@ Threat actors deploy automated "faceless" content channels powered by AI voiceov
 └── prevention_guide.md       # Consumer protection guide and banking dispute chargeback protocols
 ```
 
----
-
-<div align="center">
-
 ## 2. Funnel Architecture & Attack Lifecycle
 
-</div>
-
-<div align="center">
-
 ### 2.1 Recursive Pyramid Conversion Sequence
-
-</div>
 
 ```mermaid
 sequenceDiagram
@@ -71,13 +48,7 @@ sequenceDiagram
     TikTok->>Downstream: Re-broadcasts scheme, propagating the recursive pyramid
 ```
 
----
-
-<div align="center">
-
 ### 2.2 Four-Stage Funnel Architecture
-
-</div>
 
 ```mermaid
 flowchart TD
@@ -109,40 +80,22 @@ flowchart TD
     end
 ```
 
----
-
-<div align="center">
-
 ## 3. Deep-Dive Technical Findings
-
-</div>
-
-<div align="center">
 
 ### 3.1 Lexical & Forensic Analysis of Delivered Course Artifacts
 
-</div>
 Forensic evaluation of the digital documents delivered upon payment revealed clear indicators of automated synthesis:
 - **Lexical Transition Markers**: Consistent occurrence of boilerplate conversational transitions (*"In today's fast-paced digital environment..."*, *"Furthermore, it is essential to remember that..."*).
 - **Absence of Actionable Telemetry**: Zero verifiable ad campaign data, production code snippets, API integration scripts, or empirical marketing analytics.
 - **Graphic Assets**: Synthesized book cover templates originating from public domain Canva layout bundles.
 
-<div align="center">
-
 ### 3.2 Payment Gateway & Merchant Platform Exploitation
 
-</div>
 - **Stripe Connect Shielding**: The operators leverage platform aggregators (e.g., Stan.store) using Stripe Connect. Because onboarding occurs under the master platform's merchant umbrella, individual sellers frequently evade the rigorous underwriting normally applied to high-risk digital products and multi-level marketing (MLM).
 - **Cooling-Off Rights Evasion**: Checkout footers incorporate clauses claiming that accessing the digital download waives statutory consumer return rights, directly contravening European consumer protection mandates.
 - **Merchant Switching**: In response to high chargeback ratios, operators switch endpoints to alternate payment providers (Whop, PayPal, or crypto payment buttons).
 
----
-
-<div align="center">
-
 ## 4. Formal Abuse & Regulatory Escalations
-
-</div>
 
 Prior to public research publication, formal disclosures were transmitted to platform Trust & Safety teams, upstream payment aggregators, and regulatory authorities:
 
@@ -151,38 +104,19 @@ Prior to public research publication, formal disclosures were transmitted to pla
 - **US Federal Trade Commission (FTC)**: Filing regarding violations of **15 U.S.C. § 45 (FTC Act Section 5)**.
 - **European Consumer Authorities**: Documenting infringements of **EU Directive 2005/29/EC (Unfair Commercial Practices, Annex I Item 14)** prohibiting pyramid promotional schemes.
 
----
-
-<div align="center">
-
 ## 5. Consumer Protection & Chargeback Playbook
-
-</div>
 
 For consumers seeking financial recovery after purchasing deceptive Master Resell Rights courses:
 
-<div align="center">
-
 ### 5.1 Card Dispute Grounds & Codes
 
-</div>
 1. **Mastercard Reason Code 4853**: *Goods/Services Not Provided or Defective/Not as Described*.
 2. **Visa Condition 13.3**: *Not as Described / Deceptive Practices*.
 3. **Primary Argument**: The vendor marketed a comprehensive educational training program in digital marketing, but delivered generic, unedited AI prompt dumps whose sole utility is recruiting secondary victims into an unlicensed resale scheme.
 
----
-
-<div align="center">
-
 ## 6. Practical Guidelines: DOs and DON'Ts
 
-</div>
-
-<div align="center">
-
 ### WHAT TO DO (DOs) - Protective Heuristics
-
-</div>
 
 | Recommended Action | Operational Guidance |
 | :--- | :--- |
@@ -191,13 +125,7 @@ For consumers seeking financial recovery after purchasing deceptive Master Resel
 | **3. Request Immediate Bank Chargeback** | If scammed, contact your issuing bank immediately and dispute the charge citing **Mastercard 4853 / Visa 13.3**. |
 | **4. Report Fraudulent Ads on Social Media** | Flag the video promoting the funnel under "Scams and Fraud" -> "Deceptive Financial Scheme". |
 
----
-
-<div align="center">
-
 ### WHAT NOT TO DO (DON'Ts) - Critical Traps
-
-</div>
 
 | Critical Trap | Threat Rationale |
 | :--- | :--- |

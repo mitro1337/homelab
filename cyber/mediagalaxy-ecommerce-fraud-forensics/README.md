@@ -1,24 +1,11 @@
-<div align="center">
-
 # Incident Analysis: E-Commerce Brand Spoofing & Phishing Campaign (Media Galaxy)
 
-</div>
 **Case File Reference:** `SEC-2026-ECOM-005`  
 **Classification:** `TLP:CLEAR`  
 **Investigation Date:** 16 September 2026  
 **Primary Analyst:** `@stefanutc1`  
 
-[![Threat Level](https://img.shields.io/badge/Threat%20Level-CRITICAL-red.svg)](#)
-[![MITRE ATT&CK](https://img.shields.io/badge/MITRE-T1566%20%7C%20T1056%20%7C%20T1657-blue.svg)](#)
-[![Status](https://img.shields.io/badge/Status-Mitigated%20%26%20DNSC%20Enforced-brightgreen.svg)](#)
-
----
-
-<div align="center">
-
 ## 1. Project Overview
-
-</div>
 
 This repository contains the complete forensic investigation, evidence analysis, Indicators of Compromise (IoCs), Incident Response (IR) playbooks, and perimeter defense configurations for an e-commerce fraud campaign uncovered in September 2026. 
 
@@ -56,19 +43,9 @@ The threat actors impersonated the Romanian retail giant **Media Galaxy** via sp
 └── csirt_cache.json                   # Resilient fallback cache for upstream threat feeds
 ```
 
----
-
-<div align="center">
-
 ## 2. Attack Lifecycle & Incident Response Action Timeline
 
-</div>
-
-<div align="center">
-
 ### 2.1 Technical Attack Kill Chain (Sequence Diagram)
-
-</div>
 
 ```mermaid
 sequenceDiagram
@@ -91,13 +68,7 @@ sequenceDiagram
     Mail->>Victim: Sends fake order [229942-177457] & reset code 586571
 ```
 
----
-
-<div align="center">
-
 ### 2.2 Incident Response Action Lifecycle & Forensic Audit Trail
-
-</div>
 
 ```mermaid
 flowchart TD
@@ -152,19 +123,10 @@ flowchart TD
 | **September 18, 11:22** | **Authority Response** | Romanian National CSIRT ([DNSC](https://dnsc.ro)) | Official ticket response received under `[D.N.S.C. #178465]`: formal investigation launched, reported domain evaluated for inclusion in the national PNRISC Blacklist (`https://blacklist.dnsc.ro/`). |
 | **September 18, ~18:00** | **National Blacklist Enforcement** | DNSC PNRISC Blacklist Gateway (`https://blacklist.dnsc.ro/`) | **CONFIRMED & ENFORCED**: DNSC officially lists and blocks the `voetbalshop-nlco.com` threat infrastructure (`dm.voetbalshop-nlco.com`, `gonser.voetbalshop-nlco.com`) under classification **Impersonation**; threat pushed live to national browser extension database and our automated CI/CD blocklist. |
 
----
-
-<div align="center">
-
 ## 3. Quick Start & Execution
-
-</div>
-
-<div align="center">
 
 ### Generating the Executive PDF Report
 
-</div>
 ```bash
 # Set up virtual environment and install ReportLab
 python3 -m venv .venv
@@ -176,11 +138,8 @@ python3 reports/generate_report.py
 ```
 The output file `reports/cybersecurity_report_final.pdf` will be compiled immediately.
 
-<div align="center">
-
 ### Deploying Network Blocklists to OPNsense (`192.168.1.1`)
 
-</div>
 ```bash
 # Inspect plain domain list
 cat ioc/domains.txt
@@ -189,21 +148,12 @@ cat ioc/domains.txt
 # Follow the complete step-by-step instructions in configs/opnsense_blocklist_guide.md
 ```
 
-<div align="center">
-
 ### Reviewing the Chargeback Playbook
 
-</div>
 For victims or fraud handlers filing chargeback claims with BCR or issuing banks, refer to:
 [playbooks/ir_playbook.md](playbooks/ir_playbook.md)
 
----
-
-<div align="center">
-
 ## 4. Key Indicators of Compromise (IoCs)
-
-</div>
 
 - **Phishing FQDN:** `mediagalaxy.voetbalshop-nlco.com`
 - **Compromised Base Domain:** `voetbalshop-nlco.com`
@@ -216,26 +166,14 @@ For victims or fraud handlers filing chargeback claims with BCR or issuing banks
 - **Fraud Order ID:** `[229942-177457]`
 - **Phishing OTP Lure:** `586571`
 
----
-
-<div align="center">
-
 ## 5. Defense-in-Depth Homelab Correlation
-
-</div>
 
 This incident analysis feeds directly into the homelab's central security architecture:
 - **OPNsense Gateway (`192.168.1.1`):** Unbound DNS sinkholing and Suricata IDS alerts.
 - **Wazuh SIEM (Proxmox LXC 150):** Log ingestion and alert correlation on endpoint mail and DNS requests.
 - **Documentation Platform:** Published in the [Homelab Datacenter Architecture](https://github.com/stefanutc1/infrastructure).
 
----
-
-<div align="center">
-
 ## 6. Official Disclosures & Investigation Communications
-
-</div>
 
 All external incident notifications, abuse filings, and public advocacy disclosures are tracked in the [`disclosures/`](disclosures/) directory:
 
@@ -247,45 +185,26 @@ All external incident notifications, abuse filings, and public advocacy disclosu
 - **Google Safe Browsing Report ([EN](disclosures/GOOGLE_SAFE_BROWSING_REPORT.md)):** Domain blacklisting request for `mediagalaxy.voetbalshop-nlco.com`.
 - **Cloudflare Abuse Report ([EN](disclosures/CLOUDFLARE_ABUSE_REPORT.md)):** Infrastructure takedown request targeting `yiyangsaas.com`.
 
----
-
-<div align="center">
-
 ## 7. Visual Forensic Evidence Gallery
-
-</div>
 
 Below is the complete photographic and forensic dossier documenting the anatomy of this e-commerce phishing campaign across its entire lifecycle:
 
-<div align="center">
-
 ### Phase 1: Lure Ingestion & Brand Impersonation
 
-</div>
 | Sponsored TikTok Campaign | Cloned Media Galaxy Subdomain |
 | :---: | :---: |
 | ![TikTok Lure](evidence/Screenshot%202026-09-17%20at%2001.14.25.png) | ![Phishing Landing](evidence/08_phishing_subdomain_landing_chinese_notice.png) |
 | *Deceptive sponsored ad offering 4 RON detergent* | *Subdomain `mediagalaxy.voetbalshop-nlco.com` displaying fake maintenance screen* |
 
----
-
-<div align="center">
-
 ### Phase 2: Technical Fingerprinting & Chinese SaaS Telemetry
 
-</div>
 | Browser DevTools & Storage Inspection | DOM Source Code (`zh-CN` Language Tag) |
 | :---: | :---: |
 | ![DevTools Storage](evidence/09_browser_devtools_storage_inspection.png) | ![DOM zh-CN](evidence/10_dom_source_zh_cn_login_module.png) |
 | *Inspection of session tokens, tracking cookies & telemetry* | *Source code revealing Chinese SaaS frontend boilerplate and login modules* |
 
----
-
-<div align="center">
-
 ### Phase 3: Fraudulent Order Confirmation & Spoofed Communications
 
-</div>
 | Phishing Email Confirmation | Spoofed Media Galaxy Footer |
 | :---: | :---: |
 | ![Order Confirmation](evidence/05_order_confirmation_worvixglobal.png) | ![Spoofed Footer](evidence/06_email_footer_spoofed_mediagalaxy.png) |
@@ -296,25 +215,15 @@ Below is the complete photographic and forensic dossier documenting the anatomy 
 | ![DKIM SPF](evidence/04_dkim_spf_mailappfly.png) | ![Email Headers](evidence/03_phishing_email_headers_mailappfly.png) |
 | *Cryptographic signatures passing Gmail filters via `mailapp-fly.com`* | *MTA delivery trace showing relay through bulk mailing services* |
 
----
-
-<div align="center">
-
 ### Phase 4: Financial Exfiltration & Secondary Lures
 
-</div>
 | Bank Statement & Merchant Descriptor | Secondary Password Reset / Verification Lure |
 | :---: | :---: |
 | ![Merchant Descriptor](evidence/14_merchant_descriptor_investigation.png) | ![Password Reset Lure](evidence/23_fake_password_reset_lure.png) |
 | *BCR statement charge of ~21 EUR under `morvethemi london`* | *Follow-up email attempting secondary account takeover with code `586571`* |
 
----
-
-<div align="center">
-
 ### Phase 5: OSINT, Certificate Pivoting & Threat Actor Attribution
 
-</div>
 | WorvixGlobal Facade Shell | WHOIS Records (NameSilo Parked Domain) |
 | :---: | :---: |
 | ![WorvixGlobal Shell](evidence/01_worvixglobal_fake_portal.png) | ![WHOIS WorvixGlobal](evidence/02_whois_worvixglobal.png) |
@@ -330,57 +239,32 @@ Below is the complete photographic and forensic dossier documenting the anatomy 
 | ![China Registrant](evidence/21_whois_yiyangsaas_china_registrant.png) | ![eName Registrar](evidence/22_whois_yiyangsaas_ename_registrar.png) |
 | *Attribution of `yiyangsaas.com` to threat actors in Yunnan, China* | *Domain registered via eName Technology Co. on 12.09.2023* |
 
----
-
-<div align="center">
-
 ### Phase 6: Regulatory Authority Resolution & National PNRISC Blacklisting
 
-</div>
 | DNSC Official PNRISC Blacklist Confirmation |
 | :---: |
 | ![DNSC Blacklist Confirmation](evidence/25_dnsc_blacklist_voetbalshop_block.png) |
 | *Official DNSC Blacklist Gateway (`https://blacklist.dnsc.ro/`) confirming `dm.voetbalshop-nlco.com` & `gonser.voetbalshop-nlco.com` published and blacklisted under Impersonation* |
 
----
-
-<div align="center">
-
 ### Phase 7: Cross-Platform Campaign Link (Facebook Sponsored Ad Lure & Banking Fraud)
 
-</div>
 | Facebook Sponsored Ad Lure: Philips LatteGO 4300 (51 lei) | Facebook Victim Transaction: Dreamwardrobe.online (-49.72 RON) |
 | :---: | :---: |
 | ![Facebook Sponsored Ad Lure](evidence/27_facebook_sponsored_ad_mediagalaxy_coffee_machine_51lei.png) | ![Facebook Victim Dreamwardrobe](evidence/26_facebook_victim_dreamwardrobe_coffee_machine_fraud.png) |
 | *Deceptive sponsored ad in Facebook feed impersonating Media Galaxy with a fake warehouse closure pretext ("închiderea depozitelor noastre din România"), advertising a Philips LatteGO 4300 for only 51 lei (~10 EUR) with a spoofed yellow shelf price tag and "Aflați mai multe" CTA.* | *Victim lured on Facebook by the coffee machine clearance ad, resulting in an unauthorized payment debited as `dreamwardrobe.online` (-49.72 RON / 9.99 EUR) on 07/08.02.2025 — the exact calendar date on which campaign domain `worvixglobal.com` was created.* |
 
----
-
-<div align="center">
-
 ### Phase 8: Post-Exploitation Stalling & Fake Logistics Infrastructure
 
-</div>
 | Delivery Notice Header: StridewiseTrading | Fake Tracking Portal Lure (TrackParcel.de) | Threat Actor Support Drop Inbox |
 | :---: | :---: | :---: |
 | ![Delivery Notice Header](evidence/28_delivery_notice_email_header_stridewise.png) | ![Fake Tracking Body](evidence/29_delivery_notice_email_body_tracking_lure.png) | ![Support Drop Inbox](evidence/30_delivery_notice_email_body_outlook_drop_inbox.png) |
 | *Automated delivery notification (`Order Delivery Notice 229942-177457`) dispatched from `noreply@email.stridewisetrading.com` on Sept 18, 2026, flagged as Spam by Gmail heuristics.* | *Email body tying directly to fraudulent order `229942-177457`, providing a fabricated tracking number `EURO20260918100004917` routed to fake tracking portal `https://www.trackparcel.de/` with artificial 10-20 business day delivery window and customs clearance warnings.* | *Direct forensic link to campaign IoC drop inbox: `brekerfurught@outlook.com`. The stall tactic deliberately pacifies the victim to run down the card issuer's immediate fraud dispute window.* |
 
----
-
-<div align="center">
-
 ## 8. Practical Security Guidelines: What to Do & What NOT to Do (DOs and DON'Ts)
-
-</div>
 
 These recommendations are designed for consumers and victims of e-commerce phishing schemes, as well as security practitioners, incident responders, and their families.
 
-<div align="center">
-
 ### WHAT TO DO (DOs) - Immediate Protective Actions
-
-</div>
 
 | Recommended Action | Detailed Instructions & Practical Procedure |
 | :--- | :--- |
@@ -391,13 +275,7 @@ These recommendations are designed for consumers and victims of e-commerce phish
 | **5. Preserve forensic artifacts & evidence** | Do not delete confirmation emails or purge browser cache/history. Capture full-page screenshots of the advertisements, banking transaction records, and export raw RFC 822 email source headers (including SPF, DKIM, and DMARC verification headers) for law enforcement submission. |
 | **6. Report the incident to National CSIRTs and Law Enforcement** | Submit the technical indicators and details to your national cybersecurity agency (e.g., the Romanian National Cyber Security Directorate at [dnsc.ro](https://dnsc.ro) / `alerte@dnsc.ro`) and file a formal cybercrime report with local police authorities (Cybercrime Investigation Division). |
 
----
-
-<div align="center">
-
 ### WHAT NOT TO DO (DON'Ts) - Critical Mistakes to Avoid
-
-</div>
 
 | Common Critical Mistake | Threat Rationale & Why It Is Hazardous |
 | :--- | :--- |
@@ -408,16 +286,9 @@ These recommendations are designed for consumers and victims of e-commerce phish
 | **DO NOT fall for absurdly discounted prices** | Legitimate e-commerce retailers never sell name-brand household goods or high-value electronics for **4 RON (~$0.84) or 10 RON**. Discounts exceeding 90-95% advertised via sponsored social media feeds are exclusively bait for harvesting financial credentials. |
 | **DO NOT use primary physical debit cards on unverified websites** | For online purchases on unfamiliar platforms, **strictly utilize single-use disposable virtual cards** with strict spending limits rather than exposing primary physical debit or salary accounts. |
 
----
-
-<div align="center">
-
 ### Key Incident Response Takeaways
-
-</div>
 
 1. **Immediate Containment:** Freeze/terminate the compromised card, dispute the transaction via your issuing bank under official chargeback protocols, and preserve raw forensic email headers (`.eml`/`.msg`).
 2. **Zero-Trust Browsing:** Never finalize transactions within in-app social media webviews; always break out to external browsers to inspect the Fully Qualified Domain Name (FQDN).
 3. **No Threat Engagement:** Never click fake unsubscribe links or communicate with drop mailboxes (`*@outlook.com`, `*@gmail.com`), as this flags the victim as an active candidate for targeted social engineering.
 4. **Credential Hygiene:** Rotate any compromised or reused passwords immediately and enforce application-based Multi-Factor Authentication (MFA) across all critical accounts.
-

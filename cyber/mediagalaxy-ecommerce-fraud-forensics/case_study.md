@@ -1,8 +1,5 @@
-<div align="center">
-
 # Case Study: E-Commerce Brand Impersonation & Chinese SaaS Fraud Funnel (Media Galaxy Spoof via TikTok)
 
-</div>
 **Case Reference:** `SEC-2026-ECOM-005`  
 **Classification:** `TLP:CLEAR`  
 **Incident Date:** 16 September 2026  
@@ -11,27 +8,14 @@
 **Financial Loss Impact:** ~21 EUR (~112 RON) via BCR (Banca Comercială Română) Debit Card  
 **Status:** Incident Resolved & Remediated, Domain Inactive (DNSC Takedown Confirmed on 21.09.2026, `[D.N.S.C. #178465]`), Card Reissued & Chargeback Filed  
 
-
----
-
-<div align="center">
-
 ## 1. Context & Incident Overview
-
-</div>
 
 In September 2026, a targeted e-commerce fraud operation weaponized sponsored short-form video advertisements on TikTok to impersonate **Media Galaxy**, one of Romania's largest national consumer electronics retailers. Consumers were lured with unrealistic promotional pricing on high-demand tech items, routed through in-app mobile browsers into a fraudulent web property hosted at:
 `https://mediagalaxy.voetbalshop-nlco.com`
 
 Upon submitting card details, the victim was debited ~21 EUR under the obscure foreign descriptor **`morvethemi london`**. The phishing portal instantly became inaccessible, displaying a deceptive `"maintenance"` status screen. Follow-up automated emails containing fake order tokens (`[229942-177457]`) and password reset verification codes (`586571`) were dispatched from attacker-operated mail relays to maintain cover and attempt secondary account takeover.
 
----
-
-<div align="center">
-
 ## 2. Technical Findings & Forensics
-
-</div>
 
 1. **Subdomain Masking on Compromised Infrastructure:**  
    The attackers leveraged a secondary domain (`voetbalshop-nlco.com`) ostensibly created to clone a Dutch football sportswear portal (`voetbalshop.nl`). The subdomain `mediagalaxy` was established to spoof the genuine brand.
@@ -50,13 +34,7 @@ Upon submitting card details, the victim was debited ~21 EUR under the obscure f
 6. **Cross-Platform Facebook Lure & Infrastructure Correlation (`dreamwardrobe.online` / Media Galaxy Espresso Machine Ad):**  
    Additional forensic intelligence captured the exact deceptive ad creative deployed on Facebook (Evidence Item 27) and the corresponding banking charge (Evidence Item 26). Threat actors ran sponsored ads on Facebook impersonating Media Galaxy, claiming that due to *"warehouse closures in Romania"* (*"închiderea depozitelor noastre din România"*), a Philips LatteGO 4300 espresso machine was on clearance for only "51 lei". When victims clicked *"Aflați mai multe"*, they were routed through Facebook's in-app webview to a phishing checkout. One victim's card was charged ~9.99 EUR / 49.72 RON under shell descriptor `dreamwardrobe.online` (categorized as apparel/fashion) on **7–8 February 2025** — aligning to the exact calendar date on which the threat actor registered the core infrastructure and mail domain `worvixglobal.com` (08.02.2025).
 
----
-
-<div align="center">
-
 ## 3. Indicators of Compromise (IoCs)
-
-</div>
 
 | Indicator | Type | Threat Role | Action |
 | :--- | :--- | :--- | :--- |
@@ -78,13 +56,7 @@ Upon submitting card details, the victim was debited ~21 EUR under the obscure f
 | `104.21.14.99` | IPv4 | Phishing Proxy (Cloudflare) | L3/L4 Firewall Drop |
 | `morvethemi london` | String | Fraudulent Card Descriptor | Bank Dispute / Chargeback |
 
----
-
-<div align="center">
-
 ## 4. Remediation & Incident Response Execution
-
-</div>
 
 1. **Compromised Card Lockdown:** The victim immediately froze and blocked the compromised card via George BCR, requesting an emergency card cancellation and reissuance to eliminate recurring unauthorized charges.
 2. **Chargeback Dispute:** A formal dispute was initiated with BCR support under Visa/Mastercard Rule 4853 / Condition 13.1 (Merchant Fraud / Misrepresentation), requesting a complete clawback of the ~21 EUR fee.
@@ -93,4 +65,3 @@ Upon submitting card details, the victim was debited ~21 EUR under the obscure f
    - Deployed custom Suricata IDS rules (`sid:1000951-1000956`) on WAN and LAN interfaces.
    - Created Floating firewall reject rules for C2 proxy IPs.
 4. **Takedown Submissions & Authority Enforcement:** Abuse reports submitted to Cloudflare, NameSilo, eName Technology, Zoho Mail, Google, and the Romanian National Cyber Security Directorate (DNSC - `alerts@dnsc.ro`). Following formal ticket confirmation **`[D.N.S.C. #178465]`**, the Directorate completed technical validation on **September 18, 2026** and officially published the malicious campaign infrastructure (`dm.voetbalshop-nlco.com`, `gonser.voetbalshop-nlco.com`) to the national **PNRISC Blacklist** (`https://blacklist.dnsc.ro/`) under classification *Impersonation*, triggering blocking nationwide. Subsequently, on **September 21, 2026 (06:29 EEST)**, DNSC issued official confirmation that the apex domain `voetbalshop-nlco.com` has been completely neutralized and rendered non-functional, formally closing the investigation.
-

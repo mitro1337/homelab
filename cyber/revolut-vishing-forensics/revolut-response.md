@@ -1,8 +1,4 @@
-<div align="center">
-
 # Revolut Security Operations Acknowledgment & Official Guidance
-
-</div>
 
 **Case File Reference:** `SEC-2026-VISH-002`  
 **Classification:** `TLP:CLEAR`  
@@ -11,13 +7,7 @@
 **Incident Reference Date:** 10 August 2026  
 **Status:** Documented, Triaged & Confirmed by Institution
 
----
-
-<div align="center">
-
 ## 1. Operational Overview
-
-</div>
 
 Following the active voice phishing and real-time credential relay attempt identified on **10 August 2026**, forensic telemetry, spoofed telephone allocations, and phishing infrastructure indicators were securely transmitted to **Revolut Fraud Operations & Threat Intelligence**.
 
@@ -33,36 +23,20 @@ flowchart LR
     GUIDANCE --> CLOSED
 ```
 
----
-
-<div align="center">
-
 ## 2. Institutional Response Statement
-
-</div>
 
 > *"It's wonderful to see the cybersecurity community working together to keep people safe. Your report and feedback are highly appreciated and have been documented.*
 >
 > *As requested, here is an official security warning you can use for your repository..."*
 
----
-
-<div align="center">
-
 ## 3. Official Institutional Advisory: Protection Against Vishing & Impersonation Scams
-
-</div>
 
 > [!IMPORTANT]
 > **Revolut Security Warning: How to Protect Yourself from Vishing and Scams**
 >
 > Voice phishing, or *"vishing"*, is a severe form of social engineering where threat actors place calls impersonating authority figures — such as Revolut anti-fraud employees, law enforcement officers, or technical support specialists. The call is calculated to induce extreme urgency, cognitive overload, and immediate panic to manipulate the victim into executing dangerous actions.
 
-<div align="center">
-
 ### Golden Rules of Protection
-
-</div>
 
 1. **No Unannounced Outbound Calls:**  
    Revolut will **never** call you out of the blue. Legitimate telephone consultations are only initiated if booked and confirmed via the official application in advance.
@@ -77,13 +51,7 @@ flowchart LR
 6. **Line Clearing & Hang-Up Buffer:**  
    On landlines or certain VoIP lines, threat actors can keep the connection open even after the receiver hangs up. Wait at least 10 minutes or place outbound verification calls from an independent, secondary device.
 
----
-
-<div align="center">
-
 ## 4. Remediation Confirmation
-
-</div>
 
 - **Target Account Status:** Card PAN rotated and reissued; biometric multi-factor authentication re-verified.
 - **Threat Indicators:** Phone prefix blocks and phishing hosting IP space registered within regional fraud monitoring databases.

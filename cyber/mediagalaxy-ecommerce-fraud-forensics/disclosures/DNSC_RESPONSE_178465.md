@@ -1,8 +1,4 @@
-<div align="center">
-
 # DNSC Official Incident Response / Răspuns Oficial Sesizare Incident [D.N.S.C. #178465]
-
-</div>
 
 **Autoritate:** Directoratul Național de Securitate Cibernetică (DNSC)  
 **Departament:** Direcția Generală Operațiuni Tehnice  
@@ -16,14 +12,7 @@
 **Stare Inițială:** CONFIRMAT & BLOCAT – Inclus în PNRISC Blacklist (18 Septembrie 2026)  
 **Stare Finală:** **REZOLVAT / DEZAFECTAT (TAKEDOWN CONFIRMED)** – Domeniul nu mai este funcțional; sesizare închisă oficial (21 Septembrie 2026)  
 
-
----
-
-<div align="center">
-
 ## Versiunea in Limba Romana (Text Oficial Primit)
-
-</div>
 
 **De la:** DNSC `<alerts@dnsc.ro>`  
 **Data:** 18 Septembrie 2026, 11:22  
@@ -56,13 +45,7 @@
 > ----------------------------------------------  
 > **Directoratul Național de Securitate Cibernetică**
 
----
-
-<div align="center">
-
 ## English Translation (Official Incident Response)
-
-</div>
 
 **From:** DNSC `<alerts@dnsc.ro>`  
 **Date:** September 18, 2026, 11:22 EEST  
@@ -95,13 +78,7 @@
 > ----------------------------------------------  
 > **National Cyber Security Directorate (DNSC - Romania)**
 
----
-
-<div align="center">
-
 ## Technical Assessment & Integration
-
-</div>
 
 1. **Incident Validation & Ticketing:**
    - The filing submitted on September 16, 21:21 EEST was officially accepted, assigned Ticket ID **`[D.N.S.C. #178465]`**, and escalated to the *General Directorate of Technical Operations*.
@@ -113,13 +90,7 @@
      - **Recommendation 4 & 6 (Card & Credentials lockdown):** Executed on Sept 16, 20:00 (card frozen) & Sept 17, 18:00 (BCR bank dispute opened under Visa/Mastercard Rule 4853).
      - **Recommendation 1-3 & 7 (Infrastructure & DNS Sinkholing):** Threat vectors sinkholed to `0.0.0.0` on OPNsense (`192.168.1.1`) and forwarded to Wazuh SIEM.
 
----
-
-<div align="center">
-
 ## Verificare & Confirmare Blocare Oficială PNRISC (18 Septembrie 2026)
-
-</div>
 
 În cursul serii de 18 Septembrie 2026, specialiștii Directoratului Național de Securitate Cibernetică (DNSC) au finalizat analiza și au adăugat oficial infrastructura de fraudă semnalată în baza națională de date **PNRISC Blacklist** ([`https://blacklist.dnsc.ro/`](https://blacklist.dnsc.ro/)):
 
@@ -132,16 +103,8 @@
 - **Efect Operativ**: Extensia oficială de browser DNSC blochează în timp real tentativele de acces la nivel național.
 - **Sincronizare Automată Depozit**: Scriptul nostru de sincronizare zilnică ([`scripts/sync_forbidden_domains.py`](../../../scripts/sync_forbidden_domains.py)) a extras noile intrări direct din portalul DNSC, actualizând [`cyber/dnsc_blacklist.json`](../dnsc_blacklist.json) și lista de blocare [`cyber/forbidden_domains.txt`](../forbidden_domains.txt).
 
----
-
-<div align="center">
-
 ## 6. Rezoluție Finală: Confirmare Dezafectare Domeniu & Închidere Sesizare (21 Septembrie 2026)
-
-</div>
 
 La data de **21 Septembrie 2026, ora 06:29 EEST**, DNSC a transmis confirmarea oficială a finalizării demersurilor operative și închiderea tichetului `[D.N.S.C. #178465]`:
 * **Concluzie Oficială:** Domeniul apex `voetbalshop-nlco[.]com` nu mai este funcțional (neutralizat/takedown complet).
 * **Documentație Dedicată:** Textul complet în română și engleză este documentat în [`DNSC_TAKEDOWN_CONFIRMATION_178465.md`](./DNSC_TAKEDOWN_CONFIRMATION_178465.md).
-
-
