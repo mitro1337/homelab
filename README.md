@@ -102,8 +102,5 @@ Some directories contain proof-of-concept or intentionally vulnerable material. 
 
 Templates and examples are provided for some tools, including Terraform variable files and service environment files. Supply local credentials through the mechanism expected by the specific tool. Do not commit passwords, API tokens, private keys, generated state files, or populated environment files.
 
-## License
-
-This repository is distributed under the GNU Affero General Public License v3.0. See [`LICENSE`](LICENSE).
 
 
