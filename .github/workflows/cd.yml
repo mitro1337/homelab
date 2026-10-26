@@ -97,59 +97,7 @@ jobs:
           done
           echo "Finished processing Dependabot pull requests."
 
-  build-and-deploy-web:
-    name: Build & Deploy Web
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Setup Node.js 22
-        uses: actions/setup-node@v7
-        with:
-          node-version: '22'
-          cache: 'npm'
-          cache-dependency-path: web/package-lock.json
-
-      - name: Install Dependencies
-        run: |
-          cd web
-          npm ci || npm install --legacy-peer-deps
-
-      - name: Build Frontend
-        env:
-          GITHUB_PAGES: 'true'
-        run: |
-          cd web
-          npm run build
-          touch dist/.nojekyll
-          cp dist/index.html dist/404.html
-
-      - name: Deploy to gh-pages Branch
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./web/dist
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: web/dist
-
-  deploy-pages-environment:
-    name: Deploy to GitHub Pages
-    needs: build-and-deploy-web
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+  
 
   sync-readme:
     name: Sync Metrics, Currency Conversions & Cyber Blacklist
