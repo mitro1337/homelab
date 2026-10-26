@@ -36,7 +36,7 @@ This document describes the physical host hardware, compute chassis, power deliv
 
 <div align="center">
 
-### Host: `proxmox` (Node 1 — Primary Hypervisor `pve_primary_x64`)
+### Host: `pve`
 
 </div>
 
@@ -71,7 +71,7 @@ This document describes the physical host hardware, compute chassis, power deliv
 
 <div align="center">
 
-### Host: `openmediavault` (Node 2 — Storage NAS `omv_nas`)
+### Host: `openmediavault`
 
 </div>
 
@@ -93,7 +93,7 @@ This document describes the physical host hardware, compute chassis, power deliv
 
 <div align="center">
 
-### Host: `k8s-node-04` (Node 4 — Edge Kubernetes Worker)
+### Host: `kubernetes` 
 
 </div>
 
