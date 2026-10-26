@@ -10,7 +10,7 @@
 [![Port](https://img.shields.io/badge/Port-2283%2FTCP-blue.svg?style=flat)](#)
 [![Storage](https://img.shields.io/badge/Storage-NVMe%20Local--LVM%20%2B%20NAS-059669.svg?style=flat&logo=zfs)](#)
 [![Machine Learning](https://img.shields.io/badge/ML%20Search-CLIP%20%2B%20Facial%20Recognition-8b5cf6.svg?style=flat&logo=pytorch)](#)
-[![Database](https://img.shields.io/badge/Database-PostgreSQL%2016%20%2B%20pgvecto--rs-336791.svg?style=flat&logo=postgresql)](#)
+[![Database](https://img.shields.io/badge/Database-PostgreSQL%2014%20%2B%20pgvecto--rs-336791.svg?style=flat&logo=postgresql)](#)
 
 </div>
 
@@ -22,7 +22,7 @@
 
 </div>
 
-This module deploys the self-hosted photo, video backup, indexing, and computer-vision classification platform for the homelab. It serves as a privacy-preserving, high-performance replacement for commercial cloud photo services.
+This module deploys the self-hosted photo, video backup, indexing, and computer-vision classification platform for the homelab. It serves as a privacy-preserving, high-performance replacement for commercial cloud photo services. This deployment runs inside Proxmox VE LXC container 109.
 
 ---
 
@@ -35,7 +35,7 @@ This module deploys the self-hosted photo, video backup, indexing, and computer-
 ```mermaid
 flowchart TD
     Client["Mobile Apps & Web Browsers"] -->|Port 2283/TCP| Server["immich-server<br/>NestJS REST API & WebUI"]
-    Server -->|Vector Search & Metadata| DB["PostgreSQL 16 + pgvecto-rs<br/>Vector Embeddings Index"]
+    Server -->|Vector Search & Metadata| DB["PostgreSQL 14 + pgvecto-rs<br/>Vector Embeddings Index"]
     Server -->|Task Queue Management| Redis["Redis In-Memory Cache<br/>Background Job Broker"]
     Server -->|Inference RPC| ML["immich-machine-learning<br/>Python ONNX / CLIP Embeddings<br/>Facial Recognition Models"]
     Server -->|Persistent Media Storage| Storage["Storage Volume<br/>/data/photos (ZFS / NVMe)"]
@@ -57,7 +57,7 @@ flowchart TD
 | Volume Path | Host Mount Point | Purpose |
 | :--- | :--- | :--- |
 | `/usr/src/app/upload` | `/data/photos` | Master immutable original photo and video vault |
-| `/var/lib/postgresql/data` | `local-lvm:vm-immich-db` | Relational metadata, album states, and vector embeddings |
+| `/var/lib/postgresql/data` | `./config/postgres` | Relational metadata, album states, and vector embeddings |
 | `/dev/dri` | Host Intel QuickSync / VAAPI | Hardware-accelerated H.264/HEVC video transcoding |
 
 ---
