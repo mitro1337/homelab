@@ -1,3 +1,0 @@
-requires 'Getopt::Long', '>= 2.40';
-requires 'FindBin';
-requires 'Exporter';
