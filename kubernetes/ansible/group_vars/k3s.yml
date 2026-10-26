@@ -1,2 +1,0 @@
-k3s_version: "v1.30.2+k3s1"
-cluster_interface: "eth0"
