@@ -1,9 +1,0 @@
-ID,Sursă,Etichetă de referință,Scor fuzzy,Decizie,Rezultat
-N01,Sintetic / laborator,Normal,14.15,Inregistrare si monitorizare,Detectat corect
-N02,Sintetic / laborator,Normal,14.58,Inregistrare si monitorizare,Detectat corect
-S01,Sintetic / laborator,Suspicious,67.10,Alerta si analiza suplimentara,Detectat corect
-S02,Sintetic / laborator,Suspicious,75.39,Alerta prioritara si recomandare de raspuns,Detectat corect
-S03,Sintetic / laborator,Suspicious,75.59,Alerta prioritara si recomandare de raspuns,Detectat corect
-S04,Sintetic / laborator,Suspicious,92.81,Escaladare imediata si analizarea unei actiuni de contentie,Detectat corect
-C01,Sintetic / laborator,Ambiguous,48.99,Alerta si analiza suplimentara,Fals Negativ / Neutru
-W01,Wazuh real,De validat,—,—,Rezervat pentru Etapa III (Wazuh real)
