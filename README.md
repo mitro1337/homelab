@@ -12,12 +12,7 @@ The repository describes intended or tracked configuration. A file being present
 | `terraform/` | Proxmox infrastructure configuration and reusable modules for VMs, LXC guests, network segments, SDN, and firewalling. |
 | `ansible/` | Inventories, playbooks, and roles for host setup, services, networking, storage, security, and maintenance. |
 | `cloud/` | Terraform configurations for AWS, Azure, and Google Cloud. |
-| `kubernetes/` | Kubernetes and GitOps configuration, applications, and supporting automation. |
-| `hypervisors/` | Terraform configurations for Proxmox and other hypervisor platforms. |
 | `cyber/` | Defensive tooling, threat intelligence, incident analysis, CTF material, and vulnerability research. |
-| `hardware/`, `inventory/` | Hardware notes and host inventory data. |
-| `scripts/` | Administration, backup, health-check, audit, and recovery utilities. |
-| `.github/workflows/` | GitHub Actions workflows for CI, CD, and chaos-related jobs. |
 
 ## Physical hardware
 
@@ -53,11 +48,11 @@ The tracked x64 inventory contains 16 guests. The names below follow the current
 | 200 | OPNsense | QEMU VM | `services/x64/opnsense/` |
 | 300 | Parrot | QEMU VM | `services/x64/parrot/` |
 | 301 | Sandboxed Windows 10 for Malware Analysis | QEMU VM | `services/x64/sandbox/` |
-| 400 | DC | QEMU VM | `services/x64/dc/` |
-| 401 | SV1 | QEMU VM | `services/x64/sv1/` |
-| 402 | SV2 | QEMU VM | `services/x64/sv2/` |
-| 403 | Active Directory client | QEMU VM | `services/x64/client/` |
-| 405 | RHEL | QEMU VM | `services/x64/rhel/` |
+| 400 | Domain Controller - Windows Server 2022 | QEMU VM | `services/x64/dc/` |
+| 401 | Server 1 - Windows Server 2016 | QEMU VM | `services/x64/sv1/` |
+| 402 | Server 2 - Windows Server 2012 R2 | QEMU VM | `services/x64/sv2/` |
+| 403 | Active Directory Client - Windows 10 LTSC IoT | QEMU VM | `services/x64/client/` |
+| 405 | Red Hat Enterprise Linux | QEMU VM | `services/x64/rhel/` |
 
 Each guest directory contains its Proxmox `.conf` definition. Selected LXC guests also have application configuration. VM definitions are QEMU/Proxmox configuration files; they are not Docker Compose services. The x64 directory has no root-level aggregate `docker-compose.yml`.
 
