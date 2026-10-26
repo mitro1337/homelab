@@ -54,16 +54,8 @@ This document describes the physical host hardware, compute chassis, power deliv
 | **System Memory (RAM)** | 12 GB DDR4 (1x 8GB + 1x 4GB @ 2666 MHz, non-ECC) |
 | **Primary Storage** | 512 GB PCIe 3.0 NVMe M.2 Solid State Drive (`local-lvm`) |
 | **Network Interface** | 1x Realtek RTL8111H PCIe Gigabit Ethernet (RJ-45) |
-| **Power Supply Unit (PSU)** | Coldex 350W Pure Sine Wave Active PFC Power Supply |
 
-<div align="center">
 
-#### Capacity Notes
-
-</div>
-- **Memory Ceiling**: 12 GB DDR4 RAM is strictly budgeted: ~9,280 MB allocated to always-on production LXCs (100–106b) and OPNsense (VM 200), leaving ~3,000 MB permanent headroom for host kernel page caching and ZFS ARC.
-- **GPU Acceleration**: The GTX 1050 Ti is dedicated via IOMMU passthrough to Container 102 (`ollama`) for local LLM inference (CUDA 12.x).
-- **Storage Tier**: The 512 GB NVMe SSD hosts all latency-sensitive root filesystems and active PostgreSQL transaction ledgers.
 
 <div align="center">
 
@@ -101,17 +93,6 @@ This document describes the physical host hardware, compute chassis, power deliv
 
 <div align="center">
 
-#### Capacity Notes
-
-</div>
-- **Memory Ceiling**: 2 GB RAM strictly limits this host to low-overhead file serving (NFSv4 / SMBv3) and ZFS storage operations. Heavy background microservices are intentionally barred from this node.
-- **Role**: Secondary backup target for Proxmox vzdump archives and household file shares.
-- **Static IPv4**: `192.168.1.135` (VLAN 10 Management / Storage).
-
----
-
-<div align="center">
-
 ### Host: `k8s-node-04` (Node 4 — Edge Kubernetes Worker)
 
 </div>
@@ -134,68 +115,3 @@ This document describes the physical host hardware, compute chassis, power deliv
 
 <div align="center">
 
-#### Capacity Notes
-
-</div>
-- **Memory Ceiling**: 4 GB DDR3 RAM is tuned strictly for lightweight container runtimes (`containerd`) and `k3s-agent` background processing. Pod memory limits are enforced via Kubernetes resource quotas.
-- **Role**: Asynchronous batch job processing, Woodpecker CI runners, and stateless worker queue offloading.
-- **Static IPv4**: `192.168.1.18` (VLAN 30 CyberLab / Worker).
-
----
-
-<div align="center">
-
-## 2. Embedded Microcontroller Fleet (`iot/`)
-
-</div>
-
-All microcontrollers are powered by dual-core 32-bit Xtensa LX6 processors clocked at 240 MHz with 520 KB SRAM and 4 MB onboard SPI flash memory. Connected to **VLAN 50 (Isolated IoT Sensors)**:
-
-```text
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                               IoT EDGE TELEMETRY FLEET                                 │
-├──────────────────────────┬──────────────────────────┬──────────────────────────────────┤
-│ NODE 01: footprint       │ NODE 02: irrigation      │ NODE 03: datacenter_env          │
-│ R307/R504 Fingerprint    │ 4-Zone Relay Driver      │ Bosch BME280 I2C                 │
-│ Dual PIR Motion Detect   │ Capacitive Soil Probes   │ Dual DS18B20 1-Wire Delta-T      │
-│ Ultrasonic HC-SR04       │ Pulse Flow Meter         │ Noctua 25kHz PWM Fan Driver      │
-│ 12V Solenoid Gate Relay  │ Safety Hardware Timer    │ Native Prometheus /metrics (:80) │
-│ IP: 192.168.50.21        │ IP: 192.168.50.22        │ IP: 192.168.50.23                │
-├──────────────────────────┼──────────────────────────┴──────────────────────────────────┤
-│ NODE 04: power_monitor   │ NODE 05: smart_thermostat                                   │
-│ 230V AC Opto Mains Cut   │ DHT22 Temperature & Humidity · 3x Optocoupled Relays (W1/Y1)│
-│ INA219 DC Power Monitor  │ 3-Minute Compressor Protection · Dual Tactile Pushbuttons   │
-│ Battery ADC Shutdown     │ Home Assistant MQTT Climate Entity                          │
-│ IP: 192.168.50.24        │ IP: 192.168.50.25                                           │
-├──────────────────────────┴─────────────────────────────────────────────────────────────┤
-│ NODE 06: smart_motion_sensor                                                           │
-│ Retrofitted Analog PIR (HC-SR501/AM312) · RCWL-0516 Microwave Radar Fusion             │
-│ LDR Ambient Lux Sensor · 18650 Li-ion Battery ADC · 30s Software Occupancy Hold Timer   │
-│ IP: 192.168.50.26                                                                      │
-└────────────────────────────────────────────────────────────────────────────────────────┘
-```
-
-Detailed schematic documentation, GPIO pinouts, and source code reside in [`iot/README.md`](../iot/README.md).
-
----
-
-<div align="center">
-
-## 3. Adding a New Host
-
-</div>
-
-When a new compute node joins the infrastructure:
-1. Duplicate the `### Host: <name>` section above with complete hardware specifications.
-2. Update the physical capacity budget in [`INFRASTRUCTURE.md`](../INFRASTRUCTURE.md).
-3. Create corresponding host variable declarations in `ansible/inventories/homelab/host_vars/<hostname>.yml`.
-4. Register the node's MAC address and static IP in NetBox (`services/x64/netbox`) and OPNsense DHCP reservation tables.
-
----
-
-<div align="center">
-
-*Engineered with precision by **Moană Ștefănuț-Cornel** (`@stefanutc1`).*  
-*Universitatea din Craiova · Facultatea de Economie și Administrarea Afacerilor (FEAA) · Informatică Economică (2024–2027).*
-
-</div>
