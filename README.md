@@ -28,7 +28,7 @@ The tracked x64 inventory contains 16 guests. The names below follow the current
 | ---: | --- | --- | --- |
 | 100 | Home Assistant | LXC | `services/x64/homeassistant/` |
 | 101 | Mosquitto | LXC | `services/x64/mosquitto/` |
-| 104 | Monitoring | LXC | `services/x64/monitoring/` |
+| 104 | Monitoring (Prometheus, Grafana and Loki) | LXC | `services/x64/monitoring/` |
 | 105 | OWASP | LXC | `services/x64/owasp/` |
 | 106 | Wazuh | LXC | `services/x64/wazuh/` |
 | 107 | Nextcloud | LXC | `services/x64/nextcloud/` |
@@ -36,7 +36,7 @@ The tracked x64 inventory contains 16 guests. The names below follow the current
 | 109 | Immich | LXC | `services/x64/immich/` |
 | 200 | OPNsense | QEMU VM | `services/x64/opnsense/` |
 | 300 | Parrot | QEMU VM | `services/x64/parrot/` |
-| 301 | Sandbox | QEMU VM | `services/x64/sandbox/` |
+| 301 | Sandboxed Windows 10 for Malware Analysis | QEMU VM | `services/x64/sandbox/` |
 | 400 | DC | QEMU VM | `services/x64/dc/` |
 | 401 | SV1 | QEMU VM | `services/x64/sv1/` |
 | 402 | SV2 | QEMU VM | `services/x64/sv2/` |
