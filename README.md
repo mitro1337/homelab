@@ -9,7 +9,7 @@
 [![University Affiliation](https://img.shields.io/badge/University-FEAA%20UCV%20(2024%20%E2%80%93%202027)-401823?style=for-the-badge&logo=googleclassroom&logoColor=efebe5&labelColor=24181e)](https://github.com/stefanutc1/university)
 
 <!-- AUTO-METRICS-START -->
-[![Active Workloads](https://img.shields.io/badge/Workloads-29%20Services-blue?style=flat&logo=docker)](https://stefanutc1.github.io/infrastructure/)
+[![Active Workloads](https://img.shields.io/badge/Workloads-13%20Services-blue?style=flat&logo=docker)](https://stefanutc1.github.io/infrastructure/)
 [![CI Pipeline](https://img.shields.io/badge/CI%20Pipeline-Passed%20(100%25)-brightgreen?style=flat&logo=githubactions)](https://github.com/stefanutc1/infrastructure/actions/workflows/ci.yml)
 [![CD Pipeline](https://img.shields.io/badge/CD%20Pipeline-Active-blue?style=flat&logo=githubactions)](https://github.com/stefanutc1/infrastructure/actions/workflows/cd.yml)
 [![Last Sync](https://img.shields.io/badge/Last%20Auto--Sync-2026--10--26-informational?style=flat&logo=githubactions)](https://github.com/stefanutc1/infrastructure/actions)
