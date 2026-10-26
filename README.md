@@ -1,6 +1,6 @@
-# Infrastructure
+# Homelab
 
-This repository contains configuration, automation, and operational material for a personal infrastructure lab. It includes Proxmox guest definitions, service manifests, Terraform and Ansible code, cloud and Kubernetes configuration, IoT firmware, and cybersecurity research.
+This repository contains configuration, automation, and operational material for a personal homelab. It includes Proxmox guest definitions, service manifests, Terraform and Ansible code, cloud and Kubernetes configuration, IoT firmware, and cybersecurity research.
 
 The repository describes intended or tracked configuration. A file being present here does not confirm that a machine, container, or application is currently running. For the current x64 Proxmox guest list, use the [x64 inventory](services/x64/README.md) and the corresponding guest configuration files.
 
