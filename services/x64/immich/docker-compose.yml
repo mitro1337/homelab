@@ -22,7 +22,7 @@ services:
       disable: false
 
   # ============================================================================
-  # 2. MACHINE LEARNING ENGINE (Recunoaștere Facială & Căutare Semantică CLIP)
+  # 2. MACHINE LEARNING ENGINE (Facial Recognition & CLIP Semantic Search)
   # ============================================================================
   immich-machine-learning:
     container_name: immich_machine_learning
@@ -36,7 +36,7 @@ services:
       disable: false
 
   # ============================================================================
-  # 3. REDIS (Caching, Cozi de procesare imagini / video)
+  # 3. REDIS (Caching, Image/Video Processing Queues)
   # ============================================================================
   redis:
     container_name: immich_redis
@@ -46,7 +46,7 @@ services:
     restart: always
 
   # ============================================================================
-  # 4. POSTGRESQL + PGVECTOR (Stocare Relațională & Vector Search)
+  # 4. POSTGRESQL + PGVECTOR (Relational Storage & Vector Search)
   # ============================================================================
   database:
     container_name: immich_postgres
