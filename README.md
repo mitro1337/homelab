@@ -20,6 +20,23 @@ The repository describes intended or tracked configuration. A file being present
 | `scripts/` | Administration, backup, health-check, audit, and recovery utilities. |
 | `.github/workflows/` | GitHub Actions workflows for CI, CD, and chaos-related jobs. |
 
+## Physical hardware
+
+The hardware notes in [`hardware/hardware.md`](hardware/hardware.md) describe three physical hosts. The summary below keeps the main specifications near the Proxmox guest inventory. These are hardware records; they do not imply that every configured workload is currently online.
+
+| Host | Role | Processor | Memory | Graphics | Storage | Network |
+| --- | --- | --- | --- | --- | --- | --- |
+| `pve` | Proxmox VE hypervisor | Intel Core i3-10100F, 4 cores / 8 threads | 12 GB DDR4-2666 | NVIDIA GeForce GTX 1050 Ti, 4 GB | 512 GB PCIe 3.0 NVMe | Realtek RTL8111H Gigabit Ethernet |
+| `openmediavault` | Storage host | Intel Celeron N2830, 2 cores / 2 threads | 2 GB DDR3L-1333 | Intel HD Graphics | 500 GB 2.5-inch SATA HDD; ZFS pool `omv_tank` | Realtek RTL8101E Ethernet |
+| `kubernetes` | Kubernetes worker host | AMD Athlon II X2 220, 2 cores / 2 threads | 4 GB DDR3-1066 | NVIDIA GeForce GTS 250, 1 GB | 80 GB 3.5-inch SATA HDD | Realtek Gigabit Ethernet |
+
+### Host notes
+
+- `pve` is the x64 Proxmox VE host. The hardware record lists a custom ATX chassis and Proxmox VE 9.2. Its inventory is documented in the [x64 Proxmox section](#current-x64-proxmox-inventory).
+- `openmediavault` is an ASUS X451MA laptop used as a storage host. The hardware record lists an external 19 V / 2.37 A adapter and an internal battery buffer.
+- `kubernetes` is a legacy ATX micro-tower. Its hardware record lists a 450 W power supply.
+- The hardware source records `pve` at `192.168.1.132`. Check the live host configuration before relying on addresses or network assignments.
+- IoT board and peripheral details are maintained with the firmware projects under [`iot/`](iot/).
 ## Current x64 Proxmox inventory
 
 The tracked x64 inventory contains 16 guests. The names below follow the current Proxmox node view.
@@ -119,9 +136,3 @@ Templates and examples are provided for some tools, including Terraform variable
 This repository is distributed under the GNU Affero General Public License v3.0. See [`LICENSE`](LICENSE).
 
 
-<!-- AUTO-METRICS-START -->
-[![Active Workloads](https://img.shields.io/badge/Workloads-4%20Services-blue?style=flat&logo=docker)](https://stefanutc1.github.io/infrastructure/)
-[![CI Pipeline](https://img.shields.io/badge/CI%20Pipeline-Passed%20(100%25)-brightgreen?style=flat&logo=githubactions)](https://github.com/stefanutc1/infrastructure/actions/workflows/ci.yml)
-[![CD Pipeline](https://img.shields.io/badge/CD%20Pipeline-Active-blue?style=flat&logo=githubactions)](https://github.com/stefanutc1/infrastructure/actions/workflows/cd.yml)
-[![Last Sync](https://img.shields.io/badge/Last%20Auto--Sync-2026--10--26-informational?style=flat&logo=githubactions)](https://github.com/stefanutc1/infrastructure/actions)
-<!-- AUTO-METRICS-END -->
