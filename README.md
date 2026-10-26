@@ -14,7 +14,6 @@ The repository describes intended or tracked configuration. A file being present
 | `cloud/` | Terraform configurations for AWS, Azure, and Google Cloud. |
 | `kubernetes/` | Kubernetes and GitOps configuration, applications, and supporting automation. |
 | `hypervisors/` | Terraform configurations for Proxmox and other hypervisor platforms. |
-| `iot/` | ESP32 firmware and supporting code for sensing, access control, irrigation, power monitoring, motion sensing, and climate control. |
 | `cyber/` | Defensive tooling, threat intelligence, incident analysis, CTF material, and vulnerability research. |
 | `hardware/`, `inventory/` | Hardware notes and host inventory data. |
 | `scripts/` | Administration, backup, health-check, audit, and recovery utilities. |
@@ -87,45 +86,17 @@ Use the same pattern for `monitoring`, `owasp`, or `immich`. The Immich stack ne
 
 For a Proxmox guest, use its `.conf` file as the tracked configuration reference. Terraform and Ansible have their own inventories, examples, and playbooks; review those files before applying changes to a host or cloud account. This README does not prescribe applying every configuration in the repository.
 
-## IoT firmware
-
-The `iot/` directory contains separate firmware projects and project-level notes for:
-
-- `footprint/` — fingerprint, motion, and gate-control hardware.
-- `irrigation/` — multi-zone irrigation control and sensors.
-- `datacenter_environment/` — environmental measurements for equipment monitoring.
-- `power_monitor/` — mains and power telemetry.
-- `smart_motion_sensor/` — motion sensing.
-- `smart_thermostat/` — thermostat control.
-
-Firmware configuration is project-specific. Check the `config.h`, `.yaml`, and README files in the relevant directory before building or flashing a device.
 
 ## Cybersecurity material
 
 The `cyber/` tree contains defensive and research material, including:
 
-- tools and data for threat intelligence and blocklist management;
+- tools and data for threat intelligence;
 - incident and infrastructure analysis case files;
-- Active Directory automation and fuzzy SOAR experiments;
 - CTF writeups and vulnerability reports;
-- OPSEC and OSINT utilities.
 
 Some directories contain proof-of-concept or intentionally vulnerable material. Use it only in systems and environments where you have authorization. Keep training targets isolated from trusted networks.
 
-## Automation and validation
-
-The GitHub Actions workflows are in `.github/workflows/`: `ci.yml`, `cd.yml`, and `chaos.yml`. The CI workflow defines checks for areas including secrets scanning, shell and YAML linting, Markdown linting, infrastructure audits, IoT firmware checks, cloud policy checks, and security analysis. The CD workflow handles repository automation and deployment-related jobs. Consult the workflow files for their exact triggers and behavior.
-
-Useful local scripts include:
-
-- `scripts/audit_infrastructure.py` — repository infrastructure audit;
-- `scripts/verify_esp32_firmware.py` — firmware checks;
-- `scripts/verify_zero_cloud_cost.py` — static cloud configuration policy check;
-- `scripts/audit_mermaid_diagrams.py` — Mermaid diagram audit;
-- `scripts/backup-configs.sh` and `scripts/backup-configs.ps1` — configuration backup helpers;
-- `scripts/healthcheck-fleet.sh` and `scripts/healthcheck-fleet.ps1` — fleet health-check helpers.
-
-Run a script only after checking its options and target environment. Some scripts can change remote systems or require credentials and network access.
 
 ## Configuration and secrets
 
