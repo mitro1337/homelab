@@ -33,12 +33,13 @@ The hardware notes in [`hardware/hardware.md`](hardware/hardware.md) describe th
 - IoT board and peripheral details are maintained with the firmware projects under [`iot/`](iot/).
 ## Current x64 Proxmox inventory
 
-The tracked x64 inventory contains 16 guests. The names below follow the current Proxmox node view.
+The x64 inventory contains 17 guests, including Vigolium (102) as reported for the Proxmox node. The names below follow the current Proxmox node view.
 
 | ID | Name | Type | Directory |
 | ---: | --- | --- | --- |
 | 100 | Home Assistant | LXC | `services/x64/homeassistant/` |
 | 101 | Mosquitto | LXC | `services/x64/mosquitto/` |
+| 102 | Vigolium | LXC | `services/x64/vigolium/` |
 | 104 | Monitoring (Prometheus, Grafana and Loki) | LXC | `services/x64/monitoring/` |
 | 105 | OWASP | LXC | `services/x64/owasp/` |
 | 106 | Wazuh | LXC | `services/x64/wazuh/` |
@@ -54,19 +55,20 @@ The tracked x64 inventory contains 16 guests. The names below follow the current
 | 403 | Active Directory Client - Windows 10 LTSC IoT | QEMU VM | `services/x64/client/` |
 | 405 | Red Hat Enterprise Linux | QEMU VM | `services/x64/rhel/` |
 
-Each guest directory contains its Proxmox `.conf` definition. Selected LXC guests also have application configuration. VM definitions are QEMU/Proxmox configuration files; they are not Docker Compose services. The x64 directory has no root-level aggregate `docker-compose.yml`.
+Guest directories contain their Proxmox `.conf` definitions where tracked. The Vigolium guest (102) is listed from the operator's inventory, but its Proxmox definition is not currently tracked here. Selected LXC guests also have application configuration. VM definitions are QEMU/Proxmox configuration files; they are not Docker Compose services. The x64 directory has no root-level aggregate `docker-compose.yml`. See the [x64 guest documentation](services/x64/README.md).
 
 ### Tracked application manifests
 
 | Guest | Files tracked for the application |
 | --- | --- |
 | Home Assistant (100) | `docker-compose.yml`; configuration is mounted from `homeassistant/config/`. |
+| Vigolium (102) | Service documentation only; no Compose manifest or guest configuration is tracked. See [`services/x64/vigolium/README.md`](services/x64/vigolium/README.md). |
 | Monitoring (104) | Compose stack with Grafana, Prometheus, Loki, Promtail, and Node Exporter; Prometheus scrape configuration. |
 | OWASP (105) | Compose definition for OWASP Juice Shop, an intentionally vulnerable training application. |
 | Wazuh (106) | `wazuh.conf`; application deployment is managed inside the guest. |
 | Immich (109) | Compose stack, `.env.example`, and a guest definition. See [`services/x64/immich/README.md`](services/x64/immich/README.md). |
 
-Mosquitto, Nextcloud, and ESPHome have guest definitions in this directory; their application configuration is managed inside the guests and is not represented by a tracked Compose file here.
+Mosquitto, Nextcloud, and ESPHome have guest definitions in this directory; their application configuration is managed inside the guests and is not represented by a tracked Compose file here. Vigolium is documented as a service on guest 102; the repository does not currently include its guest definition or deployment manifest.
 
 ## Running a Compose stack
 
