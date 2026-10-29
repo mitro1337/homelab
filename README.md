@@ -14,7 +14,7 @@ This repository contains configuration and documentation for my personal workben
 | `cyber/` | Defensive tooling, CTF work, incident analysis, and vulnerability research. |
 | `hardware/` | Physical host and device specifications. |
 
-## Physical hosts
+## Hardware
 
 | Host | Role | Main hardware |
 | --- | --- | --- |
@@ -22,7 +22,6 @@ This repository contains configuration and documentation for my personal workben
 | `openmediavault` | Storage | Intel Celeron N2830, 2 GB RAM, 500 GB SATA disk. |
 | `kubernetes` | Kubernetes worker | AMD Athlon II X2 220, 4 GB RAM, 80 GB SATA disk. |
 
-Hardware records and network addresses can become outdated; verify them on the host before use.
 
 ## x64 Proxmox guests
 
