@@ -2,7 +2,7 @@
 
 Virtualization, networking, IoT and cybersecurity research.
 
-This repository contains configuration and documentation for a personal lab. Tracked files describe intended or recorded setup; they do not confirm that a host, guest, or service is currently running.
+This repository contains configuration and documentation for my personal workbench.
 
 ## Repository layout
 
@@ -55,7 +55,7 @@ See the [x64 inventory](services/x64/README.md) for tracked guest and applicatio
 Run Compose from the service directory on the system that hosts the application:
 
 ```sh
-cd services/x64/homeassistant
+cd services/x64/service
 docker compose up -d
 ```
 
