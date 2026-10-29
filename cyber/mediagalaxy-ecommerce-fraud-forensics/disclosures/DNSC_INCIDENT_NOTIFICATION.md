@@ -1,13 +1,10 @@
 # DNSC Official Incident Notification / Notificare Incident de Securitate Cibernetică
 
-**Autoritate:** Directoratul Național de Securitate Cibernetică (DNSC)  
-**Clasificare:** TLP:CLEAR  
-**Tip Incident:** Phishing, Fraudă Electronică, Spoofing Retail  
+**Autoritate:** Directoratul Național de Securitate Cibernetică (DNSC) **Clasificare:** TLP:CLEAR **Tip Incident:** Phishing, Fraudă Electronică, Spoofing Retail
 
 ## Versiunea in Limba Romana (Original)
 
-**Subiect:** Notificare Incident de Securitate Cibernetică / Phishing și Fraudă E-Commerce – Fals Media Galaxy  
-**Prioritate:** Urgentă / Risc Ridicat  
+**Subiect:** Notificare Incident de Securitate Cibernetică / Phishing și Fraudă E-Commerce – Fals Media Galaxy **Prioritate:** Urgentă / Risc Ridicat
 
 Către Directoratul Național de Securitate Cibernetică (DNSC),
 
@@ -22,17 +19,15 @@ Pentru protejarea utilizatorilor și blocarea infrastructurii atacatorilor, vă 
 
 ### Impact și Mod de Operare:
 
-Victimele sunt atrase prin prețuri false, introducând datele cardurilor bancare (procesate fraudulos prin debitări directe pe carduri de debit/credit bancare). Pagubele raportate per victimă se ridică la aproximativ 21 de euro, campania vizând colectarea frauduloasă de fonduri și date financiare.
+Victimele sunt atrase prin prețuri false, introducând datele cardurilor bancare (procesate fraudulos prin debitări directe pe carduri de debit/credit bancare).
 
 Vă transmitem acești indicatori în vederea analizării și emiterii eventualelor avertismente publice specifice pentru protejarea utilizatorilor români în fața acestei rețele de scam.
 
-Cu stimă,  
-**Echipa de Analiză și Răspuns la Incidente**
+Cu stimă, **Echipa de Analiză și Răspuns la Incidente**
 
 ## English Translation
 
-**Subject:** Cybersecurity Incident Notification / Phishing and E-Commerce Fraud – Media Galaxy Brand Impersonation  
-**Priority:** Urgent / High Risk  
+**Subject:** Cybersecurity Incident Notification / Phishing and E-Commerce Fraud – Media Galaxy Brand Impersonation **Priority:** Urgent / High Risk
 
 To the National Cyber Security Directorate (DNSC - Romania),
 
@@ -47,17 +42,16 @@ To facilitate infrastructure takedown and protect internet users, we submit the 
 
 ### Impact and Threat Assessment:
 
-Victims are lured with counterfeit pricing and enter sensitive debit/credit card credentials (processed directly against legitimate retail bank debit/credit cards). Direct losses average approximately €21 per victim. The infrastructure is configured for persistent recurring harvesting and account takeover lures.
+Victims are lured with counterfeit pricing and enter sensitive debit/credit card credentials (processed directly against legitimate retail bank debit/credit cards).
 
 We submit these findings for ingestion into national threat intelligence feeds and the issuance of public security advisories to safeguard consumers.
 
-Respectfully,  
-**Incident Analysis & Response Team**
+Respectfully, **Incident Analysis & Response Team**
 
 ## Official Resolution & Response / Rezolutie Oficiala
 
 - **Ticket ID:** `[D.N.S.C. #178465]`  
 - **Received:** September 18, 2026, 11:22 EEST  
 - **Authority:** Directoratul Național de Securitate Cibernetică (DNSC) – Direcția Generală Operațiuni Tehnice  
-- **Status:** Investigation Completed & Enforced – Threat infrastructure officially published and blacklisted on the national PNRISC Blacklist ([`blacklist.dnsc.ro`](https://blacklist.dnsc.ro/)) on September 18, 2026 under classification *Impersonation* (`dm.voetbalshop-nlco.com`, `gonser.voetbalshop-nlco.com`).  
+- **Status:** Investigation Completed & Enforced – Threat infrastructure officially published and blacklisted on the national PNRISC Blacklist ([`blacklist.dnsc.ro`](https://blacklist.dnsc.ro/)) on September 18, 2026 under classification...
 - **Full Dossier (RO / EN):** See [`DNSC_RESPONSE_178465.md`](./DNSC_RESPONSE_178465.md).

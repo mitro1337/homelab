@@ -4,9 +4,7 @@ This document contains the official incident notification sent to the Media Gala
 
 ## Versiunea in Limba Romana (Original)
 
-**Către:** Departamentul Juridic & Echipa de Securitate Informatică – Media Galaxy / Altex România  
-**Subiect:** Notificare privind o campanie activă de fraudă electronică și uzurpare de identitate de brand (Phishing Media Galaxy pe TikTok)  
-**Prioritate:** Ridicată  
+**Către:** Departamentul Juridic & Echipa de Securitate Informatică – Media Galaxy / Altex România **Subiect:** Notificare privind o campanie activă de fraudă electronică și uzurpare de identitate de brand (Phishing Media Galaxy pe TikTok) **Prioritate:** Ridicată
 
 Vă aducem la cunoștință că la nivelul rețelelor sociale (în speță, platforma TikTok) se desfășoară o campanie activă de înșelăciune și fraudă electronică ce folosește în mod ilegal și abuziv imaginea și sigla companiei dumneavoastră.
 
@@ -23,14 +21,11 @@ Utilizatorii care accesează aceste reclame introduc datele cardurilor bancare c
 
 Vă rugăm să dispuneți verificarea acestei situații de către departamentul juridic sau de securitate informatică și să inițiați demersurile legale necesare pentru blocarea acestor pagube aduse consumatorilor și imaginii brandului dumneavoastră.
 
-Cu stimă,  
-**Analist Securitate Cibernetică / Reprezentant victimă**
+Cu stimă, **Analist Securitate Cibernetică / Reprezentant victimă**
 
 ## English Translation
 
-**To:** Legal Department & Information Security Team – Media Galaxy / Altex Romania  
-**Subject:** Urgent Notification: Active E-Commerce Brand Impersonation and Phishing Campaign (Media Galaxy Spoofing on TikTok)  
-**Priority:** High  
+**To:** Legal Department & Information Security Team – Media Galaxy / Altex Romania **Subject:** Urgent Notification: Active E-Commerce Brand Impersonation and Phishing Campaign (Media Galaxy Spoofing on TikTok) **Priority:** High
 
 We hereby notify you that an active fraud and electronic deception campaign is currently circulating across social media platforms (specifically TikTok), unlawfully and deceptively utilizing your company's trademarks, logo, and brand identity.
 
@@ -43,9 +38,8 @@ We hereby notify you that an active fraud and electronic deception campaign is c
 
 ### Impact on Consumers:
 
-Unsuspecting consumers clicking these advertisements input their payment card information believing they are transacting on the official Media Galaxy storefront. This results in direct financial harm via unauthorized debits on their personal bank debit and credit cards.
+Unsuspecting consumers clicking these advertisements input their payment card information believing they are transacting on the official Media Galaxy storefront.
 
 We urge your legal and cybersecurity teams to review this incident promptly and initiate the necessary takedown and legal measures to safeguard your consumers and protect your brand's reputation.
 
-Sincerely,  
-**Cybersecurity Incident Response Analyst / Victim Representative**
+Sincerely, **Cybersecurity Incident Response Analyst / Victim Representative**

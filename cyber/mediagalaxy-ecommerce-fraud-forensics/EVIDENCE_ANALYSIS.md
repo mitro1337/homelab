@@ -1,31 +1,25 @@
 # Technical Forensics & Evidence Analysis
 
-**Case File:** `SEC-2026-ECOM-005`  
-**Target Brand:** Media Galaxy (Altex Romania S.A.)  
-**Threat Category:** Social Engineering / Brand Impersonation / Chinese SaaS Phishing Cluster  
-**Victim Asset Impact:** BCR Debit Card (~21 EUR), Personal Identification Information (PII)  
-**Investigation Date:** 16 September 2026  
-**Classification:** `TLP:CLEAR`  
-**Analyst:** `@stefanutc1`
+**Case File:** `SEC-2026-ECOM-005` **Target Brand:** Media Galaxy (Altex Romania S.A.) **Threat Category:** Social Engineering / Brand Impersonation / Chinese SaaS Phishing Cluster **Victim Asset Impact:** BCR Debit Card (~21 EUR), Personal Identification Information (PII) **Investigation Date:** 16 September 2026 **Classification:** `TLP:CLEAR` **Analyst:** `@stefanutc1`
 
-## 1. Executive Summary & Attack Chain
+## Executive Summary & Attack Chain
 
-On 16 September 2026, an active e-commerce phishing and financial fraud campaign was uncovered targeting Romanian consumers through sponsored promotional ads on TikTok. The attackers cloned the visual identity, branding, and product catalogs of the major electronics and consumer retailer **Media Galaxy** (operated in Romania by Altex România S.A.). 
+On 16 September 2026, an active e-commerce phishing and financial fraud campaign was uncovered targeting Romanian consumers through sponsored promotional ads on TikTok.
 
 The campaign operated on a multi-tier infrastructure:
 1. **Lure & Ingestion:** High-volume sponsored advertisements on TikTok presenting deep discounts on consumer electronics, directing users into the in-app browser to a spoofed subdomain: `https://mediagalaxy.voetbalshop-nlco.com`.
 2. **Landing Page & Credential Harvesting:** A localized clone of the Media Galaxy checkout and login portal. Victims were prompted for contact information, delivery address, and bank payment card credentials.
-3. **Financial Exfiltration:** Payment processing was executed through a merchant descriptor recorded on bank statements as `morvethemi london` (amounting to ~21 EUR / ~105 RON), debited directly from a **BCR (Banca Comercială Română)** card.
-4. **Follow-Up Social Engineering & Phishing Lures:** The threat actors deployed automated notifications via SMTP relays using spoofed addresses (`noreply@email.worvixglobal.com`, `noreply@info.mailapp-fly.com`), providing fake purchase order identifiers (`[229942-177457]`) and sending unsolicited password reset validation codes (`586571`) to harvest email account credentials.
-5. **Technical Attribution:** Deep packet inspection, SSL certificate fingerprinting, and DOM inspection revealed that the phishing infrastructure was built upon a compromised foreign domain (`voetbalshop-nlco.com`) fronted by Cloudflare, reverse-proxying into an underlying Chinese-developed e-commerce fraud SaaS backend: **`yiyangsaas.com`** (registered with eName Technology Co. in Yunnan, China).
+3. **Financial Exfiltration:** Payment processing was executed through a merchant descriptor recorded on bank statements as `morvethemi london` (amounting to ~21 EUR / ~105 RON), debited directly from a **BCR (Banca Comercială Română)** ...
+4. **Follow-Up Social Engineering & Phishing Lures:** The threat actors deployed automated notifications via SMTP relays using spoofed addresses (`noreply@email.worvixglobal.com`, `noreply@info.mailapp-fly.com`), providing fake purchase ...
+5. **Technical Attribution:** Deep packet inspection, SSL certificate fingerprinting, and DOM inspection revealed that the phishing infrastructure was built upon a compromised foreign domain (`voetbalshop-nlco.com`) fronted by Cloudflare...
 
-## 2. Granular Evidence Breakdown
+## Granular Evidence Breakdown
 
 ### Evidence Item 01: WorvixGlobal Shell Portal
 
 - **File:** `evidence/01_worvixglobal_fake_portal.png`
 - **Source:** Desktop Capture (20:17:47)
-- **Observations:** The root domain `worvixglobal.com` hosts an unencrypted (`Not secure | worvixglobal.com`) shell trading template displaying "Your Trusted Partner for Global Trade". This facade was erected to satisfy cursory automated domain reputation filters while abusing the domain's subdomains (`email.worvixglobal.com`) for SMTP delivery.
+- **Observations:** The root domain `worvixglobal.com` hosts an unencrypted (`Not secure | worvixglobal.com`) shell trading template displaying "Your Trusted Partner for Global Trade". This facade was erected to satisfy cursory automated...
 
 ### Evidence Item 02: WHOIS Registration of WorvixGlobal
 
@@ -34,7 +28,7 @@ The campaign operated on a multi-tier infrastructure:
 - **Registrar:** NameSilo, LLC (`whois.namesilo.com`)
 - **Creation Date:** 8 February 2025
 - **Expiration Date:** 8 February 2027
-- **Key Finding:** The domain was registered over a year prior to the attack and parked under privacy-protected WHOIS, establishing an aged domain profile to bypass spam and newly registered domain (NRD) filters.
+- Additional items omitted.
 
 ### Evidence Item 03 & 04: Email Header Analysis & DKIM Signatures
 
@@ -42,7 +36,7 @@ The campaign operated on a multi-tier infrastructure:
 - **Sender (From):** `mediagalaxy-ro <noreply@info.mailapp-fly.com>`
 - **Reply-To:** `mediagalaxy-ro <MaryxBeckb96@gmail.com>`
 - **MTA Delivery:** Sent and cryptographically signed (DKIM) by `info.mailapp-fly.com`.
-- **Forensic Assessment:** The threat actor abused a bulk mailing SaaS platform (`mailapp-fly.com`) with valid SPF and DKIM signatures to bypass Google Gmail security scoring. Crucially, the `Reply-To` header points directly to an attacker-controlled drop inbox: `MaryxBeckb96@gmail.com`.
+- **Forensic Assessment:** The threat actor abused a bulk mailing SaaS platform (`mailapp-fly.com`) with valid SPF and DKIM signatures to bypass Google Gmail security scoring. Crucially, the `Reply-To` header points directly to an attack...
 
 ### Evidence Item 05 & 06: Fraudulent Order Confirmation & Spoofed Media Galaxy Footer
 
@@ -51,7 +45,7 @@ The campaign operated on a multi-tier infrastructure:
 - **Sender:** `Customer Service <noreply@email.worvixglobal.com>`
 - **Recipient:** Target victim inbox (`08:17 AM`)
 - **Footer Text:** `"Dacă aveți întrebări, răspundeți la acest e-mail sau contactați-ne la MaryxBeckb96@gmail.com . (c) 2026 mediagalaxy-ro"`
-- **Forensic Assessment:** The threat actor fabricated a structured order token `[229942-177457]` to create a false sense of legitimacy and prevent immediate panic or cancellation from the buyer.
+- Additional items omitted.
 
 ### Evidence Item 07: WHOIS Intelligence on Compromised Landing Domain
 
@@ -60,7 +54,7 @@ The campaign operated on a multi-tier infrastructure:
 - **Created:** 12 March 2026
 - **Nameservers:** `amos.ns.cloudflare.com`, `daphne.ns.cloudflare.com`
 - **Status:** `clientTransferProhibited`
-- **Forensic Assessment:** The domain `voetbalshop-nlco.com` was registered on 12 March 2026 mimicking a Dutch sporting goods outlet (`voetbalshop.nl`). The subdomain `mediagalaxy` was configured specifically to deceive Romanian users clicking the TikTok promotion.
+- Additional items omitted.
 
 ### Evidence Item 08, 09 & 10: Phishing Landing Decompilation & Chinese Codebase Attribution
 
@@ -69,21 +63,8 @@ The campaign operated on a multi-tier infrastructure:
 - **Visual State:** The portal displayed `"The website is under maintenance"` with an icon labeled `"Warning - m***o"` and `"v***L"`.
 - **Browser Heuristics:** Google Chrome automatically displayed the popup: `"Translate page from Chinese (Simplified)?"`
 - **DOM Source Code Audit:**
-  ```html
-  <!DOCTYPE html>
-  <html lang="zh-CN">
-    <head>...</head>
-    <body>
-      <div class="module_login_default" id="module_login">
-        <div class="module_login_wrapper">...</div>
-      </div>
-      <script type="text/javascript">
-        window._CEDDE_ET = 0.0468571186;
-      </script>
-    </body>
-  </html>
-  ```
-- **Forensic Assessment:** Despite impersonating a Romanian retailer, the root HTML declaration explicitly specifies `<html lang="zh-CN">`. The CSS layout classes (`module_login_default`, `module_login_wrapper`) and JavaScript execution timing variables (`window._CEDDE_ET`) are identical to turnkey Chinese e-commerce SaaS platforms sold on underground forums.
+```html <!DOCTYPE html> <html lang="zh-CN"> <head>...</head> <body> <div class="module_login_default" id="module_login"> <div class="module_login_wrapper">...</div> </div> <script type="text/javascript"> window._CEDDE_ET = 0.0468571186; </script> </body> </html> ```
+- Additional items omitted.
 
 ### Evidence Item 11 & 12: Historical Web Archival Analysis
 
@@ -103,7 +84,7 @@ The campaign operated on a multi-tier infrastructure:
 
 - **File:** `evidence/14_merchant_descriptor_investigation.png`
 - **Search Query:** `"morvethemi london"`
-- **Result:** No registered corporation, retail establishment, or authorized payment facilitator exists in the UK Companies House or global merchant registries under this name. The descriptor was algorithmically generated or mapped through an offshore merchant payment aggregator to obstruct chargeback investigations.
+- **Result:** No registered corporation, retail establishment, or authorized payment facilitator exists in the UK Companies House or global merchant registries under this name. The descriptor was algorithmically generated or mapped throu...
 
 ### Evidence Item 15, 16 & 17: Certificate Transparency History for WorvixGlobal
 
@@ -126,10 +107,7 @@ The campaign operated on a multi-tier infrastructure:
   - IP: `104.21.14.99` (Cloudflare AS13335)
   - MX: `mx.zoho.com`, `mx2.zoho.com`, `mx3.zoho.com` (Zoho Mail for C2 communication)
 - **`voetbalshop-nlco.com` Direct Pivot:**
-  - IP: `104.16.145.247`
-  - Ports 443 & 8443 Probe: Returns HTTP `403 Forbidden`
-  - **SSL Common Name Disclosed:** `cn: yiyangsaas.com`!
-- **Smoking Gun Finding:** Querying the direct port 443/8443 banner of the IP hosting `voetbalshop-nlco.com` exposed the SSL certificate issued directly to **`yiyangsaas.com`**, definitively linking the landing page to the central SaaS platform.
+- Additional items omitted.
 
 ### Evidence Item 21 & 22: WHOIS Profile of `yiyangsaas.com`
 
@@ -138,9 +116,7 @@ The campaign operated on a multi-tier infrastructure:
 - **Creation Date:** 12 September 2023
 - **Expiration Date:** 12 September 2027
 - **Updated Date:** 13 September 2026
-- **Registrant Country / Province:** `YunNan, CN` (Yunnan, China)
-- **Abuse Contact Phone:** `+86.4000044400`
-- **Abuse Contact Email:** `abuse@ename.com`
+- Additional items omitted.
 
 ### Evidence Item 23 & 24: Secondary Account Takeover (ATO) Phase
 
@@ -149,8 +125,7 @@ The campaign operated on a multi-tier infrastructure:
 - **Timestamps:** 16 September 2026 at `13:10:45` & `13:12:09`
 - **Target Victim:** `[REDACTED]`
 - **Header:** Emblazoned with a spoofed red `MEDIACALAXY` logo.
-- **Verification Code:** `586571`
-- **Forensic Assessment:** Hours after capturing the payment, the automated infrastructure initiated secondary credential harvesting, prompting the victim to input their password or two-factor authentication code under the guise of an account recovery procedure.
+- Additional items omitted.
 
 ### Evidence Item 25: Official DNSC PNRISC Blacklist Enforcement & Takedown
 
@@ -159,8 +134,7 @@ The campaign operated on a multi-tier infrastructure:
 - **Date Added:** 18 September 2026
 - **Status:** `Blacklisted`
 - **Threat Reason:** `Impersonation`
-- **Confirmed Assets:** `dm.voetbalshop-nlco.com`, `gonser.voetbalshop-nlco.com` (associated with the `voetbalshop-nlco.com` phishing cluster)
-- **Forensic Assessment:** Following our technical incident filing under Ticket `[D.N.S.C. #178465]`, the Romanian National Cyber Security Directorate validated the campaign and officially listed the malicious infrastructure on the national PNRISC Blacklist. This feeds directly into the national DNSC browser extension, proactively blocking access for all protected Romanian consumers and triggering automated ingestion into our perimeter blocklists.
+- Additional items omitted.
 
 ### Evidence Item 26: Facebook Lure & Cross-Platform Campaign Link (Dreamwardrobe.online)
 
@@ -169,11 +143,7 @@ The campaign operated on a multi-tier infrastructure:
 - **Billing Entity / Descriptor:** `dreamwardrobe.online`
 - **Amount Debited:** `-49,72 RON` (`9,99 EUR`)
 - **Category Tag:** `Moda` (Fashion hanger icon)
-- **Card Transaction Timestamp:** 7 February 2025 at 13:49 (Settled: 8 February 2025)
-- **Forensic Correlation & Significance:**
-  1. **Cross-Platform Social Engineering (Facebook):** A victim was lured through a sponsored advertisement on Facebook advertising an espresso / coffee machine at an absurd clearance price of "49 lei" (~9.99 EUR / 49.72 RON), mirroring the promotional pricing lures seen in the TikTok Media Galaxy campaign.
-  2. **Direct Correlation with Infrastructure Registration Date:** The payment was executed on **7 February 2025** and settled on **8 February 2025** — **the exact day on which the campaign domain `worvixglobal.com` was registered** at NameSilo (Evidence Item 02).
-  3. **Shell Merchant Camouflage:** The billing descriptor `dreamwardrobe.online` categorized under fashion/apparel (`Moda`) reveals the threat actor's modus operandi of spinning up shell e-commerce storefronts to acquire payment merchant accounts, subsequently reusing those accounts to charge victims recruited across multiple social media channels (Facebook and TikTok).
+- Additional items omitted.
 
 ### Evidence Item 27: Facebook Sponsored Ad Lure (Philips LatteGO 4300 at 51 lei)
 
@@ -181,15 +151,9 @@ The campaign operated on a multi-tier infrastructure:
 - **Source:** Facebook Mobile Application (Sponsored Feed Ad / Post Sponsorizat)
 - **Spoofed Brand / Page:** `Media Galaxy` (official brand identity & logo avatar co-opted)
 - **Ad Headline & Copy:**
-  > *"Espressor Philips LatteGO 4300 la doar 51 lei*  
-  > *Datorită închiderii depozitelor noastre din România, lansăm o vânzare online prin care toată lumea poate cumpăra Philips LatteGO 4300 la un preț incredibil*  
-  > *Faceți clic pe butonul „Aflați mai multe” de sub post pentru a participa la vânzarea noastră"*
+> *"Espressor Philips LatteGO 4300 la doar 51 lei* > *Datorită închiderii depozitelor noastre din România, lansăm o vânzare online prin care toată lumea poate cumpăra Philips LatteGO 4300 la un preț incredibil* > *Faceți clic pe butonul „Aflați mai multe” de sub post pentru a participa la vânzarea noastră"*
 - **Visual Staging & Asset:** Premium Philips LatteGO 4300 coffee machine showcased on a retail display shelf with a counterfeit yellow shelf price tag: `MEDIA GALAXY | PHILIPS LATTEGO 4300 | 51 lei`.
-- **Forensic Assessment & Social Engineering Mechanics:**
-  1. **Warehouse Liquidation Pretext:** The attackers exploit artificial scarcity and urgency by fabricating a warehouse closure narrative (*"Datorită închiderii depozitelor noastre din România"*) to rationalize a 97%+ price collapse on a ~2,000+ RON appliance down to 51 lei (~10 EUR).
-  2. **Direct Operational Correlation with Evidence Item 26:** This ad copy is the exact visual lure that captured the victim in Evidence Item 26, culminating in the unauthorized debit of `-49,72 RON` (`9,99 EUR`) via shell merchant `dreamwardrobe.online`.
-  3. **Multi-Channel Syndication (Meta & ByteDance):** Confirms the threat syndicate does not rely exclusively on TikTok; they actively syndicate identical promotional hooks across Meta platforms (Facebook / Instagram Feed) targeting Romanian demographics.
-  4. **In-App WebView Hijack:** The "Aflați mai multe" CTA funnels users directly into Facebook's embedded browser (In-App WebView), obscuring the full FQDN URL bar, bypassing traditional desktop browser security extensions, and lowering victim skepticism.
+- Additional items omitted.
 
 ### Evidence Item 28: Order Delivery Notice Email Headers (StridewiseTrading Spoofing)
 
@@ -198,11 +162,7 @@ The campaign operated on a multi-tier infrastructure:
 - **Subject:** `Order Delivery Notice 229942-177457 (Notificare de livrare a comenzii 229942-177457)`
 - **Spam Labeling:** Filtered directly to `Spam` folder by Google Mail heuristics
 - **Sender (From):** `Customer Service <noreply@email.stridewisetrading.com>`
-- **Delivery Timestamp:** Friday, 18 September 2026 at 05:06 EEST
-- **Recipient:** Target victim inbox (`către eu`)
-- **Forensic Assessment & Technical Significance:**
-  1. **New Infrastructure Pivot (`stridewisetrading.com`):** Demonstrates that the threat actor operates a pool of disposable front domains (`worvixglobal.com`, `mailapp-fly.com`, and now `stridewisetrading.com`) for SMTP distribution, cycling domains as prior hosts accumulate spam reports or DNS blocks.
-  2. **Order Token Consistency:** The email references the exact fraudulent transaction token `229942-177457` originally generated in Evidence Item 05 (`Order Confirmation: Thank You for Your Purchase [229942-177457]`), proving end-to-end campaign infrastructure continuity across different sender domains.
+- Additional items omitted.
 
 ### Evidence Item 29: Order Delivery Notice Body & Fake Logistics Tracking (TrackParcel.de)
 
@@ -211,15 +171,8 @@ The campaign operated on a multi-tier infrastructure:
 - **Order Identifier:** `numărul de comandă: 229942-177457`
 - **Tracking Identifier:** `EURO20260918100004917`
 - **Tracking Portal URL:** `https://www.trackparcel.de/`
-- **Delivery Notice Copy:**
-  > *"Vă mulțumim pentru achiziție! Comanda dumneavoastră 229942-177457 a fost livrată și este expediată la adresa specificată.*  
-  > *Informații importante:*  
-  > *• Informațiile de urmărire sunt de obicei actualizate în termen de 2-4 zile lucrătoare.*  
-  > *• Timp estimat de livrare: 10-20 zile lucrătoare.*  
-  > *• Tratamentul vamal la destinație poate afecta timpul de livrare."*
-- **Forensic Assessment & Stalling Psychology:**
-  1. **Dispute Window Pacification:** The explicit insertion of an extended shipping window ("10-20 zile lucrătoare") and a customs clearance pretext ("Tratamentul vamal la destinație poate afecta timpul de livrare") is a calculated psychological stalling tactic designed to deter the victim from contacting their bank immediately to dispute the charge or initiate a formal chargeback.
-  2. **Bogus Tracking Ecosystem (`trackparcel.de`):** The tracking number format (`EURO20260918100004917`) mimics European parcel consignments, directing victims to a third-party tracking portal (`trackparcel.de`) that returns spoofed in-transit milestones to maintain the illusion of an active physical shipment.
+- Additional items omitted.
+> *"Vă mulțumim pentru achiziție!
 
 ### Evidence Item 30: Threat Actor Contact Drop Inbox (brekerfurught@outlook.com)
 
@@ -227,16 +180,9 @@ The campaign operated on a multi-tier infrastructure:
 - **Source:** Gmail Web Interface (Lower Body & Support Details)
 - **Customer Support Mailbox:** `brekerfurught@outlook.com`
 - **Call-to-Action Instructions:**
-  > *"Următoarea operațiune:*  
-  > *• Faceți clic pe linkul de mai sus pentru a urmări starea coletului.*  
-  > *• Asigurați-vă că adresa de destinație este corectă.*  
-  > *• Cineva primește coletul acasă sau îl aranjează în avans.*  
-  > *Dacă aveți întrebări despre această livrare, vă rugăm să contactați echipa noastră de asistență clienți.*  
-  > *Cutia poștală pentru serviciul clienți: brekerfurught@outlook.com*  
-  > *Acest e-mail este o notificare de livrare automată, vă rugăm să nu răspundeți direct."*
+> *"Următoarea operațiune:* > *• Faceți clic pe linkul de mai sus pentru a urmări starea coletului.* > *• Asigurați-vă că adresa de destinație este corectă.* > *• Cineva primește coletul acasă sau îl aranjează în avans.* > *Dacă aveți întrebări despre această livrare, vă rugăm să contactați echipa noastră de asistență clienți.* > *Cutia poștală pentru serviciul clienți:...
 - **Forensic Assessment & Direct Threat Actor Correlation:**
-  1. **Direct IoC Correlation:** The support address `brekerfurught@outlook.com` provides absolute forensic confirmation linking this delivery notification to the core threat syndicate, directly matching the drop inbox identified in Section 4 of our master dossier.
-  2. **Secondary Social Engineering Vector:** Directing victims to communicate with a freemail Outlook account rather than an authenticated retail customer support portal is a major red flag, intended to capture secondary identity artifacts, address verification, or deflect bank fraud inquiries.
+- Additional items omitted.
 
 ### Section 2.5: Live Airtight Browser Sandbox Probing & Discoveries
 
@@ -245,57 +191,16 @@ In addition to the historical screenshots provided on the Desktop, active forens
 Key artifacts captured live into `evidence/live_scans/`:
 1. **Live Proof of Shared Origin (`104.16.145.247`):** Active DNS resolution confirmed that both `mediagalaxy.voetbalshop-nlco.com` and the central C2 domain `yiyangsaas.com` point to the exact same Cloudflare IP address: `104.16.145.247`.
 2. **TikTok Ad Preloading Detection:** Live DOM dumping captured the explicit meta directive:
-   `<meta name="tiktok-ads-preloading-nocache" content="1">`
-   This proves the threat actor specifically tailored their application to exploit the caching and preloading behavior of TikTok's in-app webview.
-3. **Deobfuscated OEMCart Chinese Engine:** Client-side JavaScript execution environment revealed the decoded token `atob("b2VtY2FydF8=") === "oemcart_"`, associated with asset path `/skins/default/guoqi.png` (*guoqi* being Chinese pinyin for national flag 国旗). This confirms the platform runs on China's OEMCart turnkey counterfeit/phishing software.
-4. **Certificate Timestamping:** OpenSSL certificate extraction verified the active SSL certificate for `mediagalaxy.voetbalshop-nlco.com` (Serial `b4:66:51:7d...`) was issued by Google Trust Services on **September 15, 2026 at 00:43:20 GMT**, less than 24 hours prior to the fraudulent charge.
+`<meta name="tiktok-ads-preloading-nocache" content="1">` This proves the threat actor specifically tailored their application to exploit the caching and preloading behavior of TikTok's in-app webview.
+3. **Deobfuscated OEMCart Chinese Engine:** Client-side JavaScript execution environment revealed the decoded token `atob("b2VtY2FydF8=") === "oemcart_"`, associated with asset path `/skins/default/guoqi.png` (*guoqi* being Chinese pinyi...
+4. **Certificate Timestamping:** OpenSSL certificate extraction verified the active SSL certificate for `mediagalaxy.voetbalshop-nlco.com` (Serial `b4:66:51:7d...`) was issued by Google Trust Services on **September 15, 2026 at 00:43:20 ...
 5. **Burned Secondary Dispatchers:** Mail dispatch subdomains `info.mailapp-fly.com` and `email.worvixglobal.com` now resolve to `NXDOMAIN`, confirming threat actors purged their secondary DNS records post-campaign.
 
 Refer to [`evidence/LIVE_WEB_VERIFICATION.md`](evidence/LIVE_WEB_VERIFICATION.md) for full raw dumps and header logs.
 
-## 3. Threat Actor Infrastructure Graph
+## Threat Actor Infrastructure Graph
 
-```mermaid
-graph TD
-    subgraph LURE ["Social Media Ingestion"]
-        TikTokAd["Sponsored TikTok Ad
-Fake Media Galaxy Deals"] --> TrapURL["https://mediagalaxy.voetbalshop-nlco.com"]
-    end
-
-    subgraph FRONTEND ["Phishing & Harvesting Tier"]
-        TrapURL --> CFProxy["Cloudflare CDN
-IP: 104.16.145.247"]
-        CFProxy --> LandingCode["Compromised Host: voetbalshop-nlco.com
-HTML lang='zh-CN'
-module_login_default"]
-    end
-
-    subgraph BACKEND ["Command & Control SaaS Tier"]
-        LandingCode --> SSLCert["SSL Port 443/8443 Banner Leak
-CN: yiyangsaas.com"]
-        SSLCert --> YiyangSaaS["Backend C2: yiyangsaas.com
-Registrar: eName Tech (Yunnan, CN)
-Active Since: Sept 2023"]
-    end
-
-    subgraph EXFIL ["Financial & Credential Exfiltration"]
-        LandingCode --> CardCapture["BCR Debit Card Harvest
-Card-Not-Present Data Theft"]
-        CardCapture --> Merchant["Descriptor: 'morvethemi london'
-Charge: ~21 EUR"]
-        LandingCode --> MailRelay["Mail Relays
-info.mailapp-fly.com
-email.worvixglobal.com"]
-        MailRelay --> DropInbox["Drop Email Accounts
-MaryxBeckb96@gmail.com
-brekerfurught@outlook.com"]
-        MailRelay --> ATOLure["Secondary ATO Lure
-Reset Code: 586571
-Fake Order: [229942-177457]"]
-    end
-```
-
-## 4. MITRE ATT&CK Matrix Mapping
+## MITRE ATT&CK Matrix Mapping
 
 | Tactic | Technique ID | Technique Name | Implementation in Campaign |
 | :--- | :--- | :--- | :--- |
@@ -304,6 +209,4 @@ Fake Order: [229942-177457]"]
 | **Resource Development** | `T1584.001` | Compromise Domains | Hijacked/created `mediagalaxy` subdomain on `voetbalshop-nlco.com`. |
 | **Initial Access** | `T1566.002` | Spearphishing Link | Sponsored ads on TikTok directing users to cloned e-commerce portal. |
 | **Execution** | `T1204.001` | Malicious Link | Victim clicks link inside the TikTok mobile in-app browser. |
-| **Credential Access** | `T1056.003` | Web Portal Harvesting | Fake login form and payment checkout capturing PAN, CVV, and OTP. |
-| **Command & Control** | `T1071.001` | Web Protocols | HTTPS encrypted telemetry over Cloudflare edge to `yiyangsaas.com`. |
-| **Impact** | `T1657` | Financial Theft | Unauthorized ~21 EUR withdrawal via `morvethemi london`. |
+| ... | additional rows omitted |

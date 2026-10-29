@@ -1,23 +1,10 @@
 # DNSC Official Incident Response / Răspuns Oficial Sesizare Incident [D.N.S.C. #178465]
 
-**Autoritate:** Directoratul Național de Securitate Cibernetică (DNSC)  
-**Departament:** Direcția Generală Operațiuni Tehnice  
-**Expeditor:** DNSC `<alerts@dnsc.ro>`  
-**Destinatar:** Incident Response Team / Raportor (`eu`)  
-**Data Primirii:** 18 Septembrie 2026, 11:22 EEST  
-**Număr Tichet:** `[D.N.S.C. #178465]`  
-**Subiect:** `[D.N.S.C. #178465] Răspuns sesizare`  
-**Referință Dosar:** `SEC-2026-ECOM-005` (Media Galaxy Brand Impersonation & E-Commerce Phishing)  
-**Clasificare:** `TLP:CLEAR`  
-**Stare Inițială:** CONFIRMAT & BLOCAT – Inclus în PNRISC Blacklist (18 Septembrie 2026)  
-**Stare Finală:** **REZOLVAT / DEZAFECTAT (TAKEDOWN CONFIRMED)** – Domeniul nu mai este funcțional; sesizare închisă oficial (21 Septembrie 2026)  
+**Autoritate:** Directoratul Național de Securitate Cibernetică (DNSC) **Departament:** Direcția Generală Operațiuni Tehnice **Expeditor:** DNSC `<alerts@dnsc.ro>` **Destinatar:** Incident Response Team / Raportor (`eu`) **Data Primirii:** 18 Septembrie 2026, 11:22 EEST **Număr Tichet:** `[D.N.S.C. #178465]` **Subiect:** `[D.N.S.C. #178465] Răspuns sesizare` **Referință...
 
 ## Versiunea in Limba Romana (Text Oficial Primit)
 
-**De la:** DNSC `<alerts@dnsc.ro>`  
-**Data:** 18 Septembrie 2026, 11:22  
-**Către:** `eu`  
-**Subiect:** `[D.N.S.C. #178465] Răspuns sesizare`  
+**De la:** DNSC `<alerts@dnsc.ro>` **Data:** 18 Septembrie 2026, 11:22 **Către:** `eu` **Subiect:** `[D.N.S.C. #178465] Răspuns sesizare`
 
 > Bună ziua,
 > 
@@ -47,10 +34,7 @@
 
 ## English Translation (Official Incident Response)
 
-**From:** DNSC `<alerts@dnsc.ro>`  
-**Date:** September 18, 2026, 11:22 EEST  
-**To:** Incident Reporter (`eu`)  
-**Subject:** `[D.N.S.C. #178465] Response to notification`  
+**From:** DNSC `<alerts@dnsc.ro>` **Date:** September 18, 2026, 11:22 EEST **To:** Incident Reporter (`eu`) **Subject:** `[D.N.S.C. #178465] Response to notification`
 
 > Hello,
 > 
@@ -84,11 +68,8 @@
    - The filing submitted on September 16, 21:21 EEST was officially accepted, assigned Ticket ID **`[D.N.S.C. #178465]`**, and escalated to the *General Directorate of Technical Operations*.
 2. **PNRISC Blacklist Pipeline Integration:**
    - DNSC confirmed the evaluation of `mediagalaxy.voetbalshop-nlco.com` (and associated campaign endpoints) for inclusion in the national PNRISC Blacklist gateway ([`https://blacklist.dnsc.ro/`](https://blacklist.dnsc.ro/)).
-   - Our automated repository synchronizer ([`scripts/sync_forbidden_domains.py`](../../../scripts/sync_forbidden_domains.py)), executing every 24 hours at 00:00 Europe/Bucharest via GitHub Actions CD, will automatically ingest the domain into [`cyber/forbidden_domains.txt`](../forbidden_domains.txt) and [`cyber/lista_interzisa.txt`](../lista_interzisa.txt) upon publication.
-3. **Alignment with National Directives:**
-   - All 7 DNSC mitigation directives were proactively executed during earlier phases:
-     - **Recommendation 4 & 6 (Card & Credentials lockdown):** Executed on Sept 16, 20:00 (card frozen) & Sept 17, 18:00 (BCR bank dispute opened under Visa/Mastercard Rule 4853).
-     - **Recommendation 1-3 & 7 (Infrastructure & DNS Sinkholing):** Threat vectors sinkholed to `0.0.0.0` on OPNsense (`192.168.1.1`) and forwarded to Wazuh SIEM.
+   - Our automated repository synchronizer (`scripts/sync_forbidden_domains.py`), executing every 24 hours at 00:00 Europe/Bucharest via GitHub Actions CD, will automatically ingest the domai...
+- Additional items omitted.
 
 ## Verificare & Confirmare Blocare Oficială PNRISC (18 Septembrie 2026)
 
@@ -101,9 +82,9 @@
 
 - **Dovadă Vizuală**: Înregistrată ca [`evidence/25_dnsc_blacklist_voetbalshop_block.png`](../evidence/25_dnsc_blacklist_voetbalshop_block.png).
 - **Efect Operativ**: Extensia oficială de browser DNSC blochează în timp real tentativele de acces la nivel național.
-- **Sincronizare Automată Depozit**: Scriptul nostru de sincronizare zilnică ([`scripts/sync_forbidden_domains.py`](../../../scripts/sync_forbidden_domains.py)) a extras noile intrări direct din portalul DNSC, actualizând [`cyber/dnsc_blacklist.json`](../dnsc_blacklist.json) și lista de blocare [`cyber/forbidden_domains.txt`](../forbidden_domains.txt).
+- **Sincronizare Automată Depozit**: Scriptul nostru de sincronizare zilnică (`scripts/sync_forbidden_domains.py`) a extras noile intrări direct din portalul DNSC, actualizând [`cyber/dnsc_bl...
 
-## 6. Rezoluție Finală: Confirmare Dezafectare Domeniu & Închidere Sesizare (21 Septembrie 2026)
+## Rezoluție Finală: Confirmare Dezafectare Domeniu & Închidere Sesizare (21 Septembrie 2026)
 
 La data de **21 Septembrie 2026, ora 06:29 EEST**, DNSC a transmis confirmarea oficială a finalizării demersurilor operative și închiderea tichetului `[D.N.S.C. #178465]`:
 * **Concluzie Oficială:** Domeniul apex `voetbalshop-nlco[.]com` nu mai este funcțional (neutralizat/takedown complet).
