@@ -1,7 +1,5 @@
 # Workbench
 
-Virtualization, networking, IoT and cybersecurity research.
-
 This repository contains configuration and documentation for my personal workbench.
 
 ## Repository layout
